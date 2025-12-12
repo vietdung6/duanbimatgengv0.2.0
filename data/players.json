@@ -1,0 +1,81 @@
+{
+  "roster": [
+    {
+      "id": "kiin",
+      "name": "Kiin",
+      "realName": "Kim Gi-in",
+      "roleKey": "top",
+      "flag": "🇰🇷",
+      "number": "10",
+      "featured": false,
+      "animalIcon": "🐸",
+      "champions": ["K'Sante", "Aatrox", "Gwen"],
+      "stats": { "kda": "4.2", "cs": "8.9", "games": "142" },
+      "image": "/images/players/Kiin.webp"
+    },
+    {
+      "id": "canyon",
+      "name": "Canyon",
+      "realName": "Kim Geon-bu",
+      "roleKey": "jungle",
+      "flag": "🇰🇷",
+      "number": "23",
+      "featured": false,
+      "animalIcon": "🐻‍❄️",
+      "champions": ["Nidalee", "Lee Sin", "Graves"],
+      "stats": { "kda": "5.1", "cs": "6.2", "games": "156" },
+      "image": "/images/players/Canyon.jpg"
+    },
+    {
+      "id": "chovy",
+      "name": "Chovy",
+      "realName": "Jeong Ji-hoon",
+      "roleKey": "mid",
+      "flag": "🇰🇷",
+      "number": "7",
+      "featured": true,
+      "animalIcon": "🐱",
+      "champions": ["Cassiopeia", "Galio", "Taliyah"],
+      "stats": { "kda": "8.2", "cs": "10.1", "games": "168" },
+      "image": "/images/players/Chovy.jpg"
+    },
+    {
+      "id": "ruler",
+      "name": "Ruler",
+      "realName": "Park Jae-hyuk",
+      "roleKey": "adc",
+      "flag": "🇰🇷",
+      "number": "1",
+      "featured": true,
+      "animalIcon": "🐶",
+      "champions": ["Lucian", "Ezreal", "Zeri"],
+      "stats": { "kda": "7.1", "cs": "10.5", "games": "245" },
+      "image": "/images/players/Ruler.jpg"
+    },
+    {
+      "id": "duro",
+      "name": "Duro",
+      "realName": "Joo Min-kyu",
+      "roleKey": "support",
+      "flag": "🇰🇷",
+      "number": "33",
+      "featured": false,
+      "animalIcon": "🐰",
+      "champions": ["Nautilus", "Alistar", "Rakan"],
+      "stats": { "kda": "4.5", "cs": "1.1", "games": "98" },
+      "image": "/images/players/Duro.webp"
+    },
+    {
+      "id": "genrang",
+      "name": "Genrang",
+      "realName": "Genrang",
+      "roleKey": "mascot",
+      "flag": "🎮",
+      "number": "",
+      "featured": false,
+      "favorites": ["Xách nước", "Bổ Cam", "Content Creator"],
+      "image": "/images/genrang_avt_rose.png"
+    }
+  ]
+}
+

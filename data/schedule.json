@@ -1,0 +1,115 @@
+{
+  "currentTournament": "Kespa Cup 2025",
+  "upcomingMatches": [],
+  "recentResults": [
+    {
+      "id": "r1765549701651",
+      "opponent": "HLE",
+      "opponentLogo": "https://upload.wikimedia.org/wikipedia/vi/e/e0/HLE_logo.png",
+      "date": "2025-12-08",
+      "score": {
+        "gen": 0,
+        "opp": 1
+      },
+      "result": "loss",
+      "tournament": "Kespa Cup 2025",
+      "mvp": "",
+      "vodUrl": "",
+      "lineup": [
+        {
+          "role": "Top",
+          "player": "Kiin"
+        },
+        {
+          "role": "Jungle",
+          "player": "Canyon"
+        },
+        {
+          "role": "Mid",
+          "player": "Chovy"
+        },
+        {
+          "role": "ADC",
+          "player": "Ruler"
+        },
+        {
+          "role": "Support",
+          "player": "Duro"
+        }
+      ]
+    },
+    {
+      "id": "r1765549810523",
+      "opponent": "KT",
+      "opponentLogo": "https://am-a.akamaihd.net/image?resize=1920:&f=http%3A%2F%2Fstatic.lolesports.com%2Fteams%2Fkt_darkbackground.png",
+      "date": "2025-11-01",
+      "score": {
+        "gen": 1,
+        "opp": 3
+      },
+      "result": "loss",
+      "tournament": "Worlds 2025",
+      "mvp": "",
+      "vodUrl": "",
+      "lineup": [
+        {
+          "role": "Top",
+          "player": "Kiin"
+        },
+        {
+          "role": "Jungle",
+          "player": "Canyon"
+        },
+        {
+          "role": "Mid",
+          "player": "Chovy"
+        },
+        {
+          "role": "ADC",
+          "player": "Ruler"
+        },
+        {
+          "role": "Support",
+          "player": "Duro"
+        }
+      ]
+    },
+    {
+      "id": "r1765549860994",
+      "opponent": "HLE",
+      "opponentLogo": "https://upload.wikimedia.org/wikipedia/vi/e/e0/HLE_logo.png",
+      "date": "2025-12-12",
+      "score": {
+        "gen": 3,
+        "opp": 1
+      },
+      "result": "win",
+      "tournament": "Worlds 2025",
+      "mvp": "Chovy",
+      "vodUrl": "",
+      "lineup": [
+        {
+          "role": "Top",
+          "player": "Kiin"
+        },
+        {
+          "role": "Jungle",
+          "player": "Canyon"
+        },
+        {
+          "role": "Mid",
+          "player": "Chovy"
+        },
+        {
+          "role": "ADC",
+          "player": "Ruler"
+        },
+        {
+          "role": "Support",
+          "player": "Duro"
+        }
+      ]
+    }
+  ],
+  "_updated": "2025-12-12"
+}

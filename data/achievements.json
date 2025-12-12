@@ -1,0 +1,33 @@
+{
+  "summary": {
+    "worldsChampions": 2,
+    "lckChampions": 9,
+    "msiChampions": 2,
+    "internationalTitles": 4,
+    "yearsActive": 13
+  },
+  
+  "timeline": [
+    {
+      "year": 2025,
+      "era": "Gen.G",
+      "items": [
+        { "title": "MSI 2025 Champion", "titleVi": "Vô địch MSI 2025", "type": "gold", "icon": "🏆", "major": true },
+        { "title": "EWC 2025 Champion", "titleVi": "Vô địch EWC 2025", "type": "gold", "icon": "🏆", "major": true },
+        { "title": "LCK Spring Champion", "titleVi": "Vô địch LCK Mùa Xuân", "type": "gold", "icon": "🏆", "major": true },
+        { "title": "LCK Cup Runner-up", "titleVi": "Á quân LCK Cup", "type": "silver", "icon": "🥈" },
+        { "title": "Worlds 2025 - 4th Place", "titleVi": "CKTG 2025 - Hạng 4", "type": "bronze", "icon": "🏅" }
+      ]
+    },
+    {
+      "year": 2024,
+      "era": "Gen.G",
+      "items": [
+        { "title": "LCK Spring Champion", "titleVi": "Vô địch LCK Mùa Xuân", "type": "gold", "icon": "🏆", "major": true },
+        { "title": "LCK Spring MVP - Chovy", "titleVi": "MVP LCK Mùa Xuân - Chovy", "type": "gold", "icon": "⭐" },
+        { "title": "Worlds 2024 Finalist", "titleVi": "Á quân CKTG 2024", "type": "silver", "icon": "🥈", "major": true }
+      ]
+    }
+  ]
+}
+

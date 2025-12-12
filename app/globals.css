@@ -1,0 +1,108 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-heading: 'Oswald', sans-serif;
+  --font-inter: 'Inter', sans-serif;
+}
+
+@layer base {
+  body {
+    @apply bg-black text-white font-body antialiased;
+    background-color: #000000;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading tracking-wide;
+  }
+}
+
+@layer components {
+  .btn-gold {
+    @apply bg-gold text-black font-semibold px-6 py-3 rounded-lg 
+           hover:bg-gold-light transition-all duration-300 
+           shadow-gold-glow hover:shadow-gold-glow-lg;
+  }
+
+  .btn-outline-gold {
+    @apply border-2 border-gold text-gold px-6 py-3 rounded-lg
+           hover:bg-gold hover:text-black transition-all duration-300;
+  }
+
+  .card-dark {
+    @apply rounded-xl p-6 transition-all duration-300;
+  }
+
+  .dark .card-dark {
+    @apply bg-[#0A0A0A] border border-[#1A1A1A]
+           hover:border-gold/50 shadow-lg shadow-black/50 hover:shadow-xl hover:shadow-gold/10;
+  }
+
+  .light .card-dark {
+    @apply bg-white border border-gray-200
+           hover:border-gold/50 shadow-lg shadow-gray-200/50 hover:shadow-xl hover:shadow-gold/20;
+  }
+
+  .text-gradient-gold {
+    @apply bg-gradient-gold bg-clip-text text-transparent;
+  }
+
+  .gold-underline {
+    @apply relative after:content-[''] after:absolute after:bottom-0 
+           after:left-0 after:w-full after:h-0.5 after:bg-gold;
+  }
+
+  .section-divider {
+    @apply relative py-20;
+  }
+
+  .section-divider::before {
+    content: '';
+    @apply absolute top-0 left-1/2 -translate-x-1/2 w-24 h-0.5 bg-gradient-to-r from-transparent via-gold/50 to-transparent;
+  }
+
+  .card-glow {
+    @apply relative overflow-hidden;
+  }
+
+  .card-glow::before {
+    content: '';
+    @apply absolute inset-0 bg-gradient-to-br from-gold/5 via-transparent to-transparent opacity-0 transition-opacity duration-300;
+  }
+
+  .card-glow:hover::before {
+    @apply opacity-100;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0D0D0D;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #D4AF37;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #F5E6A3;
+}
+
+/* Selection color */
+::selection {
+  background: rgba(212, 175, 55, 0.3);
+  color: #fff;
+}
+
+/* Smooth scroll */
+html {
+  scroll-behavior: smooth;
+}
+
+

@@ -3,13 +3,17 @@
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Trophy, Users, Calendar, Image, Gamepad2, Globe, Search } from "lucide-react";
+import { Menu, X, Trophy, Users, Calendar, Image, Gamepad2, Globe, Search, Download } from "lucide-react";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
 import SearchModal from "@/components/search/SearchModal";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [isPwaInfoOpen, setIsPwaInfoOpen] = useState(false);
+  const [platform, setPlatform] = useState<"ios" | "android" | "other">("other");
+  const [deferredPrompt, setDeferredPrompt] = useState<any>(null);
+  const [isStandalone, setIsStandalone] = useState(false);
   const { language, setLanguage, t } = useLanguage();
 
   const navItems = [
@@ -22,6 +26,67 @@ export default function Header() {
 
   const toggleLanguage = () => {
     setLanguage(language === "en" ? "vi" : "en");
+  };
+
+  // Detect platform (iOS / Android) and standalone mode
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    const ua = window.navigator.userAgent.toLowerCase();
+    if (/iphone|ipad|ipod/.test(ua)) {
+      setPlatform("ios");
+    } else if (/android/.test(ua)) {
+      setPlatform("android");
+    } else {
+      setPlatform("other");
+    }
+
+    const standalone =
+      window.matchMedia?.("(display-mode: standalone)").matches ||
+      // @ts-ignore - iOS Safari specific
+      (window.navigator as any).standalone === true;
+    setIsStandalone(standalone);
+  }, []);
+
+  // Capture beforeinstallprompt event for Android / supported browsers
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    const handleBeforeInstallPrompt = (e: Event) => {
+      e.preventDefault();
+      // Store event so we can trigger it later
+      setDeferredPrompt(e as any);
+    };
+
+    window.addEventListener("beforeinstallprompt", handleBeforeInstallPrompt as any);
+    return () => {
+      window.removeEventListener("beforeinstallprompt", handleBeforeInstallPrompt as any);
+    };
+  }, []);
+
+  const handleInstallClick = async () => {
+    // If already installed, just show info
+    if (isStandalone) {
+      setIsPwaInfoOpen(true);
+      return;
+    }
+
+    // Android / supported browsers: trigger native prompt
+    if (deferredPrompt) {
+      // Some browsers require calling prompt on the stored event
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const promptEvent: any = deferredPrompt;
+      promptEvent.prompt();
+      try {
+        await promptEvent.userChoice;
+      } finally {
+        setDeferredPrompt(null);
+      }
+      return;
+    }
+
+    // Fallback: show manual instructions (especially for iOS)
+    setIsPwaInfoOpen(true);
   };
 
   // Keyboard shortcut for search (Cmd/Ctrl + K)
@@ -102,6 +167,19 @@ export default function Header() {
               <Globe size={16} className="text-gold" />
               <span className="text-white font-medium">
                 {language === "en" ? "EN" : "VI"}
+              </span>
+            </button>
+
+            {/* Install PWA Button */}
+            <button
+              onClick={handleInstallClick}
+              className="flex items-center gap-2 px-3 py-2 rounded-lg border border-gold/70 
+                       bg-black/40 hover:bg-gold/10 transition-colors text-sm"
+              type="button"
+            >
+              <Download size={16} className="text-gold" />
+              <span className="text-white font-medium">
+                {isStandalone ? t.pwa.installedLabel : t.pwa.installButton}
               </span>
             </button>
 
@@ -217,6 +295,26 @@ export default function Header() {
                   ⛩️ {t.nav.enterShrine}
                 </Link>
               </motion.div>
+
+              {/* Mobile Install PWA Button */}
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.65 }}
+              >
+                <button
+                  onClick={() => {
+                    handleInstallClick();
+                    setIsOpen(false);
+                  }}
+                  className="flex items-center justify-center gap-3 mt-2 w-full px-4 py-3 rounded-lg border border-gold/70 
+                           bg-black/40 text-white font-heading text-lg"
+                  type="button"
+                >
+                  <Download size={20} className="text-gold" />
+                  <span>{isStandalone ? t.pwa.installedLabel : t.pwa.installButton}</span>
+                </button>
+              </motion.div>
             </nav>
           </motion.div>
         )}
@@ -224,6 +322,66 @@ export default function Header() {
 
       {/* Search Modal */}
       <SearchModal isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
+
+      {/* PWA Info Modal */}
+      <AnimatePresence>
+        {isPwaInfoOpen && (
+          <motion.div
+            className="fixed inset-0 z-[60] flex items-center justify-center bg-black/70"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <motion.div
+              className="bg-black-light border border-gold/40 rounded-2xl shadow-2xl max-w-md w-full mx-4 p-6"
+              initial={{ scale: 0.9, opacity: 0, y: 20 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.9, opacity: 0, y: 20 }}
+            >
+              <div className="flex items-center justify-between mb-4">
+                <h2 className="font-heading text-xl text-gold tracking-wide">
+                  {t.pwa.title}
+                </h2>
+                <button
+                  onClick={() => setIsPwaInfoOpen(false)}
+                  className="text-gray-400 hover:text-gold transition-colors"
+                  type="button"
+                  aria-label="Close"
+                >
+                  <X size={20} />
+                </button>
+              </div>
+
+              <p className="text-sm text-gray-200 leading-relaxed">
+                {platform === "ios"
+                  ? t.pwa.iosDescription
+                  : platform === "android"
+                  ? t.pwa.androidDescription
+                  : t.pwa.otherDescription}
+              </p>
+
+              <div className="mt-4 border-t border-black-charcoal pt-4">
+                <h3 className="font-heading text-sm text-gold mb-2 uppercase tracking-wider">
+                  {t.pwa.howItWorksTitle}
+                </h3>
+                <p className="text-xs text-gray-400 leading-relaxed">
+                  {t.pwa.howItWorksText}
+                </p>
+              </div>
+
+              <div className="mt-6 flex justify-end">
+                <button
+                  onClick={() => setIsPwaInfoOpen(false)}
+                  className="px-4 py-2 rounded-lg bg-gold text-black font-semibold text-sm hover:bg-gold/90 transition-colors"
+                  type="button"
+                >
+                  OK
+                </button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   );
 }

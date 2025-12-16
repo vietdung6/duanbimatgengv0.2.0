@@ -288,6 +288,22 @@ export const translations = {
         "All the developers and contributors of the open-source tools used",
       ],
     },
+    
+    // PWA / Install app helper
+    pwa: {
+      installButton: "Install app",
+      installedLabel: "Installed",
+      title: "Install Gen.G Fandom as an app",
+      androidDescription:
+        "On Android, this website can be installed as a Progressive Web App. Tap “Install app” and confirm in the browser dialog to add it to your home screen.",
+      iosDescription:
+        "On iOS, open this site in Safari, tap the share button, then choose “Add to Home Screen” to install it as an app.",
+      otherDescription:
+        "On supported browsers, you can install this website as a Progressive Web App so it opens full-screen like a normal app.",
+      howItWorksTitle: "How it works",
+      howItWorksText:
+        "When installed as a PWA, this site is saved to your device’s home screen. It runs in its own window, can work offline for some pages if cached, and always uses the same data as the website without extra permissions.",
+    },
   },
   
   vi: {
@@ -580,6 +596,22 @@ export const translations = {
         "Cộng đồng Gen.G vì niềm đam mê và sự ủng hộ",
         "Tất cả các nhà phát triển và người đóng góp của các công cụ mã nguồn mở được sử dụng",
       ],
+    },
+    
+    // PWA / Hướng dẫn cài app
+    pwa: {
+      installButton: "Cài ứng dụng",
+      installedLabel: "Đã cài",
+      title: "Cài Gen.G Fandom như một ứng dụng",
+      androidDescription:
+        "Trên Android, website này có thể được cài như Progressive Web App. Nhấn “Cài ứng dụng”, sau đó xác nhận ở hộp thoại của trình duyệt để thêm vào màn hình chính.",
+      iosDescription:
+        "Trên iOS, hãy mở trang này bằng Safari, nhấn nút chia sẻ, sau đó chọn “Thêm vào Màn hình chính” để cài như ứng dụng.",
+      otherDescription:
+        "Trên các trình duyệt hỗ trợ, bạn có thể cài website này như Progressive Web App để mở toàn màn hình giống ứng dụng bình thường.",
+      howItWorksTitle: "Cơ chế hoạt động",
+      howItWorksText:
+        "Khi cài dưới dạng PWA, trang này sẽ được lưu trên màn hình chính. Ứng dụng chạy trong một cửa sổ riêng, có thể hoạt động offline cho một số trang nếu đã được cache, và luôn dùng chung dữ liệu với website mà không yêu cầu thêm quyền truy cập đặc biệt.",
     },
   },
 };

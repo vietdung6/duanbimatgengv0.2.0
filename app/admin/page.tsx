@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Lock, Layout, CalendarRange, Images, UserSquare2, ExternalLink } from "lucide-react";
 import Link from "next/link";
 
@@ -43,11 +43,12 @@ export default function AdminHome() {
   const [message, setMessage] = useState("");
 
   // Check localStorage once (client only)
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    const authed = localStorage.getItem("adminAuthed") === "1";
-    if (authed) setIsAuthenticated(true);
-  }, []);
+  useState(() => {
+    if (typeof window !== "undefined") {
+      const authed = localStorage.getItem("adminAuthed") === "1";
+      if (authed) setIsAuthenticated(true);
+    }
+  });
 
   const handleLogin = () => {
     if (password === PASSWORD) {

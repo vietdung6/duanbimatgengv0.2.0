@@ -5,10 +5,10 @@ import { ChevronDown } from "lucide-react";
 import { EWCLogo, MSILogo, WorldsLogo, tournamentLogos } from "@/components/shared/Logos";
 import { achievements } from "@/lib/data/achievements";
 import { eraLogos } from "@/lib/data/eraLogos";
-import { translations } from "@/lib/i18n/translations";
+import { translations, Language } from "@/lib/i18n/translations";
 
 interface AchievementsTimelineProps {
-  language: string;
+  language: Language;
   expandedYear: number | null;
   setExpandedYear: (year: number | null) => void;
   isTourMode: boolean;
@@ -16,7 +16,7 @@ interface AchievementsTimelineProps {
 }
 
 // Helper: get localized title
-const getTitle = (item: { title: string; titleVi: string }, language: string) =>
+const getTitle = (item: { title: string; titleVi: string }, language: Language) =>
   language === "en" ? item.title : item.titleVi;
 
 // Helper: infer tournament logo from title

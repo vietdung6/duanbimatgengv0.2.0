@@ -7,10 +7,16 @@ import { Menu, X, Trophy, Users, Calendar, Image, Gamepad2, Globe, Search, Downl
 import { useLanguage } from "@/lib/i18n/LanguageContext";
 import SearchModal from "@/components/search/SearchModal";
 
+// Typed beforeinstallprompt event used for PWA install
+type BeforeInstallPromptEvent = Event & {
+  prompt: () => Promise<void>;
+  userChoice: Promise<{ outcome: "accepted" | "dismissed"; platform: string }>;
+};
+
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
-  const [deferredPrompt, setDeferredPrompt] = useState<any>(null);
+  const [deferredPrompt, setDeferredPrompt] = useState<BeforeInstallPromptEvent | null>(null);
   const { language, setLanguage, t } = useLanguage();
 
   const navItems = [
@@ -29,31 +35,34 @@ export default function Header() {
   useEffect(() => {
     if (typeof window === "undefined") return;
 
-    const handleBeforeInstallPrompt = (e: Event) => {
+    const handleBeforeInstallPrompt = (e: BeforeInstallPromptEvent) => {
       e.preventDefault();
       // Store event so we can trigger it later
-      setDeferredPrompt(e as any);
+      setDeferredPrompt(e);
     };
 
-    window.addEventListener("beforeinstallprompt", handleBeforeInstallPrompt as any);
+    window.addEventListener(
+      "beforeinstallprompt",
+      handleBeforeInstallPrompt as EventListener
+    );
+
     return () => {
-      window.removeEventListener("beforeinstallprompt", handleBeforeInstallPrompt as any);
+      window.removeEventListener(
+        "beforeinstallprompt",
+        handleBeforeInstallPrompt as EventListener
+      );
     };
   }, []);
 
   const handleInstallClick = async () => {
     // Android / supported browsers: trigger native prompt if available
-    if (deferredPrompt) {
-      // Some browsers require calling prompt on the stored event
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const promptEvent: any = deferredPrompt;
-      promptEvent.prompt();
-      try {
-        await promptEvent.userChoice;
-      } finally {
-        setDeferredPrompt(null);
-      }
-      return;
+    if (!deferredPrompt) return;
+
+    await deferredPrompt.prompt();
+    try {
+      await deferredPrompt.userChoice;
+    } finally {
+      setDeferredPrompt(null);
     }
   };
 

@@ -19,6 +19,19 @@ export const translations = {
       meetTeam: "Meet The Team",
       shrine: "Enter CHURCH",
       
+      // 2025 achievements teaser on home
+      achievementsTeaser: {
+        title: "2025 ACHIEVEMENTS",
+        subtitle: "A historic year of dominance and excellence",
+        msiTitle: "MSI 2025",
+        msiType: "Champion",
+        ewcTitle: "EWC 2025",
+        ewcType: "Champion",
+        lckTitle: "LCK Regular",
+        lckType: "Champion",
+        cta: "Explore More",
+      },
+      
       // Stats
       stats: {
         lckChampions: "LCK Champions",
@@ -97,6 +110,57 @@ export const translations = {
       },
     },
     
+    // Achievements main page
+    achievementsPage: {
+      hero: {
+        title: "ACHIEVEMENTS",
+        description:
+          "From Samsung Galaxy's golden era to Gen.G's dominance in LCK. A legacy spanning over a decade.",
+      },
+      legacy: {
+        genGYearsSuffix: "Present",
+        explanation:
+          "* In 2017, KSV eSports acquired the entire League of Legends roster of Samsung Galaxy (players, coaching staff, inheriting the legacy, and officially RECOGNIZED BY RIOT GAMES). KSV then rebranded as Gen.G in 2018, which is its current name.",
+        lckRegularNote:
+          "LCK Regular 2025 = Spring + Summer combined (counts as 2 titles)",
+      },
+      worldsChampions: {
+        title: "WORLDS CHAMPIONS",
+        samsungWhiteDescription:
+          "The most dominant Worlds run in history. 15-1 record.",
+        samsungGalaxyDescription:
+          "Revenge against SKT in finals. Perfect redemption.",
+      },
+      tripleCrown2025: {
+        title: "2025 - TRIPLE CROWN YEAR",
+        description:
+          "The most successful international year in organization history",
+        summary:
+          "Win Rate: 85% • First Korean team to win MSI & EWC in same year",
+      },
+      milestones: {
+        worldsChampions: "Worlds Champions",
+        msiChampions: "MSI Champions",
+        lckChampions: "LCK Champions",
+        internationalTitles: "International Titles",
+        yearsOfLegacy: "Years of Legacy",
+      },
+      timeline: {
+        fullTimelineTitle: "FULL TIMELINE",
+        fmvpNote: "FMVP or Tournament MVP",
+        cupsLabel: "cups",
+      },
+      ceoQuote: {
+        label: "FROM GEN.G CEO",
+        quote:
+          "\"Verified with Riot official: '14, '17 yes. Trophies: we do not own them and cannot control where they are. Good idea here though: we'll make a replica of them if we win worlds as a sign that we've partially lived up to the incredible legacy of those teams.\"",
+      },
+      legacyQuote: {
+        quote:
+          "\"We will strive to prove that Gen.G is worthy of the legacy of our two predecessor teams.\"",
+      },
+    },
+    
     // Alumni page
     alumni: {
       badge: "FORMER PLAYERS",
@@ -171,6 +235,22 @@ export const translations = {
     // Common
     common: {
       franchise: "FRANCHISE",
+      search: "Search",
+      close: "Close",
+      navigate: "Navigate",
+      select: "Select",
+      goHome: "Go Home",
+      goBack: "Go Back",
+      notFoundTitle: "Sorry, this content is not available or has been removed.",
+      notFoundSubtitle: "Please return to the previous page.",
+      langEnShort: "EN",
+      langViShort: "VI",
+      langSwitchToVi: "🇻🇳 Vietnamese",
+      langSwitchToEn: "🇬🇧 English",
+      searchPlaceholder: "Search players, achievements, pages...",
+      searchStartTyping: "Start typing to search...",
+      searchNoResults: "No results found",
+      searchResultsLabel: "results",
     },
     
     // Schedule page
@@ -303,6 +383,32 @@ export const translations = {
       howItWorksTitle: "How it works",
       howItWorksText:
         "When installed as a PWA, this site is saved to your device’s home screen. It runs in its own window, can work offline for some pages if cached, and always uses the same data as the website without extra permissions.",
+      page: {
+        badge: "Install as App",
+        heading: "Install Gen.G Fandom",
+        intro: "Follow the steps below to add Gen.G Fandom to your home screen on Android or iOS. Once installed, it opens full-screen like a native app.",
+        androidTitle: "Android",
+        iosTitle: "iOS / iPadOS (Safari)",
+        androidSteps: [
+          "Open this site with Chrome/Edge/Brave on Android.",
+          "If you see the browser banner or three-dot menu, choose “Install app” / “Add to Home screen”.",
+          "Confirm the install dialog. An icon will appear on your home screen.",
+        ],
+        iosSteps: [
+          "Open this site with Safari on iOS/iPadOS (required for install).",
+          "Tap the Share button (square with an up arrow).",
+          "Scroll and choose “Add to Home Screen”.",
+          "Confirm. The app icon appears on your home screen.",
+        ],
+        howItWorksList: [
+          "Works like a full-screen app launched from your home screen.",
+          "Uses the same data as the website; no extra permissions.",
+          "Can cache pages/assets for faster repeat visits; some pages may work offline if cached.",
+          "You can remove it anytime like a normal home-screen shortcut/app.",
+        ],
+        tip: "Tip: If you don’t see the install option, make sure you’re using Safari on iOS or a Chromium-based browser on Android, and that you’ve visited the site recently.",
+        backToHome: "Back to home",
+      },
     },
   },
   
@@ -325,6 +431,19 @@ export const translations = {
       description: "Điểm đến tối thượng cho fan. Theo dõi tuyển thủ yêu thích, cập nhật mọi trận đấu, và gia nhập cộng đồng Gen.G.",
       meetTeam: "Gặp Đội Tuyển",
       shrine: "Vào Đền Thờ",
+      
+      // 2025 achievements teaser on home
+      achievementsTeaser: {
+        title: "THÀNH TÍCH 2025",
+        subtitle: "Một năm lịch sử của sự thống trị và xuất sắc",
+        msiTitle: "MSI 2025",
+        msiType: "Vô địch",
+        ewcTitle: "EWC 2025",
+        ewcType: "Vô địch",
+        lckTitle: "LCK Regular",
+        lckType: "Vô địch",
+        cta: "Khám phá thêm",
+      },
       
       // Stats
       stats: {
@@ -424,6 +543,57 @@ export const translations = {
       },
     },
     
+    // Achievements main page
+    achievementsPage: {
+      hero: {
+        title: "THÀNH TÍCH",
+        description:
+          "Từ kỷ nguyên vàng của Samsung Galaxy đến sự thống trị của Gen.G tại LCK.",
+      },
+      legacy: {
+        genGYearsSuffix: "Hiện tại",
+        explanation:
+          "* Năm 2017, KSV eSports mua lại toàn bộ đội hình LMHT của Samsung Galaxy (tuyển thủ, ban huấn luyện,kế thừa di sản, và ĐƯỢC RIOT CÔNG NHẬN). KSV sau đó đổi tên thành Gen.G vào năm 2018, tên gọi như hiện tại.",
+        lckRegularNote:
+          "LCK Regular 2025 = Xuân + Hè gộp (tính 2 danh hiệu)",
+      },
+      worldsChampions: {
+        title: "VÔ ĐỊCH THẾ GIỚI",
+        samsungWhiteDescription:
+          "Hành trình CKTG thống trị nhất lịch sử. Tỉ số 15-1.",
+        samsungGalaxyDescription:
+          "Trả thù SKT trong trận chung kết. Sự cứu chuộc hoàn hảo.",
+      },
+      tripleCrown2025: {
+        title: "2025 - NĂM BA CÚP",
+        description:
+          "Năm quốc tế thành công nhất trong lịch sử tổ chức",
+        summary:
+          "Tỉ lệ thắng: 85% • Đội Hàn Quốc đầu tiên vô địch MSI & EWC cùng năm",
+      },
+      milestones: {
+        worldsChampions: "Vô địch Thế giới",
+        msiChampions: "Vô địch MSI",
+        lckChampions: "Vô địch LCK",
+        internationalTitles: "Danh hiệu Quốc tế",
+        yearsOfLegacy: "Năm Lịch sử",
+      },
+      timeline: {
+        fullTimelineTitle: "LỊCH SỬ ĐẦY ĐỦ",
+        fmvpNote: "FMVP hoặc MVP giải đấu",
+        cupsLabel: "cúp",
+      },
+      ceoQuote: {
+        label: "TỪ CEO GEN.G",
+        quote:
+          "\"Đã được Riot xác nhận: '14, '17 có. Chiếc cúp thật: chúng tôi không sở hữu được nó. Một ý tưởng đáng cân nhắc: Gen.G sẽ làm một bản sao của 2 chiếc cúp cũ nếu chúng tôi vô địch, đó là dấu hiệu cho việc xứng đáng với di sản của 2 đội tuyển tiền nhiệm.\"",
+      },
+      legacyQuote: {
+        quote:
+          "\"Chúng tôi sẽ cố gắng chứng minh cho việc Gen.G xứng đáng với di sản của 2 đội tuyển tiền nhiệm.\"",
+      },
+    },
+    
     // Alumni page
     alumni: {
       badge: "CỰU TUYỂN THỦ",
@@ -498,6 +668,22 @@ export const translations = {
     // Common
     common: {
       franchise: "TRỤ CỘT",
+      search: "Tìm kiếm",
+      close: "Đóng",
+      navigate: "Điều hướng",
+      select: "Chọn",
+      goHome: "Về Trang Chủ",
+      goBack: "Quay Lại",
+      notFoundTitle: "Xin lỗi, nội dung không có hoặc đã bị xóa.",
+      notFoundSubtitle: "Vui lòng trở về trang trước.",
+      langEnShort: "EN",
+      langViShort: "VI",
+      langSwitchToVi: "🇻🇳 Tiếng Việt",
+      langSwitchToEn: "🇬🇧 English",
+      searchPlaceholder: "Tìm kiếm tuyển thủ, thành tích, trang...",
+      searchStartTyping: "Bắt đầu gõ để tìm kiếm...",
+      searchNoResults: "Không tìm thấy kết quả",
+      searchResultsLabel: "kết quả",
     },
     
     // Fan Zone page
@@ -612,6 +798,32 @@ export const translations = {
       howItWorksTitle: "Cơ chế hoạt động",
       howItWorksText:
         "Khi cài dưới dạng PWA, trang này sẽ được lưu trên màn hình chính. Ứng dụng chạy trong một cửa sổ riêng, có thể hoạt động offline cho một số trang nếu đã được cache, và luôn dùng chung dữ liệu với website mà không yêu cầu thêm quyền truy cập đặc biệt.",
+      page: {
+        badge: "Cài ứng dụng (PWA)",
+        heading: "Cài Gen.G Fandom như ứng dụng",
+        intro: "Làm theo các bước bên dưới để thêm Gen.G Fandom lên màn hình chính Android hoặc iOS. Sau khi cài, app mở toàn màn hình giống ứng dụng gốc.",
+        androidTitle: "Android",
+        iosTitle: "iOS / iPadOS (Safari)",
+        androidSteps: [
+          "Mở trang bằng Chrome/Edge/Brave trên Android.",
+          "Khi thấy banner hoặc menu ba chấm, chọn \"Install app\" / \"Add to Home screen\".",
+          "Xác nhận hộp thoại cài đặt. Biểu tượng sẽ xuất hiện trên màn hình chính.",
+        ],
+        iosSteps: [
+          "Mở trang bằng Safari trên iOS/iPadOS (bắt buộc để cài).",
+          "Nhấn nút Chia sẻ (hình vuông có mũi tên lên).",
+          "Kéo xuống và chọn \"Add to Home Screen\".",
+          "Xác nhận. Biểu tượng app sẽ xuất hiện trên màn hình chính.",
+        ],
+        howItWorksList: [
+          "Hoạt động như app toàn màn hình khi mở từ màn hình chính.",
+          "Dùng chung dữ liệu với website; không cần quyền truy cập lạ.",
+          "Có thể lưu cache để vào nhanh hơn; một số trang có thể xem offline nếu đã cache.",
+          "Có thể gỡ bất cứ lúc nào như một shortcut/app bình thường.",
+        ],
+        tip: "Mẹo: Nếu không thấy tùy chọn cài, hãy dùng Safari trên iOS hoặc trình duyệt Chromium trên Android và đảm bảo bạn vừa truy cập site gần đây.",
+        backToHome: "Về trang chủ",
+      },
     },
   },
 };

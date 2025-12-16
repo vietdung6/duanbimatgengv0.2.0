@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Trophy, Users, Calendar, Image, Gamepad2, Globe, Search, Download } from "lucide-react";
@@ -18,6 +19,7 @@ export default function Header() {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [deferredPrompt, setDeferredPrompt] = useState<BeforeInstallPromptEvent | null>(null);
   const { language, setLanguage, t } = useLanguage();
+  const router = useRouter();
 
   const navItems = [
     { href: "/team", label: t.nav.team, icon: Users },
@@ -55,15 +57,19 @@ export default function Header() {
   }, []);
 
   const handleInstallClick = async () => {
-    // Android / supported browsers: trigger native prompt if available
-    if (!deferredPrompt) return;
-
-    await deferredPrompt.prompt();
-    try {
-      await deferredPrompt.userChoice;
-    } finally {
-      setDeferredPrompt(null);
+    // If native PWA prompt is available (Android / supported browsers), trigger it
+    if (deferredPrompt) {
+      await deferredPrompt.prompt();
+      try {
+        await deferredPrompt.userChoice;
+      } finally {
+        setDeferredPrompt(null);
+      }
+      return;
     }
+
+    // Fallback: navigate to the PWA instructions page
+    router.push("/pwa");
   };
 
   // Keyboard shortcut for search (Cmd/Ctrl + K)
@@ -143,7 +149,7 @@ export default function Header() {
             >
               <Globe size={16} className="text-gold" />
               <span className="text-white font-medium">
-                {language === "en" ? "EN" : "VI"}
+                {language === "en" ? t.common.langEnShort : t.common.langViShort}
               </span>
             </button>
 
@@ -236,7 +242,7 @@ export default function Header() {
                 >
                   <Search size={20} className="text-gold" />
                   <span className="font-heading text-xl">
-                    {language === "en" ? "Search" : "Tìm kiếm"}
+                    {t.common.search}
                   </span>
                 </button>
               </motion.div>
@@ -254,7 +260,7 @@ export default function Header() {
                 >
                   <Globe size={20} className="text-gold" />
                   <span className="font-heading text-xl">
-                    {language === "en" ? "🇻🇳 Tiếng Việt" : "🇬🇧 English"}
+                    {language === "en" ? t.common.langSwitchToVi : t.common.langSwitchToEn}
                   </span>
                 </button>
               </motion.div>

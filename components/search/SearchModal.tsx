@@ -18,7 +18,8 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const inputRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
-  const { language } = useLanguage();
+  const { language, t } = useLanguage();
+  const common = t.common;
 
   useEffect(() => {
     if (isOpen && inputRef.current) {
@@ -132,7 +133,7 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
                   type="text"
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
-                  placeholder={language === "en" ? "Search players, achievements, pages..." : "Tìm kiếm tuyển thủ, thành tích, trang..."}
+                  placeholder={common.searchPlaceholder}
                   className="w-full pl-9 sm:pl-10 pr-9 sm:pr-10 py-2.5 sm:py-3 bg-black-charcoal border border-gray-700 
                            rounded-lg text-white text-sm sm:text-base placeholder-gray-500 focus:outline-none 
                            focus:border-gold transition-colors"
@@ -154,17 +155,13 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
                 <div className="text-center py-8 sm:py-12 text-gray-400">
                   <Search size={40} className="mx-auto mb-3 sm:mb-4 opacity-50 sm:w-12 sm:h-12" />
                   <p className="text-xs sm:text-sm px-4">
-                    {language === "en" 
-                      ? "Start typing to search..." 
-                      : "Bắt đầu gõ để tìm kiếm..."}
+                    {common.searchStartTyping}
                   </p>
                 </div>
               ) : results.length === 0 ? (
                 <div className="text-center py-8 sm:py-12 text-gray-400">
                   <p className="text-xs sm:text-sm px-4">
-                    {language === "en" 
-                      ? "No results found" 
-                      : "Không tìm thấy kết quả"}
+                    {common.searchNoResults}
                   </p>
                 </div>
               ) : (
@@ -226,20 +223,20 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
               <div className="flex items-center gap-2 sm:gap-4 flex-wrap">
                 <span className="hidden sm:flex items-center gap-1">
                   <kbd className="px-1.5 sm:px-2 py-0.5 sm:py-1 bg-black-charcoal rounded text-[10px] sm:text-xs">↑↓</kbd>
-                  <span className="hidden md:inline">{language === "en" ? "Navigate" : "Điều hướng"}</span>
+                  <span className="hidden md:inline">{common.navigate}</span>
                 </span>
                 <span className="hidden sm:flex items-center gap-1">
                   <kbd className="px-1.5 sm:px-2 py-0.5 sm:py-1 bg-black-charcoal rounded text-[10px] sm:text-xs">Enter</kbd>
-                  <span className="hidden md:inline">{language === "en" ? "Select" : "Chọn"}</span>
+                  <span className="hidden md:inline">{common.select}</span>
                 </span>
                 <span className="flex items-center gap-1">
                   <kbd className="px-1.5 sm:px-2 py-0.5 sm:py-1 bg-black-charcoal rounded text-[10px] sm:text-xs">Esc</kbd>
-                  <span className="hidden sm:inline">{language === "en" ? "Close" : "Đóng"}</span>
+                  <span className="hidden sm:inline">{common.close}</span>
                 </span>
               </div>
               {results.length > 0 && (
                 <span className="text-gold text-xs sm:text-sm font-medium">
-                  {results.length} {language === "en" ? "results" : "kết quả"}
+                  {results.length} {common.searchResultsLabel}
                 </span>
               )}
             </div>

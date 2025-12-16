@@ -6,7 +6,7 @@ import Link from "next/link";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
 
 export default function NotFound() {
-  const { language } = useLanguage();
+  const { t } = useLanguage();
 
   return (
     <div className="min-h-screen pt-24 pb-20 flex items-center justify-center">
@@ -44,14 +44,10 @@ export default function NotFound() {
           404
         </h1>
         <p className="text-gray-300 text-xl mb-4">
-          {language === "en"
-            ? "Sorry, this content is not available or has been removed."
-            : "Xin lỗi, nội dung không có hoặc đã bị xóa."}
+          {t.common.notFoundTitle}
         </p>
         <p className="text-gray-400 mb-8">
-          {language === "en"
-            ? "Please return to the previous page."
-            : "Vui lòng trở về trang trước."}
+          {t.common.notFoundSubtitle}
         </p>
 
         {/* Action Buttons */}
@@ -64,7 +60,7 @@ export default function NotFound() {
                        text-sm sm:text-base py-2.5 sm:py-3 px-6 sm:px-8"
             >
               <Home size={18} className="sm:w-5 sm:h-5" />
-              {language === "en" ? "Go Home" : "Về Trang Chủ"}
+              {t.common.goHome}
             </motion.button>
           </Link>
           <motion.button
@@ -84,7 +80,7 @@ export default function NotFound() {
                      touch-manipulation"
           >
             <ArrowLeft size={18} className="sm:w-5 sm:h-5" />
-            {language === "en" ? "Go Back" : "Quay Lại"}
+            {t.common.goBack}
           </motion.button>
         </div>
       </motion.div>

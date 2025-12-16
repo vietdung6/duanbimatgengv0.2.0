@@ -15,7 +15,7 @@ interface HistoryTourProps {
 
 export function HistoryTour({
   language,
-  expandedYear,
+  expandedYear: _expandedYear,
   setExpandedYear,
   isTourMode,
   setIsTourMode,

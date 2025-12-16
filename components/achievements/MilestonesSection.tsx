@@ -1,7 +1,8 @@
 "use client";
 
+import type { ComponentType } from "react";
 import { motion } from "framer-motion";
-import { EWCLogo, MSILogo, WorldsLogo, tournamentLogos } from "@/components/shared/Logos";
+import { MSILogo, WorldsLogo, tournamentLogos } from "@/components/shared/Logos";
 import { translations, Language } from "@/lib/i18n/translations";
 
 interface MilestonesSectionProps {
@@ -9,7 +10,7 @@ interface MilestonesSectionProps {
   milestones: {
     value: string;
     label: string;
-    icon: string | ((props: any) => JSX.Element);
+    icon: string | ComponentType<{ className?: string }>;
     color: string;
   }[];
 }

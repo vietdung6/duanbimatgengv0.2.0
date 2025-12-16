@@ -18,7 +18,7 @@ const HERO_PARTICLES = Array.from({ length: 15 }, (_, i) => {
 });
 
 export default function HomePage() {
-  const { t, language } = useLanguage();
+  const { t } = useLanguage();
 
   const stats = [
     { icon: Trophy, value: "7x", label: t.home.stats.lckChampions, asterisk: "**", logo: <img src={tournamentLogos.lck} alt="LCK" className="w-8 h-8 object-contain" /> }, // Samsung + LCK Regular

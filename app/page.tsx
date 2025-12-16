@@ -94,6 +94,16 @@ const getRoleIcon = (roleKey: string, className: string = "w-3.5 h-3.5") => {
   }
 };
 
+// Deterministic particle configs to avoid hydration mismatches (no Math.random)
+const HERO_PARTICLES = Array.from({ length: 15 }, (_, i) => {
+  const index = i + 1;
+  return {
+    left: (index * 100) / 16, // spread roughly across width
+    duration: 8 + (index % 5), // 8–12s
+    delay: (index % 7) * 0.5, // 0–3s
+  };
+});
+
 const players = [
   { 
     name: "Kiin", 
@@ -198,22 +208,22 @@ export default function HomePage() {
 
         {/* Animated particles effect */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          {[...Array(15)].map((_, i) => (
+          {HERO_PARTICLES.map((particle, i) => (
             <motion.div
               key={i}
               className="absolute w-1 h-1 bg-gold rounded-full"
               style={{
-                left: `${Math.random() * 100}%`,
-                top: '100%',
+                left: `${particle.left}%`,
+                top: "100%",
               }}
               animate={{
                 y: [0, -1000],
                 opacity: [0, 1, 0],
               }}
               transition={{
-                duration: Math.random() * 8 + 6,
+                duration: particle.duration,
                 repeat: Infinity,
-                delay: Math.random() * 5,
+                delay: particle.delay,
                 ease: "linear",
               }}
             />

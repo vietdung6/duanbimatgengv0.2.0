@@ -38,7 +38,7 @@ export const translations = {
         worldsChampions: "Worlds Champions",
         starPlayers: "Star Players",
         established: "Established",
-        noteSamsung: "Including Samsung Galaxy / KSV era (2012-2017)",
+        noteSamsung: "Including Samsung Galaxy / KSV era (2013-2017)",
         noteLckRegular: "LCK Regular 2025 counts as 2 titles (Spring + Summer combined)",
       },
       
@@ -451,7 +451,7 @@ export const translations = {
         worldsChampions: "Vô địch Thế Giới",
         starPlayers: "Tuyển Thủ Ngôi Sao",
         established: "Thành Lập",
-        noteSamsung: "Tính cả thời kỳ Samsung Galaxy / KSV (2012-2017)",
+        noteSamsung: "Tính cả thời kỳ Samsung Galaxy / KSV (2013-2017)",
         noteLckRegular: "LCK Regular 2025 được tính 2 danh hiệu (Xuân + Hè gộp)",
       },
       

@@ -198,10 +198,6 @@ export default function SchedulePage() {
                       <MapPin size={14} className="text-gold" />
                       {match.venue}
                     </span>
-                    <span className="flex items-center gap-1">
-                      <Trophy size={14} className="text-gold" />
-                      {match.week}
-                    </span>
                   </div>
 
                   {/* Lineup Section */}

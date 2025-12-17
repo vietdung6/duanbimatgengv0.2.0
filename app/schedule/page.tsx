@@ -20,9 +20,7 @@ interface UpcomingMatch {
   time: string;
   timezone: string;
   tournament: string;
-  week: string;
   venue: string;
-  streamUrl: string;
   status: string;
   lineup?: LineupSlot[];
 }
@@ -35,9 +33,7 @@ interface MatchResult {
   score: { gen: number; opp: number };
   result: "win" | "loss";
   tournament: string;
-  week: string;
   mvp: string;
-  vodUrl: string;
   lineup?: LineupSlot[];
 }
 
@@ -308,9 +304,6 @@ export default function SchedulePage() {
                           year: 'numeric'
                         })}
                       </p>
-                      {match.week && (
-                        <span className="text-gray-500 text-xs">• {match.week}</span>
-                      )}
                     </div>
                   </div>
                 )}

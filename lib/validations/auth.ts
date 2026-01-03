@@ -7,6 +7,7 @@ export const loginSchema = z.object({
   password: z
     .string()
     .min(6, "Mật khẩu phải có ít nhất 6 ký tự"),
+  turnstileToken: z.string().optional(),
 });
 
 export const registerSchema = z.object({
@@ -29,6 +30,7 @@ export const registerSchema = z.object({
     .max(50, "Tên hiển thị không được quá 50 ký tự")
     .optional()
     .or(z.literal("")),
+  turnstileToken: z.string().optional(),
 });
 
 export type LoginInput = z.infer<typeof loginSchema>;

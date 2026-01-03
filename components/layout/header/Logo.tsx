@@ -2,16 +2,20 @@
 
 import { motion } from "framer-motion";
 import { useState, useCallback, useRef } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useProgress } from "@bprogress/next";
 import confetti from "canvas-confetti";
 
 export default function Logo() {
   const router = useRouter();
+  const { start, stop } = useProgress();
   const [clickCount, setClickCount] = useState(0);
   const navTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   const handleLogoClick = useCallback((e: React.MouseEvent) => {
     e.preventDefault();
+
+    // Start progress bar immediately for feedback
+    start();
 
     // Clear any pending navigation
     if (navTimeoutRef.current) {
@@ -21,8 +25,9 @@ export default function Logo() {
     setClickCount(prev => {
       const newCount = prev + 1;
 
-      // EASTER EGG TRIGGER (5 Clicks)
-      if (newCount === 5) {
+      // EASTER EGG TRIGGER (3 Clicks)
+      if (newCount === 3) {
+        stop(); // Stop the bar since we are staying
         // 1. Confetti Explosion
         const duration = 3000;
         const end = Date.now() + duration;
@@ -73,12 +78,12 @@ export default function Logo() {
         navTimeoutRef.current = setTimeout(() => {
           router.push("/");
           setClickCount(0);
-        }, 800); // Increased delay to 800ms for easier clicking
+        }, 300); // Reduced delay to 300ms for responsiveness
 
         return newCount;
       }
     });
-  }, [router]);
+  }, [router, start, stop]);
 
   return (
     <div onClick={handleLogoClick} className="flex items-center gap-3 group cursor-pointer">

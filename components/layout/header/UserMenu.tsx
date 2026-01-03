@@ -8,6 +8,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useAuth } from "@/lib/auth/AuthContext";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
 import UserAvatar from "@/components/shared/UserAvatar";
+import { useProgress } from "@bprogress/next";
 
 interface UserMenuProps {
   mobile?: boolean;
@@ -17,6 +18,7 @@ interface UserMenuProps {
 
 export default function UserMenu({ mobile = false, onClose, onInstallPWA }: UserMenuProps) {
   const { user, logout, loading } = useAuth();
+  const { start } = useProgress();
   const { t, language, setLanguage } = useLanguage();
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
@@ -35,6 +37,7 @@ export default function UserMenu({ mobile = false, onClose, onInstallPWA }: User
   }, []);
 
   const handleLogout = () => {
+    start(); // Show progress bar on logout
     logout();
     if (onClose) onClose();
     setIsOpen(false);
@@ -65,7 +68,7 @@ export default function UserMenu({ mobile = false, onClose, onInstallPWA }: User
         </div>
       );
     }
-    
+
     return (
       <div className="flex items-center gap-3 px-2 py-1.5 rounded-lg border border-transparent animate-pulse">
         <div className="w-8 h-8 rounded-full bg-white/10 border border-white/5" />
@@ -83,14 +86,14 @@ export default function UserMenu({ mobile = false, onClose, onInstallPWA }: User
       return (
         <div className="flex flex-col w-full bg-black-charcoal/30 rounded-lg p-3">
           {/* Profile Header - Click to toggle */}
-          <button 
+          <button
             onClick={() => setIsOpen(!isOpen)}
             className="flex items-center justify-between w-full"
           >
             <div className="flex items-center gap-3">
-              <UserAvatar 
-                src={user.avatarUrl} 
-                alt="Avatar" 
+              <UserAvatar
+                src={user.avatarUrl}
+                alt="Avatar"
                 size={36}
                 className="rounded-full border border-gold/30"
               />
@@ -99,8 +102,8 @@ export default function UserMenu({ mobile = false, onClose, onInstallPWA }: User
                 <span className="text-[10px] text-gold uppercase tracking-wider">{user.role || 'Member'}</span>
               </div>
             </div>
-            <ChevronDown 
-              size={16} 
+            <ChevronDown
+              size={16}
               className={`text-gold transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}
             />
           </button>
@@ -115,27 +118,27 @@ export default function UserMenu({ mobile = false, onClose, onInstallPWA }: User
                 className="overflow-hidden"
               >
                 <div className="flex flex-col gap-1 pt-3 mt-3 border-t border-white/10">
-                   <Link 
-                     href="/me" 
-                     onClick={handleLinkClick}
-                     className="flex items-center gap-3 text-white/70 hover:text-gold 
+                  <Link
+                    href="/me"
+                    onClick={handleLinkClick}
+                    className="flex items-center gap-3 text-white/70 hover:text-gold 
                               transition-colors py-2 px-1 text-sm"
-                   >
-                     <User size={16} className="text-gold" />
-                     <span>{t.nav?.profile || "Profile"}</span>
-                   </Link>
+                  >
+                    <User size={16} className="text-gold" />
+                    <span>{t.nav?.profile || "Profile"}</span>
+                  </Link>
 
-                   {(user.role === 'admin' || user.role === 'staff') && (
-                     <Link 
-                       href="/staff" 
-                       onClick={handleLinkClick}
-                       className="flex items-center gap-3 text-white/70 hover:text-gold 
+                  {(user.role === 'admin' || user.role === 'staff') && (
+                    <Link
+                      href="/staff"
+                      onClick={handleLinkClick}
+                      className="flex items-center gap-3 text-white/70 hover:text-gold 
                                 transition-colors py-2 px-1 text-sm"
-                     >
-                       <LayoutDashboard size={16} className="text-gold" />
-                       <span>Staff Dashboard</span>
-                     </Link>
-                   )}
+                    >
+                      <LayoutDashboard size={16} className="text-gold" />
+                      <span>Staff Dashboard</span>
+                    </Link>
+                  )}
 
                   {/* Language Switcher */}
                   <div className="flex items-center gap-3 py-2 px-1 w-full text-sm">
@@ -146,21 +149,19 @@ export default function UserMenu({ mobile = false, onClose, onInstallPWA }: User
                     <div className="flex items-center bg-black-charcoal/50 rounded-lg p-1 border border-white/10">
                       <button
                         onClick={(e) => { e.stopPropagation(); setLanguage('vi'); }}
-                        className={`px-3 py-1 rounded text-[10px] font-bold transition-all ${
-                          language === 'vi' 
-                            ? 'bg-gold text-black shadow-[0_0_10px_rgba(212,175,55,0.3)]' 
+                        className={`px-3 py-1 rounded text-[10px] font-bold transition-all ${language === 'vi'
+                            ? 'bg-gold text-black shadow-[0_0_10px_rgba(212,175,55,0.3)]'
                             : 'text-gray-400 hover:text-white'
-                        }`}
+                          }`}
                       >
                         VN
                       </button>
                       <button
                         onClick={(e) => { e.stopPropagation(); setLanguage('en'); }}
-                        className={`px-3 py-1 rounded text-[10px] font-bold transition-all ${
-                          language === 'en' 
-                            ? 'bg-gold text-black shadow-[0_0_10px_rgba(212,175,55,0.3)]' 
+                        className={`px-3 py-1 rounded text-[10px] font-bold transition-all ${language === 'en'
+                            ? 'bg-gold text-black shadow-[0_0_10px_rgba(212,175,55,0.3)]'
                             : 'text-gray-400 hover:text-white'
-                        }`}
+                          }`}
                       >
                         EN
                       </button>
@@ -180,7 +181,7 @@ export default function UserMenu({ mobile = false, onClose, onInstallPWA }: User
                   )}
 
                   {/* Logout */}
-                  <button 
+                  <button
                     onClick={handleLogout}
                     className="flex items-center gap-3 text-red-400 hover:text-red-300 
                              transition-colors py-2 px-1 w-full text-sm"
@@ -219,25 +220,25 @@ export default function UserMenu({ mobile = false, onClose, onInstallPWA }: User
           className={`flex items-center gap-3 px-2 py-1.5 rounded-lg transition-all duration-300 border
             ${isOpen ? 'bg-white/10 border-gold/50' : 'hover:bg-white/5 border-transparent'}`}
         >
-           <UserAvatar 
-             src={user.avatarUrl} 
-             alt="Avatar" 
-             fallback={(user.displayName || user.username)?.charAt(0).toUpperCase() || "?"}
-             size={32}
-             className="rounded-full border border-gold/30"
-           />
-           <div className="flex flex-col items-start hidden sm:flex">
-             <span className="text-sm font-bold text-gray-200 max-w-[120px] truncate leading-none">
-               {user.displayName || user.username}
-             </span>
-             <span className="text-[10px] text-gold uppercase tracking-wider leading-none mt-1">
-               {user.role || 'Member'}
-             </span>
-           </div>
-           <ChevronDown 
-             size={14} 
-             className={`text-gray-400 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`} 
-           />
+          <UserAvatar
+            src={user.avatarUrl}
+            alt="Avatar"
+            fallback={(user.displayName || user.username)?.charAt(0).toUpperCase() || "?"}
+            size={32}
+            className="rounded-full border border-gold/30"
+          />
+          <div className="flex flex-col items-start hidden sm:flex">
+            <span className="text-sm font-bold text-gray-200 max-w-[120px] truncate leading-none">
+              {user.displayName || user.username}
+            </span>
+            <span className="text-[10px] text-gold uppercase tracking-wider leading-none mt-1">
+              {user.role || 'Member'}
+            </span>
+          </div>
+          <ChevronDown
+            size={14}
+            className={`text-gray-400 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}
+          />
         </button>
 
         <AnimatePresence>
@@ -251,8 +252,8 @@ export default function UserMenu({ mobile = false, onClose, onInstallPWA }: User
                        rounded-xl shadow-xl shadow-black/50 overflow-hidden z-50 backdrop-blur-xl"
             >
               <div className="p-2 space-y-1">
-                <Link 
-                  href="/me" 
+                <Link
+                  href="/me"
                   onClick={handleLinkClick}
                   className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-gray-300 
                            hover:bg-white/10 hover:text-white transition-colors group"
@@ -262,15 +263,15 @@ export default function UserMenu({ mobile = false, onClose, onInstallPWA }: User
                 </Link>
 
                 {user.role === 'admin' || user.role === 'staff' ? (
-                   <Link 
-                   href="/staff" 
-                   onClick={handleLinkClick}
-                   className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-gray-300 
+                  <Link
+                    href="/staff"
+                    onClick={handleLinkClick}
+                    className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-gray-300 
                             hover:bg-white/10 hover:text-white transition-colors group"
-                 >
-                   <LayoutDashboard size={16} className="text-gold group-hover:scale-110 transition-transform" />
-                   Staff Dashboard
-                 </Link>
+                  >
+                    <LayoutDashboard size={16} className="text-gold group-hover:scale-110 transition-transform" />
+                    Staff Dashboard
+                  </Link>
                 ) : null}
 
                 {/* Language Switcher */}
@@ -281,21 +282,19 @@ export default function UserMenu({ mobile = false, onClose, onInstallPWA }: User
                     <div className="flex items-center bg-black-charcoal/50 rounded-lg p-1 border border-white/10">
                       <button
                         onClick={(e) => { e.stopPropagation(); setLanguage('vi'); }}
-                        className={`px-2 py-0.5 rounded text-[10px] font-bold transition-all min-w-[28px] ${
-                          language === 'vi' 
-                            ? 'bg-gold text-black shadow-gold-glow' 
+                        className={`px-2 py-0.5 rounded text-[10px] font-bold transition-all min-w-[28px] ${language === 'vi'
+                            ? 'bg-gold text-black shadow-gold-glow'
                             : 'text-gray-500 hover:text-gray-300'
-                        }`}
+                          }`}
                       >
                         VN
                       </button>
                       <button
                         onClick={(e) => { e.stopPropagation(); setLanguage('en'); }}
-                        className={`px-2 py-0.5 rounded text-[10px] font-bold transition-all min-w-[28px] ${
-                          language === 'en' 
-                            ? 'bg-gold text-black shadow-gold-glow' 
+                        className={`px-2 py-0.5 rounded text-[10px] font-bold transition-all min-w-[28px] ${language === 'en'
+                            ? 'bg-gold text-black shadow-gold-glow'
                             : 'text-gray-500 hover:text-gray-300'
-                        }`}
+                          }`}
                       >
                         EN
                       </button>
@@ -313,9 +312,9 @@ export default function UserMenu({ mobile = false, onClose, onInstallPWA }: User
                     {t.pwa?.installButton || "Install App"}
                   </button>
                 )}
-                
+
                 <div className="h-px bg-white/10 my-1" />
-                
+
                 <button
                   onClick={handleLogout}
                   className="flex w-full items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-red-400 
@@ -343,7 +342,7 @@ export default function UserMenu({ mobile = false, onClose, onInstallPWA }: User
           <Download size={20} />
         </button>
       )}
-      <Link 
+      <Link
         href={`/login?from=${encodeURIComponent(pathname)}`}
         className="flex items-center gap-2 px-4 py-2 rounded-lg bg-gold/10 border border-gold/30 
                  hover:bg-gold/20 hover:border-gold/50 transition-all duration-300 group"

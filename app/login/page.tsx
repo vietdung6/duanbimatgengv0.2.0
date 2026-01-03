@@ -6,17 +6,20 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
 import { useAuth } from "@/lib/auth/AuthContext";
 import Loading from "@/components/ui/Loading";
+import { useProgress } from "@bprogress/next";
+import { Turnstile } from "@marsidev/react-turnstile";
 
 function LoginForm() {
   const router = useRouter();
+  const { start, stop } = useProgress();
   const searchParams = useSearchParams();
   let returnUrl = searchParams.get("from") || "/me";
-  
+
   // Prevent infinite redirect loop if returnUrl is login or register
   if (returnUrl.includes("/login") || returnUrl.includes("/register")) {
     returnUrl = "/me";
   }
-  
+
   const { t } = useLanguage();
   const { user, loading: authLoading, refreshUser } = useAuth();
   const auth = t.auth;
@@ -26,6 +29,7 @@ function LoginForm() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [showPassword, setShowPassword] = useState(false);
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
 
   useEffect(() => {
     if (!authLoading && user) {
@@ -44,7 +48,14 @@ function LoginForm() {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setError(null);
+
+    if (!turnstileToken) {
+      setError("Vui lòng hoàn thành xác thực CAPTCHA");
+      return;
+    }
+
     setLoading(true);
+    start(); // Start progress bar
 
     try {
       const res = await fetch("/api/auth/login", {
@@ -52,28 +63,31 @@ function LoginForm() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ emailOrUsername, password }),
+        body: JSON.stringify({ emailOrUsername, password, turnstileToken }),
       });
 
       const data = await res.json();
 
       if (!res.ok) {
         setError(data.error || auth.errorGeneric);
+        stop(); // Stop if error
         return;
       }
 
       // Đăng nhập thành công, cập nhật state user và chuyển về trang profile
       await refreshUser();
-      
+
       // Check for admin role directly from response data to avoid waiting for state update
       if (data.user?.role === "admin") {
         router.push("/admin");
       } else {
         router.push(returnUrl);
       }
+      // Note: Don't stop() here, let the navigation take over
     } catch (err) {
       console.error("Login error", err);
       setError(auth.errorGeneric);
+      stop(); // Stop if error
     } finally {
       setLoading(false);
     }
@@ -101,16 +115,16 @@ function LoginForm() {
           <div className="card-dark p-8 shadow-2xl border border-gold/30 bg-black/80 backdrop-blur-sm">
             <div className="text-center mb-6">
               <div className="inline-flex items-center justify-center w-[72px] h-[72px] rounded-full bg-gold/20 mb-3">
-                <Image 
-                  src="/images/genrang_emote.png" 
-                  alt="Logo" 
-                  width={64} 
-                  height={64} 
+                <Image
+                  src="/images/genrang_emote.png"
+                  alt="Logo"
+                  width={64}
+                  height={64}
                   className="object-contain"
                 />
               </div>
               <h1 className="font-heading text-3xl text-gold mb-2">
-              {auth.title}
+                {auth.title}
               </h1>
               <p className="text-gray-400 text-sm max-w-md mx-auto">
                 {auth.subtitle}
@@ -161,6 +175,14 @@ function LoginForm() {
                 </div>
               </div>
 
+              <div className="flex justify-center my-2">
+                <Turnstile
+                  siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || ""}
+                  onSuccess={setTurnstileToken}
+                  options={{ theme: 'dark' }}
+                />
+              </div>
+
               {error && (
                 <p className="text-red-400 text-xs mt-1 text-center min-h-[1.5rem]">
                   {error}
@@ -169,7 +191,7 @@ function LoginForm() {
 
               <button
                 type="submit"
-                disabled={loading}
+                disabled={loading || !turnstileToken}
                 className="btn-gold w-full mt-2 disabled:opacity-60 disabled:cursor-not-allowed"
               >
                 {loading ? auth.loading : auth.submit}

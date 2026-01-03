@@ -17,7 +17,32 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const { emailOrUsername, password } = result.data;
+    const { emailOrUsername, password, turnstileToken } = result.data;
+
+    // --- TURNSTILE VERIFICATION ---
+    if (!turnstileToken) {
+      return NextResponse.json({ error: "Thiếu mã xác thực CAPTCHA" }, { status: 400 });
+    }
+
+    const secretKey = process.env.TURNSTILE_SECRET_KEY;
+    if (secretKey) {
+      const ip = req.headers.get("x-forwarded-for") || "127.0.0.1";
+      const formData = new FormData();
+      formData.append("secret", secretKey);
+      formData.append("response", turnstileToken);
+      formData.append("remoteip", ip);
+
+      const turnstileRes = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
+        method: "POST",
+        body: formData,
+      });
+
+      const turnstileData = await turnstileRes.json();
+      if (!turnstileData.success) {
+        return NextResponse.json({ error: "Xác thực CAPTCHA thất bại" }, { status: 400 });
+      }
+    }
+    // ------------------------------
 
     const authUser = await validateUserCredentials(emailOrUsername, password);
     if (!authUser) {

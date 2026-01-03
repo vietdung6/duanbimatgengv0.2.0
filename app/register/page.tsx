@@ -4,9 +4,12 @@ import { useState, useEffect, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
 import Loading from "@/components/ui/Loading";
+import { useProgress } from "@bprogress/next";
+import { Turnstile } from "@marsidev/react-turnstile";
 
 function RegisterContent() {
   const router = useRouter();
+  const { start, stop } = useProgress();
   const searchParams = useSearchParams();
   const { language } = useLanguage();
 
@@ -20,6 +23,8 @@ function RegisterContent() {
   const [error, setError] = useState<string | null>(null);
   const [tokenValid, setTokenValid] = useState<boolean | null>(null);
 
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
+
   useEffect(() => {
     const tokenParam = searchParams.get("token");
     if (tokenParam) {
@@ -31,6 +36,7 @@ function RegisterContent() {
   }, [searchParams]);
 
   async function checkToken(t: string) {
+    start();
     try {
       const res = await fetch(`/api/auth/register?check=${t}`);
       if (res.ok) {
@@ -40,6 +46,8 @@ function RegisterContent() {
       }
     } catch {
       setTokenValid(false);
+    } finally {
+      stop();
     }
   }
 
@@ -57,7 +65,13 @@ function RegisterContent() {
       return;
     }
 
+    if (!turnstileToken) {
+      setError("Vui lòng xác thực bạn không phải là robot");
+      return;
+    }
+
     setLoading(true);
+    start();
     try {
       const res = await fetch("/api/auth/register", {
         method: "POST",
@@ -68,6 +82,7 @@ function RegisterContent() {
           username: username || null,
           password,
           displayName: displayName || null,
+          turnstileToken
         }),
       });
 
@@ -80,6 +95,7 @@ function RegisterContent() {
     } catch (err) {
       const msg = err instanceof Error ? err.message : "Có lỗi xảy ra";
       setError(msg);
+      stop();
     } finally {
       setLoading(false);
     }
@@ -220,6 +236,14 @@ function RegisterContent() {
               />
             </div>
 
+            <div className="flex justify-center my-2">
+              <Turnstile
+                siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || ""}
+                onSuccess={setTurnstileToken}
+                options={{ theme: 'dark' }}
+              />
+            </div>
+
             {error && (
               <p className="text-red-400 text-xs mt-1 text-center min-h-[1.5rem]">
                 {error}
@@ -228,7 +252,7 @@ function RegisterContent() {
 
             <button
               type="submit"
-              disabled={loading}
+              disabled={loading || !turnstileToken}
               className="btn-gold w-full mt-2 disabled:opacity-60 disabled:cursor-not-allowed"
             >
               {loading
@@ -236,8 +260,8 @@ function RegisterContent() {
                   ? "Creating..."
                   : "Đang tạo..."
                 : language === "en"
-                ? "Create Account"
-                : "Tạo Tài Khoản"}
+                  ? "Create Account"
+                  : "Tạo Tài Khoản"}
             </button>
           </form>
 

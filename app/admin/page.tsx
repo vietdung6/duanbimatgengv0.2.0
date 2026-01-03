@@ -20,7 +20,9 @@ import {
   AlertCircle,
   Search,
   Filter,
-  DollarSign
+  DollarSign,
+  Menu,
+  X
 } from "lucide-react";
 import Link from "next/link";
 import Loading from "@/components/ui/Loading";
@@ -38,6 +40,7 @@ export default function AdminPage() {
   const ready = useRequireAdmin();
   const { user, logout } = useAuth();
   const [activeTab, setActiveTab] = useState<"setup" | "logs" | "reports">("setup");
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   // Setup State
   const [maintenanceMode, setMaintenanceMode] = useState(false);
@@ -128,9 +131,105 @@ export default function AdminPage() {
 
   return (
     <div className="min-h-screen bg-black text-white font-body selection:bg-gold/30">
-      <div className="flex h-screen overflow-hidden">
-        {/* Sidebar */}
-        <aside className="w-72 bg-[#050505] border-r border-white/10 hidden md:flex flex-col relative">
+      <div className="flex h-screen overflow-hidden flex-col md:flex-row">
+
+        {/* MOBILE HEADER */}
+        <div className="md:hidden flex items-center justify-between p-4 border-b border-white/10 bg-[#050505] relative z-20">
+          <div className="flex items-center gap-3">
+            <div className="w-8 h-8 bg-gradient-to-br from-gold to-gold-dark rounded-lg flex items-center justify-center text-black shadow-gold-glow">
+              <Terminal size={16} strokeWidth={2.5} />
+            </div>
+            <span className="font-heading text-lg text-white tracking-wider">ADMIN</span>
+          </div>
+          <button
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="p-2 text-gold hover:bg-white/10 rounded-lg transition-colors"
+          >
+            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
+
+        {/* MOBILE SIDEBAR OVERLAY */}
+        {isMobileMenuOpen && (
+          <div className="md:hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-sm" onClick={() => setIsMobileMenuOpen(false)}>
+            <div
+              className="absolute top-0 left-0 h-full w-3/4 max-w-xs bg-[#050505] border-r border-white/10 flex flex-col shadow-2xl"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="p-6 flex items-center gap-4 border-b border-white/10">
+                <div className="w-10 h-10 bg-gradient-to-br from-gold to-gold-dark rounded-lg flex items-center justify-center text-black shadow-gold-glow">
+                  <Terminal size={20} strokeWidth={2.5} />
+                </div>
+                <div>
+                  <h1 className="font-heading text-xl text-white tracking-wider">QUẢN TRỊ VIÊN</h1>
+                  <p className="text-xs text-gold/80 font-medium tracking-widest uppercase">System Admin</p>
+                </div>
+              </div>
+
+              <nav className="flex-1 px-4 space-y-2 mt-4 overflow-y-auto">
+                <div className="px-4 pb-2 text-xs font-bold text-gray-500 uppercase tracking-wider">Công Cụ Hệ Thống</div>
+                <button
+                  onClick={() => { setActiveTab("setup"); setIsMobileMenuOpen(false); }}
+                  className={`w-full px-4 py-3 rounded-xl flex items-center gap-3 font-medium transition-all duration-300 ${activeTab === "setup"
+                    ? "bg-gold/10 text-gold border border-gold/20 shadow-[0_0_15px_rgba(212,175,55,0.1)]"
+                    : "text-gray-400 hover:text-white hover:bg-white/5 border border-transparent"
+                    }`}
+                >
+                  <Settings size={20} />
+                  Cấu Hình Hệ Thống
+                </button>
+                <button
+                  onClick={() => { setActiveTab("logs"); setIsMobileMenuOpen(false); }}
+                  className={`w-full px-4 py-3 rounded-xl flex items-center gap-3 font-medium transition-all duration-300 ${activeTab === "logs"
+                    ? "bg-gold/10 text-gold border border-gold/20 shadow-[0_0_15px_rgba(212,175,55,0.1)]"
+                    : "text-gray-400 hover:text-white hover:bg-white/5 border border-transparent"
+                    }`}
+                >
+                  <AlertTriangle size={20} />
+                  Nhật Ký Lỗi
+                </button>
+                <button
+                  onClick={() => { setActiveTab("reports"); setIsMobileMenuOpen(false); }}
+                  className={`w-full px-4 py-3 rounded-xl flex items-center gap-3 font-medium transition-all duration-300 ${activeTab === "reports"
+                    ? "bg-gold/10 text-gold border border-gold/20 shadow-[0_0_15px_rgba(212,175,55,0.1)]"
+                    : "text-gray-400 hover:text-white hover:bg-white/5 border border-transparent"
+                    }`}
+                >
+                  <Bug size={20} />
+                  Báo Cáo Lỗi
+                </button>
+                <Link
+                  href="/admin/finance"
+                  className="w-full px-4 py-3 rounded-xl flex items-center gap-3 font-medium transition-all duration-300 text-gray-400 hover:text-white hover:bg-white/5 border border-transparent"
+                >
+                  <DollarSign size={20} />
+                  Quản Lý Donate
+                </Link>
+                <div className="my-4 border-t border-white/10"></div>
+                <Link
+                  href="/staff"
+                  className="w-full px-4 py-3 rounded-xl flex items-center gap-3 font-medium transition-all duration-300 text-gray-400 hover:text-white hover:bg-white/5 border border-transparent"
+                >
+                  <ExternalLink size={20} />
+                  Cổng Staff (CMS)
+                </Link>
+              </nav>
+
+              <div className="p-4 border-t border-white/10">
+                <button
+                  onClick={logout}
+                  className="w-full flex items-center justify-center gap-2 text-red-400 hover:text-white hover:bg-red-500/80 border border-red-500/20 hover:border-red-500/50 px-4 py-3 rounded-lg transition-all duration-300 text-xs font-bold uppercase tracking-wider"
+                >
+                  <LogOut size={16} />
+                  Đăng Xuất
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Sidebar (Desktop) */}
+        <aside className="w-72 bg-[#050505] border-r border-white/10 hidden md:flex flex-col relative shrink-0">
           <div className="absolute inset-0 bg-gradient-to-b from-gold/5 to-transparent pointer-events-none" />
 
           <div className="p-8 flex items-center gap-4 z-10">

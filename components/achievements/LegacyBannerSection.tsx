@@ -80,6 +80,13 @@ export function LegacyBannerSection({ language }: LegacyBannerProps) {
             transition={{ duration: 0.5, delay: 0.2 }}
             whileHover={{ scale: 1.05 }}
           >
+            <motion.img
+              src="/images/logo_teams/KSV_eSportslogo_square.webp"
+              alt="KSV eSports"
+              className="w-6 h-6 sm:w-8 sm:h-10 object-contain"
+              whileHover={{ rotate: [0, -10, 10, -10, 0] }}
+              transition={{ duration: 0.5 }}
+            />
             <div className="text-left">
               <div className="text-purple-400 font-bold text-xs sm:text-sm">
                 KSV<span className="text-gold">*</span>
@@ -129,15 +136,17 @@ export function LegacyBannerSection({ language }: LegacyBannerProps) {
         </motion.div>
 
         {/* Legacy Explanation */}
-        <motion.p
+        <motion.div
           className="text-center text-gray-500 text-[10px] sm:text-xs mt-3 sm:mt-4 max-w-2xl mx-auto px-2"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.5 }}
         >
-          {t.legacy.explanation}
-        </motion.p>
+          <div className="flex flex-wrap items-center justify-center gap-1">
+            <span>KSV eSports mua lại toàn bộ đội hình LMHT của Samsung Galaxy (tuyển thủ, ban huấn luyện,kế thừa di sản, và ĐƯỢC RIOT CÔNG NHẬN). KSV sau đó đổi tên thành Gen.G vào năm 2018, tên gọi như hiện tại.</span>
+          </div>
+        </motion.div>
       </div>
     </section>
   );

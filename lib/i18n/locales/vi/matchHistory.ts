@@ -1,0 +1,17 @@
+export const matchHistory = {
+  title: "LỊCH SỬ ĐẤU",
+  filter: "Bộ lọc",
+  year: "Năm",
+  tournament: "Giải đấu",
+  team: "Đội hình",
+  opponent: "Đối thủ",
+  player: "Tuyển thủ",
+  result: "Kết quả",
+  all: "Tất cả",
+  win: "Thắng",
+  loss: "Thua",
+  other: "Khác",
+  loading: "Đang tải dữ liệu...",
+  loadMore: "Xem thêm {count} trận đấu",
+  noResults: "Không tìm thấy trận đấu phù hợp",
+};

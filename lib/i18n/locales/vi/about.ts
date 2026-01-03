@@ -1,0 +1,15 @@
+export const about = {
+  title: "VỀ CHÚNG TÔI",
+  subtitle: "Ngôi Nhà Chung Của Gen.G Nation",
+  missionTitle: "Sứ Mệnh & Công Nghệ",
+  aiProduct: "Dự án phi lợi nhuận được xây dựng với mục tiêu kết nối cộng đồng fan hâm mộ Gen.G tại Việt Nam. Chúng tôi ứng dụng các công nghệ web hiện đại nhất để mang lại trải nghiệm mượt mà, tốc độ và thông tin chính xác, cập nhật liên tục.",
+  communityTitle: "Cộng Đồng & Đam Mê",
+  editedBy: "Được phát triển và vận hành bởi những người hâm mộ nhiệt huyết. Tình yêu dành cho Gen.G và Chovy là động lực để chúng tôi không ngừng cải thiện, hoàn thiện nền tảng này mỗi ngày.",
+  contributeTitle: "Đóng Góp & Hợp Tác",
+  contribute: "Với tinh thần Open Source, chúng tôi luôn hoan nghênh mọi sự đóng góp từ cộng đồng. Dù là báo lỗi, đề xuất tính năng hay trực tiếp tham gia phát triển, sự chung tay của bạn sẽ giúp cộng đồng Tiger Nation ngày càng vững mạnh.",
+  admin: "Quản trị viên",
+  editorInChief: "Chịu trách nhiệm nội dung",
+  contact: "Liên Hệ",
+  zalo: "Zalo/Hotline",
+  email: "Email Hỗ Trợ",
+};

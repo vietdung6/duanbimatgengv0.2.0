@@ -1,6 +1,6 @@
-export const tournamentLogos: Record<string, string> = {
+export const tournamentLogos = {
   lck: "https://am-a.akamaihd.net/image?resize=96:&f=http%3A%2F%2Fstatic.lolesports.com%2Fleagues%2Flck-color-on-black.png",
-};
+} as const;
 
 export const MSILogo = ({ className = "w-8 h-8" }: { className?: string }) => (
   <svg

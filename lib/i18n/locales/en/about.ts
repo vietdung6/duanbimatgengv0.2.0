@@ -1,0 +1,15 @@
+export const about = {
+  title: "ABOUT US",
+  subtitle: "The Home of Gen.G Nation",
+  missionTitle: "Mission & Technology",
+  aiProduct: "A non-profit project built to connect the Gen.G fan community. We leverage cutting-edge web technologies to deliver a seamless, fast, and accurate information experience for fans worldwide.",
+  communityTitle: "Community & Passion",
+  editedBy: "Developed and operated by passionate fans. Our love for Gen.G and Chovy drives us to continuously improve and refine this platform every single day.",
+  contributeTitle: "Contribution & Collaboration",
+  contribute: "Embracing the Open Source spirit, we welcome all contributions from the community. Whether it's bug reporting, feature suggestions, or direct development, your support helps make the Tiger Nation stronger.",
+  admin: "Administrator",
+  editorInChief: "Content Manager",
+  contact: "Contact Us",
+  zalo: "Zalo/Hotline",
+  email: "Support Email",
+};

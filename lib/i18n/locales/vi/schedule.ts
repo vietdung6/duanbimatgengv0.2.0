@@ -1,0 +1,16 @@
+export const schedule = {
+  title: "LỊCH THI ĐẤU",
+  subtitle: "Không bỏ lỡ trận đấu nào của Gen.G. Theo dõi các trận sắp tới và kết quả gần đây.",
+  upcomingMatches: "TRẬN SẮP TỚI",
+  recentResults: "KẾT QUẢ GẦN ĐÂY",
+  loading: "Đang tải lịch thi đấu...",
+  noMatches: "Chưa có trận đấu sắp tới",
+  noResults: "Chưa có kết quả gần đây",
+  setReminder: "Đặt Nhắc Nhở",
+  viewAllResults: "Xem Tất Cả Kết Quả",
+  noLiveMatch: "KHÔNG CÓ TRẬN TRỰC TIẾP",
+  nextMatchIn: "Trận tiếp theo sau",
+  days: "ngày",
+  watchOnTwitch: "Xem trên Twitch",
+  watchOnYouTube: "Xem trên YouTube",
+};

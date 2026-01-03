@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Youtube, Instagram, Facebook, Globe } from "lucide-react";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
 
@@ -18,35 +19,44 @@ const XIcon = ({ size = 18 }: { size?: number }) => (
 );
 
 const socialLinks = [
-  { 
-    icon: Globe, 
-    href: "https://geng.gg/", 
+  {
+    icon: Globe,
+    href: "https://geng.gg/",
     label: "Gen.G Official Website"
   },
-  { 
-    icon: XIcon, 
-    href: "https://twitter.com/GenG", 
+  {
+    icon: XIcon,
+    href: "https://twitter.com/GenG",
     label: "X (Twitter)"
   },
-  { 
-    icon: Youtube, 
-    href: "https://www.youtube.com/@gengesports", 
-    label: "YouTube" 
+  {
+    icon: Youtube,
+    href: "https://www.youtube.com/@gengesports",
+    label: "YouTube"
   },
-  { 
-    icon: Instagram, 
-    href: "https://www.instagram.com/gengesports/", 
-    label: "Instagram" 
+  {
+    icon: Instagram,
+    href: "https://www.instagram.com/gengesports/",
+    label: "Instagram"
   },
-  { 
-    icon: Facebook, 
-    href: "https://www.facebook.com/GenGesports", 
-    label: "Facebook" 
+  {
+    icon: Facebook,
+    href: "https://www.facebook.com/GenGesports",
+    label: "Facebook"
   },
 ];
 
 export default function Footer() {
   const { t } = useLanguage();
+  const pathname = usePathname();
+
+  // Hide footer on Admin/Staff Dashboard and Secret Pages
+  if (pathname?.startsWith('/admin') || pathname?.startsWith('/staff') || pathname?.startsWith('/portal-login') || pathname?.startsWith('/faker-secret-fanpage') || pathname?.startsWith('/chovy-cs-hack')) return null;
+
+  // Hide footer in Viewing Party Room (immersive mode)
+  const isViewingPartyRoom = pathname?.startsWith('/fan-zone/viewing-party/') && pathname !== '/fan-zone/viewing-party';
+
+  if (isViewingPartyRoom) return null;
 
   const exploreLinks = [
     { href: "/team", label: t.nav.team },
@@ -56,24 +66,28 @@ export default function Footer() {
   ];
 
   const fanZoneLinks = [
-    { href: "/fan-zone/predictions", label: t.footer.predictions },
-    { href: "/fan-zone/shrine", label: t.footer.shrine },
+    { href: "/fan-zone/church", label: t.footer.shrine },
     { href: "/fan-zone/quiz", label: t.footer.quiz },
     { href: "/fan-zone/community", label: t.footer.community },
   ];
 
   return (
-    <footer className="bg-black border-t border-black-charcoal py-12 mt-auto">
+    <footer className="bg-[#0D0D0D] border-t border-[#3D3D3D] py-12 mt-auto">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           {/* Brand */}
           <div className="md:col-span-1">
             <div className="flex items-center gap-3 mb-4">
-              <img 
-                src="https://am-a.akamaihd.net/image?resize=96:&f=http%3A%2F%2Fstatic.lolesports.com%2Fteams%2F1655210113163_GenG_logo_200407-05.png" 
-                alt="Gen.G Logo" 
-                className="w-10 h-10 object-contain"
-              />
+              <div className="relative w-10 h-10">
+                <img
+                  src="https://am-a.akamaihd.net/image?resize=96:&f=http%3A%2F%2Fstatic.lolesports.com%2Fteams%2F1655210113163_GenG_logo_200407-05.png"
+                  alt="Gen.G Logo"
+                  width={40}
+                  height={40}
+                  className="object-contain"
+                  sizes="40px"
+                />
+              </div>
               <div>
                 <h3 className="font-heading text-xl text-gold uppercase tracking-wider">Gen.G</h3>
                 <p className="text-xs text-gray-500">FANDOM</p>
@@ -131,7 +145,7 @@ export default function Footer() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={social.label}
-                    className="w-10 h-10 bg-black-light border border-black-charcoal 
+                    className="w-10 h-10 bg-[#2D2D2D] border border-[#3D3D3D] 
                              rounded-lg flex items-center justify-center text-gray-400 
                              hover:text-gold hover:border-gold transition-all duration-300"
                   >
@@ -147,7 +161,7 @@ export default function Footer() {
         </div>
 
         {/* Bottom */}
-        <div className="border-t border-black-charcoal pt-8 flex flex-col md:flex-row 
+        <div className="border-t border-[#3D3D3D] pt-8 flex flex-col md:flex-row 
                       justify-between items-center gap-4">
           <p className="text-gray-500 text-sm text-center md:text-left">
             {t.footer.copyright}
@@ -162,9 +176,13 @@ export default function Footer() {
             <Link href="/about#contact" className="hover:text-gold transition-colors">
               {t.footer.contact}
             </Link>
+            <Link href="/support" className="hover:text-gold transition-colors">
+              {t.footer.support}
+            </Link>
           </div>
         </div>
       </div>
     </footer>
   );
 }
+

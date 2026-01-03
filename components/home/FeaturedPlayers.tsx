@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
 import { getCurrentRoster } from "@/lib/data/players";
@@ -80,10 +81,12 @@ export default function FeaturedPlayers() {
                                 shadow-2xl shadow-black/50 group-hover:shadow-gold/20"
                 >
                   {player.image ? (
-                    <img
+                    <Image
                       src={player.image}
                       alt={player.name}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform	duration-500"
+                      fill
+                      className="object-cover group-hover:scale-110 transition-transform duration-500"
+                      sizes="(max-width: 768px) 50vw, 20vw"
                       onError={(e) => {
                         const target = e.target as HTMLImageElement;
                         target.style.display = "none";

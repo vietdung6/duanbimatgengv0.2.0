@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 import { EWCLogo, MSILogo, tournamentLogos } from "@/components/shared/Logos";
 import { translations, Language } from "@/lib/i18n/translations";
 
@@ -161,11 +162,15 @@ export function TripleCrown2025Section({ language }: TripleCrownProps) {
                     delay: 1,
                   }}
                 >
-                  <img
-                    src={tournamentLogos.lck}
-                    alt="LCK"
-                    className="w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 object-contain drop-shadow-[0_0_10px_rgba(212,175,55,0.5)]"
-                  />
+                  <div className="relative w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16">
+                    <Image
+                      src={tournamentLogos.lck}
+                      alt="LCK"
+                      fill
+                      className="object-contain drop-shadow-[0_0_10px_rgba(212,175,55,0.5)]"
+                      sizes="(max-width: 640px) 40px, (max-width: 768px) 48px, 64px"
+                    />
+                  </div>
                 </motion.div>
                 <div className="text-gold font-heading text-sm sm:text-base md:text-lg">
                   LCK Regular

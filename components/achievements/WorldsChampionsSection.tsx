@@ -93,6 +93,32 @@ export function WorldsChampionsSection({ language }: WorldsChampionsProps) {
                   <div className="text-gray-400 text-xs sm:text-sm">
                     {t.samsungWhiteDescription}
                   </div>
+
+                  {/* Roster */}
+                  <div className="mt-4 pt-4 border-t border-yellow-500/10">
+                    <div className="flex flex-wrap justify-center gap-2">
+                      {[
+                        { name: "Looper", role: "Top" },
+                        { name: "DanDy", role: "Jungle" },
+                        { name: "PawN", role: "Mid" },
+                        { name: "imp", role: "ADC" },
+                        { name: "Mata", role: "Support", mvp: true },
+                      ].map((player) => (
+                        <span
+                          key={player.name}
+                          title={player.role}
+                          className={`text-xs px-2 py-1 rounded transition-colors cursor-default ${
+                            player.mvp
+                              ? "bg-yellow-500/20 text-yellow-300 border border-yellow-500/50 shadow-[0_0_10px_rgba(234,179,8,0.2)]"
+                              : "bg-white/5 text-gray-400 hover:bg-white/10 hover:text-gray-200"
+                          }`}
+                        >
+                          {player.name}
+                          {player.mvp && <span className="ml-1 text-[10px]">⭐</span>}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
                 </div>
               </motion.div>
 
@@ -132,6 +158,33 @@ export function WorldsChampionsSection({ language }: WorldsChampionsProps) {
                   </div>
                   <div className="text-gray-400 text-xs sm:text-sm">
                     {t.samsungGalaxyDescription}
+                  </div>
+
+                  {/* Roster */}
+                  <div className="mt-4 pt-4 border-t border-yellow-500/10">
+                    <div className="flex flex-wrap justify-center gap-2">
+                      {[
+                        { name: "CuVee", role: "Top" },
+                        { name: "Ambition", role: "Jungle" },
+                        { name: "Haru", role: "Jungle" },
+                        { name: "Crown", role: "Mid" },
+                        { name: "Ruler", role: "ADC", mvp: true },
+                        { name: "CoreJJ", role: "Support" },
+                      ].map((player) => (
+                        <span
+                          key={player.name}
+                          title={player.role}
+                          className={`text-xs px-2 py-1 rounded transition-colors cursor-default ${
+                            player.mvp
+                              ? "bg-yellow-500/20 text-yellow-300 border border-yellow-500/50 shadow-[0_0_10px_rgba(234,179,8,0.2)]"
+                              : "bg-white/5 text-gray-400 hover:bg-white/10 hover:text-gray-200"
+                          }`}
+                        >
+                          {player.name}
+                          {player.mvp && <span className="ml-1 text-[10px]">⭐</span>}
+                        </span>
+                      ))}
+                    </div>
                   </div>
                 </div>
               </motion.div>

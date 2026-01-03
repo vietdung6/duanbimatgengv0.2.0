@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Mail, Phone, Sparkles, Code, Heart, Users } from "lucide-react";
+import { Mail, Phone, Sparkles, Code, Heart, Users, Coffee } from "lucide-react";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
 
 export default function AboutPage() {
@@ -13,14 +13,14 @@ export default function AboutPage() {
       <div className="fixed inset-0 pointer-events-none">
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gold/10 rounded-full blur-3xl" />
         <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-gold/5 rounded-full blur-3xl" />
-        
+
         {/* Grid pattern */}
         <div className="absolute inset-0 opacity-5"
-             style={{
-               backgroundImage: `linear-gradient(rgba(212, 175, 55, 0.3) 1px, transparent 1px),
+          style={{
+            backgroundImage: `linear-gradient(rgba(212, 175, 55, 0.3) 1px, transparent 1px),
                                  linear-gradient(90deg, rgba(212, 175, 55, 0.3) 1px, transparent 1px)`,
-               backgroundSize: '50px 50px'
-             }} />
+            backgroundSize: '50px 50px'
+          }} />
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
@@ -61,7 +61,7 @@ export default function AboutPage() {
                 <Code className="w-6 h-6 text-gold" />
               </div>
               <div className="flex-grow">
-                <h2 className="font-heading text-2xl text-gold mb-2">AI-Powered</h2>
+                <h2 className="font-heading text-2xl text-gold mb-2">{t.about.missionTitle}</h2>
                 <p className="text-gray-300 leading-relaxed">
                   {t.about.aiProduct}
                 </p>
@@ -82,7 +82,7 @@ export default function AboutPage() {
                 <Heart className="w-6 h-6 text-gold" />
               </div>
               <div className="flex-grow">
-                <h2 className="font-heading text-2xl text-gold mb-2">Fan-Made</h2>
+                <h2 className="font-heading text-2xl text-gold mb-2">{t.about.communityTitle}</h2>
                 <p className="text-gray-300 leading-relaxed">
                   {t.about.editedBy}
                 </p>
@@ -103,7 +103,7 @@ export default function AboutPage() {
                 <Users className="w-6 h-6 text-gold" />
               </div>
               <div className="flex-grow">
-                <h2 className="font-heading text-2xl text-gold mb-2">Contribute</h2>
+                <h2 className="font-heading text-2xl text-gold mb-2">{t.about.contributeTitle}</h2>
                 <p className="text-gray-300 leading-relaxed">
                   {t.about.contribute}
                 </p>
@@ -126,20 +126,36 @@ export default function AboutPage() {
             </div>
 
             <div className="space-y-6">
-              {/* Admin Name */}
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                className="text-center"
-              >
-                <p className="text-gray-400 text-sm mb-1">{t.about.admin}</p>
-                <p className="font-heading text-2xl text-white">Dũng</p>
-                <p className="text-gray-500 text-sm mt-1">{t.about.editorInChief}</p>
-              </motion.div>
-
               {/* Contact Methods */}
-              <div className="grid md:grid-cols-2 gap-6 mt-8">
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 mt-3 md:mt-5">
+                {/* Fanpage */}
+                <motion.a
+                  href="https://www.facebook.com/profile.php?id=61584724361968"
+                  target="_blank"
+                  rel="noreferrer"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  whileHover={{ scale: 1.05, y: -5 }}
+                  className="bg-black-charcoal/50 border border-gold/20 rounded-xl p-6 
+                           hover:border-gold/50 transition-all duration-300 group"
+                >
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 bg-gold/20 rounded-lg flex items-center justify-center 
+                                  group-hover:bg-gold/30 transition-colors">
+                      <Users className="w-6 h-6 text-gold" />
+                    </div>
+                    <div className="flex-grow">
+                      <p className="text-[11px] uppercase tracking-wide text-gray-400 mb-1">
+                        Fanpage
+                      </p>
+                      <p className="font-heading text-base text-white group-hover:text-gold transition-colors">
+                        GenG LOL Fandom Vietnam
+                      </p>
+                    </div>
+                  </div>
+                </motion.a>
+
                 {/* Zalo/Phone */}
                 <motion.a
                   href="tel:0778876000"
@@ -156,17 +172,21 @@ export default function AboutPage() {
                       <Phone className="w-6 h-6 text-gold" />
                     </div>
                     <div className="flex-grow">
-                      <p className="text-gray-400 text-sm mb-1">{t.about.zalo}</p>
-                      <p className="font-heading text-lg text-white group-hover:text-gold transition-colors">
+                      <p className="text-[11px] uppercase tracking-wide text-gray-400 mb-1">
+                        {t.about.zalo}
+                      </p>
+                      <p className="font-heading text-base text-white group-hover:text-gold transition-colors">
                         0778.876.000
                       </p>
                     </div>
                   </div>
                 </motion.a>
 
-                {/* Email */}
+                {/* Messenger */}
                 <motion.a
-                  href="mailto:admin@gengfandom.fun"
+                  href="https://www.m.me/61584724361968"
+                  target="_blank"
+                  rel="noreferrer"
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
@@ -181,9 +201,94 @@ export default function AboutPage() {
                       <Mail className="w-6 h-6 text-gold" />
                     </div>
                     <div className="flex-grow">
-                      <p className="text-gray-400 text-sm mb-1">{t.about.email}</p>
-                      <p className="font-heading text-lg text-white group-hover:text-gold transition-colors break-all">
+                      <p className="text-[11px] uppercase tracking-wide text-gray-400 mb-1">
+                        Messenger
+                      </p>
+                      <p className="font-heading text-base text-white group-hover:text-gold transition-colors break-all">
+                        m.me/61584724361968
+                      </p>
+                    </div>
+                  </div>
+                </motion.a>
+
+                {/* Email */}
+                <motion.a
+                  href="mailto:admin@gengfandom.fun"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.15 }}
+                  whileHover={{ scale: 1.05, y: -5 }}
+                  className="bg-black-charcoal/50 border border-gold/20 rounded-xl p-6 
+                           hover:border-gold/50 transition-all duration-300 group"
+                >
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 bg-gold/20 rounded-lg flex items-center justify-center 
+                                  group-hover:bg-gold/30 transition-colors">
+                      <Mail className="w-6 h-6 text-gold" />
+                    </div>
+                    <div className="flex-grow">
+                      <p className="text-[11px] uppercase tracking-wide text-gray-400 mb-1">
+                        {t.about.email}
+                      </p>
+                      <p className="font-heading text-base text-white group-hover:text-gold transition-colors break-all">
                         admin@gengfandom.fun
+                      </p>
+                    </div>
+                  </div>
+                </motion.a>
+
+                {/* GitHub (source code) */}
+                <motion.a
+                  href="https://github.com/vietdung6/gengfandomnew"
+                  target="_blank"
+                  rel="noreferrer"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.2 }}
+                  whileHover={{ scale: 1.05, y: -5 }}
+                  className="bg-black-charcoal/50 border border-gold/20 rounded-xl p-6 
+                           hover:border-gold/50 transition-all duration-300 group"
+                >
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 bg-gold/20 rounded-lg flex items-center justify-center 
+                                  group-hover:bg-gold/30 transition-colors">
+                      <Code className="w-6 h-6 text-gold" />
+                    </div>
+                    <div className="flex-grow">
+                      <p className="text-[11px] uppercase tracking-wide text-gray-400 mb-1">
+                        GitHub
+                      </p>
+                      <p className="font-heading text-base text-white group-hover:text-gold transition-colors break-all">
+                        gengfandomnew (v0.1)
+                      </p>
+                    </div>
+                  </div>
+                </motion.a>
+
+                {/* Support / Donate */}
+                <motion.a
+                  href="/support"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.25 }}
+                  whileHover={{ scale: 1.05, y: -5 }}
+                  className="bg-black-charcoal/50 border border-gold/20 rounded-xl p-6 
+                           hover:border-gold/50 transition-all duration-300 group"
+                >
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 bg-gold/20 rounded-lg flex items-center justify-center 
+                                  group-hover:bg-gold/30 transition-colors">
+                      <Coffee className="w-6 h-6 text-gold" />
+                    </div>
+                    <div className="flex-grow">
+                      <p className="text-[11px] uppercase tracking-wide text-gray-400 mb-1">
+                        {t.footer.support}
+                      </p>
+                      <p className="font-heading text-base text-white group-hover:text-gold transition-colors break-all">
+                        {t.support.subtitle}
                       </p>
                     </div>
                   </div>

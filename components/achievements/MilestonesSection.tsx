@@ -2,6 +2,7 @@
 
 import type { ComponentType } from "react";
 import { motion } from "framer-motion";
+import Image from "next/image";
 import { MSILogo, WorldsLogo, tournamentLogos } from "@/components/shared/Logos";
 import { translations, Language } from "@/lib/i18n/translations";
 
@@ -21,7 +22,7 @@ export function MilestonesSection({ language, milestones }: MilestonesSectionPro
   return (
     <section className="py-8 sm:py-10 md:py-12 border-b border-black-charcoal">
       <div className="container mx-auto px-4 sm:px-6">
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-3 sm:gap-4">
+        <div className="grid grid-cols-6 md:grid-cols-5 gap-3 sm:gap-4">
           {milestones.map((milestone, i) => {
             const Icon =
               typeof milestone.icon === "string" ? null : milestone.icon;
@@ -31,8 +32,11 @@ export function MilestonesSection({ language, milestones }: MilestonesSectionPro
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.1 }}
-                className="card-dark text-center"
+                className={`card-dark text-center relative group hover:-translate-y-1 hover:shadow-lg transition-all duration-300 col-span-2 md:col-span-1 ${i === 3 ? "col-start-2" : ""
+                  } md:col-start-auto`}
               >
+                <div className={`absolute inset-0 bg-${milestone.color.replace('text-', '')}/5 opacity-0 group-hover:opacity-100 transition-opacity rounded-xl`} />
+
                 {milestone.icon === "worlds" ? (
                   <div className="flex justify-center mb-1.5 sm:mb-2">
                     <WorldsLogo
@@ -47,11 +51,15 @@ export function MilestonesSection({ language, milestones }: MilestonesSectionPro
                   </div>
                 ) : milestone.icon === "lck" ? (
                   <div className="flex justify-center mb-1.5 sm:mb-2">
-                    <img
-                      src={tournamentLogos.lck}
-                      alt="LCK"
-                      className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 object-contain"
-                    />
+                    <div className="relative w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8">
+                      <Image
+                        src={tournamentLogos.lck}
+                        alt="LCK"
+                        fill
+                        className="object-contain"
+                        sizes="(max-width: 640px) 24px, (max-width: 768px) 28px, 32px"
+                      />
+                    </div>
                   </div>
                 ) : Icon ? (
                   <Icon

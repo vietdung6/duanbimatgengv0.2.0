@@ -6,12 +6,14 @@
       "realName": "Kim Gi-in",
       "roleKey": "top",
       "flag": "🇰🇷",
-      "number": "10",
       "featured": false,
       "animalIcon": "🐸",
       "champions": ["K'Sante", "Aatrox", "Gwen"],
-      "stats": { "kda": "4.2", "cs": "8.9", "games": "142" },
-      "image": "https://am-a.akamaihd.net/image?resize=375:&f=http%3A%2F%2Fstatic.lolesports.com%2Fplayers%2F1758213448905_kiin.png"
+      "image": "https://am-a.akamaihd.net/image?resize=375:&f=http%3A%2F%2Fstatic.lolesports.com%2Fplayers%2F1758213448905_kiin.png",
+      "socials": {
+        "twitter": "https://twitter.com/kiin_99",
+        "instagram": "https://www.instagram.com/lol_kiin/"
+      }
     },
     {
       "id": "canyon",
@@ -19,12 +21,13 @@
       "realName": "Kim Geon-bu",
       "roleKey": "jungle",
       "flag": "🇰🇷",
-      "number": "23",
       "featured": false,
       "animalIcon": "🐻‍❄️",
       "champions": ["Nidalee", "Lee Sin", "Graves"],
-      "stats": { "kda": "5.1", "cs": "6.2", "games": "156" },
-      "image": "https://am-a.akamaihd.net/image?resize=375:&f=http%3A%2F%2Fstatic.lolesports.com%2Fplayers%2F1758212470925_canyon.png"
+      "image": "https://am-a.akamaihd.net/image?resize=375:&f=http%3A%2F%2Fstatic.lolesports.com%2Fplayers%2F1758212470925_canyon.png",
+      "socials": {
+        "instagram": "https://www.instagram.com/lol_canyon/"
+      }
     },
     {
       "id": "chovy",
@@ -32,12 +35,14 @@
       "realName": "Jeong Ji-hoon",
       "roleKey": "mid",
       "flag": "🇰🇷",
-      "number": "7",
       "featured": true,
       "animalIcon": "🐱",
       "champions": ["Cassiopeia", "Galio", "Taliyah"],
-      "stats": { "kda": "8.2", "cs": "10.1", "games": "168" },
-      "image": "https://am-a.akamaihd.net/image?resize=375:&f=http%3A%2F%2Fstatic.lolesports.com%2Fplayers%2F1758212535327_chovu.png"
+      "image": "https://am-a.akamaihd.net/image?resize=375:&f=http%3A%2F%2Fstatic.lolesports.com%2Fplayers%2F1758212535327_chovu.png",
+      "socials": {
+        "twitter": "https://twitter.com/j1hu1V_chovy",
+        "instagram": "https://www.instagram.com/chovy_jihun/"
+      }
     },
     {
       "id": "ruler",
@@ -45,12 +50,14 @@
       "realName": "Park Jae-hyuk",
       "roleKey": "adc",
       "flag": "🇰🇷",
-      "number": "1",
       "featured": true,
       "animalIcon": "🐶",
       "champions": ["Lucian", "Ezreal", "Zeri"],
-      "stats": { "kda": "7.1", "cs": "10.5", "games": "245" },
-      "image": "https://am-a.akamaihd.net/image?resize=375:&f=http%3A%2F%2Fstatic.lolesports.com%2Fplayers%2F1758213914983_ruler.png"
+      "image": "https://am-a.akamaihd.net/image?resize=375:&f=http%3A%2F%2Fstatic.lolesports.com%2Fplayers%2F1758213914983_ruler.png",
+      "socials": {
+        "twitter": "https://www.x.com/RulereluR",
+        "instagram": "https://www.instagram.com/lol_ruler98/"
+      }
     },
     {
       "id": "duro",
@@ -58,12 +65,14 @@
       "realName": "Joo Min-kyu",
       "roleKey": "support",
       "flag": "🇰🇷",
-      "number": "33",
       "featured": false,
       "animalIcon": "🐰",
       "champions": ["Nautilus", "Alistar", "Rakan"],
-      "stats": { "kda": "4.5", "cs": "1.1", "games": "98" },
-      "image": "https://am-a.akamaihd.net/image?resize=375:&f=http%3A%2F%2Fstatic.lolesports.com%2Fplayers%2F1758213092149_duro.png"
+      "image": "https://am-a.akamaihd.net/image?resize=375:&f=http%3A%2F%2Fstatic.lolesports.com%2Fplayers%2F1758213092149_duro.png",
+      "socials": {
+        "twitter": "https://www.x.com/Duro0204",
+        "instagram": "https://instagram.com/kr_duro"
+      }
     },
     {
       "id": "genrang",
@@ -71,11 +80,65 @@
       "realName": "Genrang",
       "roleKey": "mascot",
       "flag": "🎮",
-      "number": "",
       "featured": false,
       "favorites": ["Xách nước", "Bổ Cam", "Content Creator"],
       "image": "/images/genrang_avt_rose.png"
     }
+  ],
+  "cl_roster": [
+    {
+      "id": "ripple",
+      "name": "Ripple",
+      "realName": "Jong-min Byeon",
+      "roleKey": "top",
+      "flag": "🇰🇷",
+      "featured": false,
+      "image": "/images/players/placeholder.png"
+    },
+    {
+      "id": "courage",
+      "name": "Courage",
+      "realName": "Hyun-min Jeon",
+      "roleKey": "jungle",
+      "flag": "🇰🇷",
+      "featured": false,
+      "image": "https://am-a.akamaihd.net/image?resize=750:&f=http%3A%2F%2Fstatic.lolesports.com%2Fplayers%2F1744279876825_SHG_Courage.png"
+    },
+    {
+      "id": "kemish",
+      "name": "Kemish",
+      "realName": "Si-hun Kim",
+      "roleKey": "mid",
+      "flag": "🇰🇷",
+      "featured": false,
+      "image": "https://am-a.akamaihd.net/image?resize=375:&f=http%3A%2F%2Fstatic.lolesports.com%2Fplayers%2F1739356892698_image684.png"
+    },
+    {
+      "id": "mudai",
+      "name": "Mudai",
+      "realName": "Sung-yu Lee",
+      "roleKey": "adc",
+      "flag": "🇰🇷",
+      "featured": false,
+      "image": "/images/players/placeholder.png"
+    },
+    {
+      "id": "siriuss",
+      "name": "Siriuss",
+      "realName": "Kun Ko",
+      "roleKey": "support",
+      "flag": "🇰🇷",
+      "featured": false,
+      "image": "https://am-a.akamaihd.net/image?resize=375:&f=http%3A%2F%2Fstatic.lolesports.com%2Fplayers%2F1739356606316_image682.png"
+    },
+    {
+      "id": "lumos",
+      "name": "Lumos",
+      "realName": "Jae-min Kim",
+      "roleKey": "support",
+      "flag": "🇰🇷",
+      "featured": false,
+      "image": "/images/players/placeholder.png"
+    }
   ]
 }
-

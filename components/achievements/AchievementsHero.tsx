@@ -31,8 +31,8 @@ export function AchievementsHero({
       {/* Background Image */}
       <div className="absolute inset-0 flex items-center justify-center">
         <motion.img
-          src="https://scontent.fsgn19-1.fna.fbcdn.net/v/t39.30808-6/518937717_1168409358430330_4592867484714323039_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=127cfc&_nc_ohc=xC5cIKq-6aIQ7kNvwHfBqLV&_nc_oc=AdkMRSNVq5QcNvJC803lSVSt1eFX9YtyF7KOL4ryu8jlWtbxaPHCwPD8QeV0uIpEcsA&_nc_zt=23&_nc_ht=scontent.fsgn19-1.fna&_nc_gid=GpxXF9ZUc40z5Mp6ec_bGw&oh=00_AfkkXEB8qOdc4i_Mholmg-L-uAHAHM2rzluZKkKZcopcZA&oe=6940F229"
-          alt="Achievements Banner"
+          src="https://admin.esports.gg/wp-content/uploads/2025/07/GENG-won-MSI-2025.jpg"
+          alt="Gen.G MSI 2025 Champions"
           className="object-cover"
           style={{
             width: "720px",
@@ -136,7 +136,6 @@ export function AchievementsHero({
           </motion.p>
 
           <HistoryTour
-            language={language}
             setExpandedYear={setExpandedYear}
             isTourMode={isTourMode}
             setIsTourMode={setIsTourMode}

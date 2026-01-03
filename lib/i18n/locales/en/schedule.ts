@@ -1,0 +1,16 @@
+export const schedule = {
+  title: "SCHEDULE",
+  subtitle: "Never miss a Gen.G match. Track upcoming games and past results.",
+  upcomingMatches: "UPCOMING MATCHES",
+  recentResults: "RECENT RESULTS",
+  loading: "Loading schedule...",
+  noMatches: "No upcoming matches scheduled",
+  noResults: "No recent results",
+  setReminder: "Set Reminder",
+  viewAllResults: "View All Results",
+  noLiveMatch: "NO LIVE MATCH",
+  nextMatchIn: "Next match in",
+  days: "days",
+  watchOnTwitch: "Watch on Twitch",
+  watchOnYouTube: "Watch on YouTube",
+};

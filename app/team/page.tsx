@@ -1,9 +1,10 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Crown, ArrowRight, Users, Calendar } from "lucide-react";
+import { Crown, ArrowRight, Users, Calendar, Instagram } from "lucide-react";
 import Link from "next/link";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
+import { getCLRoster } from "@/lib/data/players";
 
 
 // Role Icons SVG Components
@@ -46,6 +47,12 @@ const SupportIcon = ({ className = "w-4 h-4" }: { className?: string }) => (
   </svg>
 );
 
+const XIcon = ({ className = "w-4 h-4" }: { className?: string }) => (
+  <svg className={className} fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+  </svg>
+);
+
 // Helper function to get role icon
 const getRoleIcon = (roleKey: string, className: string = "w-4 h-4") => {
   switch (roleKey) {
@@ -65,77 +72,86 @@ const getRoleIcon = (roleKey: string, className: string = "w-4 h-4") => {
 };
 
 const players = [
-  { 
+  {
     id: "kiin",
-    name: "Kiin", 
+    name: "Kiin",
     realName: "Kim Gi-in",
     realNameUpper: "KIIN KIM",
-    roleKey: "top", 
-    flag: "🇰🇷", 
+    roleKey: "top",
+    flag: "🇰🇷",
     animalIcon: "🐸",
     color: "from-gold/30",
-    number: "10",
     champions: ["K'Sante", "Aatrox", "Gwen"],
-    stats: { kda: "4.2", cs: "8.9", games: "142" },
-    image: "https://am-a.akamaihd.net/image?resize=375:&f=http%3A%2F%2Fstatic.lolesports.com%2Fplayers%2F1758213448905_kiin.png"
+    image: "https://am-a.akamaihd.net/image?resize=375:&f=http%3A%2F%2Fstatic.lolesports.com%2Fplayers%2F1758213448905_kiin.png",
+    socials: {
+      twitter: "https://twitter.com/kiin_99",
+      instagram: "https://www.instagram.com/lol_kiin/"
+    }
   },
-  { 
+  {
     id: "canyon",
-    name: "Canyon", 
+    name: "Canyon",
     realName: "Kim Geon-bu",
     realNameUpper: "GUNBU KIM",
-    roleKey: "jungle", 
-    flag: "🇰🇷", 
+    roleKey: "jungle",
+    flag: "🇰🇷",
     animalIcon: "🐻‍❄️",
     color: "from-gold/30",
-    number: "23",
     champions: ["Nidalee", "Lee Sin", "Graves"],
-    stats: { kda: "5.1", cs: "6.2", games: "156" },
-    image: "https://am-a.akamaihd.net/image?resize=375:&f=http%3A%2F%2Fstatic.lolesports.com%2Fplayers%2F1758212470925_canyon.png"
+    image: "https://am-a.akamaihd.net/image?resize=375:&f=http%3A%2F%2Fstatic.lolesports.com%2Fplayers%2F1758212470925_canyon.png",
+    socials: {
+      instagram: "https://www.instagram.com/lol_canyon/"
+    }
   },
-  { 
+  {
     id: "chovy",
-    name: "Chovy", 
+    name: "Chovy",
     realName: "Jeong Ji-hoon",
     realNameUpper: "JIHUN JUNG",
-    roleKey: "mid", 
-    flag: "🇰🇷", 
+    roleKey: "mid",
+    flag: "🇰🇷",
     animalIcon: "🐱",
     color: "from-gold/30",
-    number: "7",
-    champions: ["Cassiopeia", "Galio", "Taliyah"],
-    stats: { kda: "8.2", cs: "10.1", games: "168" },
+    champions: ["Cassiopeia", "Smolder", "Aurelion Sol"],
     featured: true,
-    image: "https://am-a.akamaihd.net/image?resize=375:&f=http%3A%2F%2Fstatic.lolesports.com%2Fplayers%2F1758212535327_chovu.png"
+    image: "https://am-a.akamaihd.net/image?resize=375:&f=http%3A%2F%2Fstatic.lolesports.com%2Fplayers%2F1758212535327_chovu.png",
+    socials: {
+      twitter: "https://twitter.com/j1hu1V_chovy",
+      instagram: "https://www.instagram.com/chovy_jihun/"
+    }
   },
-  { 
+  {
     id: "ruler",
-    name: "Ruler", 
+    name: "Ruler",
     realName: "Park Jae-hyuk",
     realNameUpper: "JAEHYEOK PARK",
-    roleKey: "adc", 
-    flag: "🇰🇷", 
+    roleKey: "adc",
+    flag: "🇰🇷",
     animalIcon: "🐶",
     color: "from-gold/30",
-    number: "1",
     champions: ["Lucian", "Ezreal", "Zeri"],
-    stats: { kda: "7.1", cs: "10.5", games: "245" },
     featured: true,
-    image: "https://am-a.akamaihd.net/image?resize=375:&f=http%3A%2F%2Fstatic.lolesports.com%2Fplayers%2F1758213914983_ruler.png"
+    image: "https://am-a.akamaihd.net/image?resize=375:&f=http%3A%2F%2Fstatic.lolesports.com%2Fplayers%2F1758213914983_ruler.png",
+    socials: {
+      twitter: "https://www.x.com/RulereluR",
+      instagram: "https://www.instagram.com/lol_ruler98/"
+    }
   },
-  { 
+  {
     id: "duro",
-    name: "Duro", 
+    name: "Duro",
     realName: "Joo Min-kyu",
     realNameUpper: "MINKYU JU",
-    roleKey: "support", 
-    flag: "🇰🇷", 
+    roleKey: "support",
+    flag: "🇰🇷",
     animalIcon: "🐰",
     color: "from-gold/30",
-    number: "33",
     champions: ["Nautilus", "Alistar", "Rakan"],
-    stats: { kda: "4.5", cs: "1.1", games: "98" },
-    image: "https://am-a.akamaihd.net/image?resize=375:&f=http%3A%2F%2Fstatic.lolesports.com%2Fplayers%2F1758213092149_duro.png"
+    image: "https://am-a.akamaihd.net/image?resize=375:&f=http%3A%2F%2Fstatic.lolesports.com%2Fplayers%2F1758213092149_duro.png",
+    socials: {
+      twitter: "https://www.x.com/Duro0204",
+      instagram: "https://instagram.com/kr_duro"
+    }
   },
   {
     id: "genrang",
@@ -151,6 +167,15 @@ const players = [
 
 const coaches = [
   {
+    id: "lyn",
+    name: "Lyn",
+    realName: "Kim Da-bin",
+    roleKey: "coach",
+    flag: "🇰🇷",
+    color: "from-gold/30",
+    image: "/images/coaches/lyn.png"
+  },
+  {
     id: "ryu",
     name: "Ryu",
     realName: "Ryu Sang-wook",
@@ -160,18 +185,19 @@ const coaches = [
     image: "/images/coaches/ryu.png"
   },
   {
-    id: "lyn",
-    name: "Lyn",
-    realName: "Kim Da-bin",
+    id: "nova",
+    name: "Nova",
+    realName: "Park Chan-ho",
     roleKey: "coach",
     flag: "🇰🇷",
     color: "from-gold/30",
-    image: "/images/coaches/lyn.png"
+    image: "/images/coaches/Nova.webp"
   },
 ];
 
 export default function TeamPage() {
   const { language, t } = useLanguage();
+  const clPlayers = getCLRoster();
 
   const getRoleLabel = (roleKey: string) => {
     const roles = t.team.roles as Record<string, string>;
@@ -179,7 +205,7 @@ export default function TeamPage() {
   };
 
   return (
-    <div className="min-h-screen pt-24 pb-20">
+    <div className="min-h-screen pt-24 pb-20 bg-black">
       {/* Hero */}
       <section className="relative py-32 overflow-hidden">
         {/* Background Image */}
@@ -223,6 +249,15 @@ export default function TeamPage() {
       <section className="section-divider relative">
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-gold/5 to-transparent pointer-events-none" />
         <div className="container mx-auto px-4 relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-center mb-8"
+          >
+            <h2 className="font-heading text-3xl text-white mb-2">
+              {language === "en" ? "MAIN ROSTER" : "ĐỘI HÌNH CHÍNH"}
+            </h2>
+          </motion.div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
             {players.map((player, index) => (
               <motion.div
@@ -230,40 +265,53 @@ export default function TeamPage() {
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
-                whileHover={{ y: -12, scale: 1.02, transition: { duration: 0.3 } }}
-                className={`card-dark card-glow relative overflow-hidden group cursor-pointer
-                          bg-gradient-to-br ${player.color} to-transparent
-                          ${player.featured ? 'md:col-span-2 lg:col-span-1 ring-2 ring-gold/50 shadow-gold-glow' : ''}
-                          backdrop-blur-sm`}
+                className={`relative group cursor-pointer rounded-2xl overflow-hidden
+                          ${player.featured ? 'md:col-span-2 lg:col-span-1 ring-1 ring-gold/50 shadow-[0_0_30px_-5px_rgba(170,129,54,0.3)]' : 'border border-white/5 hover:border-gold/30'}
+                          bg-[#080808] transition-all duration-500 hover:-translate-y-2`}
               >
-                {/* Gen.G Logo Background */}
-                <div className="absolute top-1/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-10 group-hover:opacity-15 transition-opacity duration-500 pointer-events-none">
+                {/* Background Gradient & Effects */}
+                <div className={`absolute inset-0 bg-gradient-to-br ${player.color} to-transparent opacity-10 group-hover:opacity-20 transition-opacity duration-500`} />
+                <div className="absolute top-0 right-0 w-32 h-32 bg-gold/20 blur-[60px] rounded-full -translate-y-1/2 translate-x-1/2 group-hover:bg-gold/30 transition-all duration-500" />
+
+                {/* Large Gen.G Logo Watermark */}
+                <div className="absolute inset-0 flex items-center justify-center overflow-hidden pointer-events-none">
                   <img
                     src="https://am-a.akamaihd.net/image?resize=96:&f=http%3A%2F%2Fstatic.lolesports.com%2Fteams%2F1655210113163_GenG_logo_200407-05.png"
                     alt="Gen.G Logo"
-                    className="w-32 h-32 object-contain"
+                    className="w-[120%] h-[120%] object-contain opacity-[0.1] group-hover:opacity-[0.15] transition-opacity duration-500 transform -rotate-12 scale-150"
                   />
                 </div>
 
-                {/* Franchise Player Badge */}
-                {player.featured && (
-                  <div className="absolute top-4 left-4 z-20">
-                    <span className="bg-gold text-black text-xs px-3 py-1 rounded-full font-bold
-                                   flex items-center gap-1 shadow-lg">
-                      <Crown size={12} /> {t.team.franchisePlayer}
-                    </span>
+                {/* Top Info Bar */}
+                <div className="absolute top-0 left-0 right-0 p-4 flex justify-between items-start z-20">
+                  <div className="flex flex-col gap-1">
+                    <span className="text-4xl filter drop-shadow-lg transform -rotate-12">{player.animalIcon}</span>
+                    {player.featured && (
+                      <div className="bg-gold/20 backdrop-blur-md border border-gold/30 px-2 py-0.5 rounded text-[10px] font-bold text-gold uppercase tracking-wider flex items-center gap-1">
+                        <Crown size={10} /> ACE
+                      </div>
+                    )}
                   </div>
-                )}
+                  <div className="flex flex-col items-end gap-2">
+                    <div className={`bg-black/40 backdrop-blur-sm rounded-lg border border-white/10 group-hover:border-gold/50 transition-colors ${player.roleKey === 'mascot' ? 'px-3 py-1.5' : 'p-2'}`}>
+                      {player.roleKey !== "mascot" ? (
+                        getRoleIcon(player.roleKey, "w-6 h-6 text-gray-300 group-hover:text-gold transition-colors")
+                      ) : (
+                        <span className="text-xs font-bold text-gray-300 uppercase tracking-wider whitespace-nowrap">
+                          {language === "en" ? "Mascot" : "Linh vật"}
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                </div>
 
-                {/* Player Avatar */}
-                <div className="aspect-square max-w-[200px] mx-auto bg-black-charcoal rounded-xl mb-6
-                              flex items-center justify-center relative overflow-hidden z-10
-                              shadow-2xl shadow-black/50 group-hover:shadow-gold/20">
+                {/* Player Image Area */}
+                <div className="relative h-[22rem] w-full flex items-end justify-center overflow-hidden">
                   {player.image ? (
                     <img
                       src={player.image}
                       alt={player.name}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 relative z-10"
+                      className="relative z-10 h-[110%] w-auto object-cover object-top transform group-hover:scale-105 group-hover:translate-y-2 transition-transform duration-700"
                       onError={(e) => {
                         const target = e.target as HTMLImageElement;
                         target.style.display = 'none';
@@ -271,54 +319,82 @@ export default function TeamPage() {
                       }}
                     />
                   ) : null}
-                  <div className={`text-8xl group-hover:scale-110 transition-transform duration-500 relative z-10 ${player.image ? 'hidden' : ''}`}>
+                  <div className={`text-9xl text-gray-800 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 ${player.image ? 'hidden' : ''}`}>
                     👤
                   </div>
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+                  {/* Bottom Gradient Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#080808] via-[#080808]/80 to-transparent z-10" />
                 </div>
 
-                {/* Player Info */}
-                <div className="text-center">
-                  <div className="flex items-center justify-center gap-2 mb-1">
-                    <span className="text-2xl">{player.flag}</span>
-                    <h3 className="font-heading text-3xl text-white group-hover:text-gold transition-colors flex items-center gap-2">
-                      {player.name}
-                      {player.animalIcon && <span className="text-2xl">{player.animalIcon}</span>}
-                    </h3>
-                  </div>
-                  <p className="text-gray-400 text-sm mb-4">{player.realName}</p>
-                  
-                  <div className="inline-flex items-center gap-2 bg-gold/10 px-4 py-2 rounded-full mb-6">
-                    {player.roleKey !== "mascot" && getRoleIcon(player.roleKey, "w-4 h-4")}
-                    <span className="text-gold font-semibold">{getRoleLabel(player.roleKey)}</span>
+                {/* Content Section */}
+                <div className="relative z-20 px-6 pb-6 -mt-12">
+                  {/* Name & Title */}
+                  <div className="mb-6">
+                    <div className="flex items-baseline gap-2 mb-1">
+                      <span className="text-xl">{player.flag}</span>
+                      <h3 className="font-heading text-5xl text-white italic font-bold tracking-tighter group-hover:text-gold transition-colors duration-300">
+                        {player.name}
+                      </h3>
+                    </div>
+                    <p className="text-gray-500 font-medium tracking-wide uppercase text-sm pl-8 border-l-2 border-gold/30">
+                      {player.realNameUpper || player.realName}
+                    </p>
                   </div>
 
-                  {/* Champions or Favorites */}
-                  <div className="flex justify-center gap-2 mb-4 flex-wrap">
-                    {player.favorites ? (
-                      player.favorites.map((fav: string, idx: number) => (
-                        <span key={idx} className="bg-black-charcoal px-3 py-1 rounded text-xs text-gray-400">
-                          {language === "en" 
-                            ? fav === "Xách nước" ? "Water Carrier"
-                            : fav === "Bổ Cam" ? "Orange Cutter"
-                            : fav === "Content Creator" ? "Content Creator"
-                            : fav
-                            : fav}
-                        </span>
-                      ))
-                    ) : (
-                      player.champions?.map((champ) => (
-                        <span key={champ} className="bg-black-charcoal px-3 py-1 rounded text-xs text-gray-400">
-                          {champ}
-                        </span>
-                      ))
+                  {/* Footer: Champions & Socials */}
+                  <div className="flex items-center justify-between mt-4">
+                    {/* Champions or Favorites */}
+                    <div className="flex flex-wrap gap-2 max-w-[70%]">
+                      {player.favorites ? (
+                        player.favorites.map((fav: string, idx: number) => (
+                          <span key={idx} className="bg-white/5 border border-white/10 px-3 py-1 rounded text-xs text-gray-300">
+                            {language === "en"
+                              ? fav === "Xách nước" ? "Water Carrier"
+                                : fav === "Bổ Cam" ? "Orange Cutter"
+                                  : fav === "Content Creator" ? "Content Creator"
+                                    : fav
+                              : fav}
+                          </span>
+                        ))
+                      ) : (
+                        player.champions?.map((champ) => (
+                          <span key={champ} className="bg-white/5 border border-white/10 px-3 py-1 rounded text-xs text-gray-300">
+                            {champ}
+                          </span>
+                        ))
+                      )}
+                    </div>
+
+                    {/* Social Media Links */}
+                    {player.socials && (
+                      <div className="flex gap-2">
+                        {player.socials.twitter && (
+                          <a
+                            href={player.socials.twitter}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="w-8 h-8 flex items-center justify-center rounded-full bg-white/5 text-gray-400 hover:bg-white hover:text-black transition-all duration-300"
+                            onClick={(e) => e.stopPropagation()}
+                          >
+                            <XIcon className="w-3 h-3" />
+                          </a>
+                        )}
+                        {player.socials.instagram && (
+                          <a
+                            href={player.socials.instagram}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="w-8 h-8 flex items-center justify-center rounded-full bg-white/5 text-gray-400 hover:bg-gradient-to-tr hover:from-[#f09433] hover:via-[#dc2743] hover:to-[#bc1888] hover:text-white transition-all duration-300"
+                            onClick={(e) => e.stopPropagation()}
+                          >
+                            <Instagram size={14} />
+                          </a>
+                        )}
+                      </div>
                     )}
                   </div>
                 </div>
-
-                {/* Hover Border */}
-                <div className="absolute inset-0 border-2 border-transparent 
-                              group-hover:border-gold/50 rounded-xl transition-colors pointer-events-none" />
               </motion.div>
             ))}
           </div>
@@ -338,35 +414,45 @@ export default function TeamPage() {
               {language === "en" ? "COACHING STAFF" : "BAN HUẤN LUYỆN"}
             </h2>
           </motion.div>
-          
-          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+
+          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {coaches.map((coach, index) => (
               <motion.div
                 key={coach.id}
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: (players.length + index) * 0.1 }}
-                whileHover={{ y: -10 }}
-                className={`card-dark relative overflow-hidden group cursor-pointer
-                          bg-gradient-to-br ${coach.color} to-transparent`}
+                className={`relative group cursor-pointer rounded-2xl overflow-hidden
+                          border border-white/5 hover:border-gold/30
+                          bg-[#080808] transition-all duration-500 hover:-translate-y-2`}
               >
-                {/* Gen.G Logo Background */}
-                <div className="absolute inset-0 opacity-10 group-hover:opacity-15 transition-opacity duration-500 flex items-center justify-center">
+                {/* Background Gradient */}
+                <div className={`absolute inset-0 bg-gradient-to-br ${coach.color} to-transparent opacity-10 group-hover:opacity-20 transition-opacity duration-500`} />
+
+                {/* Large Gen.G Logo Watermark */}
+                <div className="absolute inset-0 flex items-center justify-center overflow-hidden pointer-events-none">
                   <img
                     src="https://am-a.akamaihd.net/image?resize=96:&f=http%3A%2F%2Fstatic.lolesports.com%2Fteams%2F1655210113163_GenG_logo_200407-05.png"
                     alt="Gen.G Logo"
-                    className="w-16 h-16 object-contain"
+                    className="w-[120%] h-[120%] object-contain opacity-[0.1] group-hover:opacity-[0.15] transition-opacity duration-500 transform -rotate-12 scale-150"
                   />
                 </div>
 
-                {/* Coach Avatar */}
-                <div className="aspect-square max-w-[200px] mx-auto bg-black-charcoal rounded-xl mb-6
-                              flex items-center justify-center relative overflow-hidden z-10">
+                {/* Top Info Bar */}
+                <div className="absolute top-0 right-0 p-4 z-20">
+                  <div className="bg-black/40 backdrop-blur-sm px-3 py-1 rounded-lg border border-white/10 group-hover:border-gold/50 transition-colors flex items-center gap-2">
+                    <Users size={14} className="text-gold" />
+                    <span className="text-xs font-bold text-gray-300 uppercase tracking-wider">{getRoleLabel(coach.roleKey)}</span>
+                  </div>
+                </div>
+
+                {/* Coach Image Area */}
+                <div className="relative h-[20rem] w-full flex items-end justify-center overflow-hidden">
                   {coach.image ? (
                     <img
                       src={coach.image}
                       alt={coach.name}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 relative z-10"
+                      className="relative z-10 h-[105%] w-auto object-cover object-top transform group-hover:scale-105 group-hover:translate-y-2 transition-transform duration-700"
                       onError={(e) => {
                         const target = e.target as HTMLImageElement;
                         target.style.display = 'none';
@@ -374,31 +460,150 @@ export default function TeamPage() {
                       }}
                     />
                   ) : null}
-                  <div className={`text-8xl group-hover:scale-110 transition-transform duration-500 relative z-10 ${coach.image ? 'hidden' : ''}`}>
+                  <div className={`text-9xl text-gray-800 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 ${coach.image ? 'hidden' : ''}`}>
                     👤
                   </div>
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+
+                  {/* Bottom Gradient Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#080808] via-[#080808]/80 to-transparent z-10" />
                 </div>
 
-                {/* Coach Info */}
-                <div className="text-center">
-                  <div className="flex items-center justify-center gap-2 mb-1">
-                    <span className="text-2xl">{coach.flag}</span>
-                    <h3 className="font-heading text-3xl text-white group-hover:text-gold transition-colors">
-                      {coach.name}
-                    </h3>
+                {/* Content Section */}
+                <div className="relative z-20 px-6 pb-6 -mt-10 text-center">
+                  <div className="mb-2">
+                    <div className="flex items-center justify-center gap-2 mb-1">
+                      <span className="text-xl">{coach.flag}</span>
+                      <h3 className="font-heading text-4xl text-white italic font-bold tracking-tighter group-hover:text-gold transition-colors duration-300">
+                        {coach.name}
+                      </h3>
+                    </div>
+                    <p className="text-gray-500 font-medium tracking-wide uppercase text-sm">
+                      {coach.realName}
+                    </p>
                   </div>
-                  <p className="text-gray-400 text-sm mb-4">{coach.realName}</p>
-                  
-                  <div className="inline-flex items-center gap-2 bg-gold/10 px-4 py-2 rounded-full mb-6">
-                    <Users size={16} className="text-gold" />
-                    <span className="text-gold font-semibold">{getRoleLabel(coach.roleKey)}</span>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* LCK CL Section */}
+      <section className="py-12 bg-black/30">
+        <div className="container mx-auto px-4">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-8"
+          >
+            <h2 className="font-heading text-3xl text-white mb-2">
+              {language === "en" ? "LCK CL ROSTER" : "ĐỘI HÌNH LCK CL"}
+            </h2>
+          </motion.div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+            {clPlayers.map((player, index) => (
+              <motion.div
+                key={player.id}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                className="relative group cursor-pointer rounded-2xl overflow-hidden border border-white/5 hover:border-gold/30 bg-[#080808] transition-all duration-500 hover:-translate-y-2"
+              >
+                {/* Background Gradient & Effects */}
+                <div className={`absolute inset-0 bg-gradient-to-br ${player.color || "from-gold/30"} to-transparent opacity-10 group-hover:opacity-20 transition-opacity duration-500`} />
+                <div className="absolute top-0 right-0 w-32 h-32 bg-gold/20 blur-[60px] rounded-full -translate-y-1/2 translate-x-1/2 group-hover:bg-gold/30 transition-all duration-500" />
+
+                {/* Large Gen.G Logo Watermark */}
+                <div className="absolute inset-0 flex items-center justify-center overflow-hidden pointer-events-none">
+                  <img
+                    src="https://am-a.akamaihd.net/image?resize=96:&f=http%3A%2F%2Fstatic.lolesports.com%2Fteams%2F1655210113163_GenG_logo_200407-05.png"
+                    alt="Gen.G Logo"
+                    className="w-[120%] h-[120%] object-contain opacity-[0.1] group-hover:opacity-[0.15] transition-opacity duration-500 transform -rotate-12 scale-150"
+                  />
+                </div>
+
+                {/* Top Info Bar */}
+                <div className="absolute top-0 left-0 right-0 p-4 flex justify-between items-start z-20">
+                  <div className="flex flex-col gap-1">
+                    {player.animalIcon && <span className="text-4xl filter drop-shadow-lg transform -rotate-12">{player.animalIcon}</span>}
+                  </div>
+                  <div className="flex flex-col items-end gap-2">
+                    <div className="bg-black/40 backdrop-blur-sm rounded-lg border border-white/10 group-hover:border-gold/50 transition-colors p-2">
+                      {getRoleIcon(player.roleKey, "w-6 h-6 text-gray-300 group-hover:text-gold transition-colors")}
+                    </div>
                   </div>
                 </div>
 
-                {/* Hover Border */}
-                <div className="absolute inset-0 border-2 border-transparent 
-                              group-hover:border-gold/50 rounded-xl transition-colors pointer-events-none" />
+                {/* Player Image Area */}
+                <div className="relative h-[22rem] w-full flex items-end justify-center overflow-hidden">
+                  {player.image ? (
+                    <img
+                      src={player.image}
+                      alt={player.name}
+                      className="relative z-10 h-[110%] w-auto object-cover object-top transform group-hover:scale-105 group-hover:translate-y-2 transition-transform duration-700"
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement;
+                        target.style.display = 'none';
+                        target.nextElementSibling?.classList.remove('hidden');
+                      }}
+                    />
+                  ) : null}
+                  <div className={`text-9xl text-gray-800 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 ${player.image && !player.image.includes('placeholder') ? 'hidden' : ''}`}>
+                    👤
+                  </div>
+
+                  {/* Bottom Gradient Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#080808] via-[#080808]/80 to-transparent z-10" />
+                </div>
+
+                {/* Content Section */}
+                <div className="relative z-20 px-6 pb-6 -mt-12">
+                  {/* Name & Title */}
+                  <div className="mb-6">
+                    <div className="flex items-baseline gap-2 mb-1">
+                      <span className="text-xl">{player.flag}</span>
+                      <h3 className="font-heading text-5xl text-white italic font-bold tracking-tighter group-hover:text-gold transition-colors duration-300">
+                        {player.name}
+                      </h3>
+                    </div>
+                    <p className="text-gray-500 font-medium tracking-wide uppercase text-sm pl-8 border-l-2 border-gold/30">
+                      {player.realName?.toUpperCase()}
+                    </p>
+                  </div>
+
+                  {/* Footer: Socials if available */}
+                  <div className="flex items-center justify-end mt-4">
+                    {player.socials && (
+                      <div className="flex gap-2">
+                        {player.socials.twitter && (
+                          <a
+                            href={player.socials.twitter}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="w-8 h-8 flex items-center justify-center rounded-full bg-white/5 text-gray-400 hover:bg-white hover:text-black transition-all duration-300"
+                            onClick={(e) => e.stopPropagation()}
+                          >
+                            <XIcon className="w-3 h-3" />
+                          </a>
+                        )}
+                        {player.socials.instagram && (
+                          <a
+                            href={player.socials.instagram}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="w-8 h-8 flex items-center justify-center rounded-full bg-white/5 text-gray-400 hover:bg-gradient-to-tr hover:from-[#f09433] hover:via-[#dc2743] hover:to-[#bc1888] hover:text-white transition-all duration-300"
+                            onClick={(e) => e.stopPropagation()}
+                          >
+                            <Instagram size={14} />
+                          </a>
+                        )}
+                      </div>
+                    )}
+                  </div>
+                </div>
               </motion.div>
             ))}
           </div>
@@ -406,7 +611,7 @@ export default function TeamPage() {
       </section>
 
       {/* More Teams Section */}
-      <section className="py-16 bg-black-light border-t border-black-charcoal">
+      <section className="py-16 bg-black border-t border-white/10">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -418,7 +623,7 @@ export default function TeamPage() {
               {language === "en" ? "EXPLORE MORE" : "KHÁM PHÁ THÊM"}
             </h2>
             <p className="text-gray-400">
-              {language === "en" 
+              {language === "en"
                 ? "Discover the rich history and legendary players of our organization"
                 : "Khám phá lịch sử phong phú và những tuyển thủ huyền thoại của tổ chức"
               }
@@ -434,7 +639,7 @@ export default function TeamPage() {
               whileHover={{ scale: 1.02 }}
               className="w-full"
             >
-              <Link 
+              <Link
                 href="/team/alumni"
                 className="card-dark flex flex-col items-center text-center p-8 group cursor-pointer h-full"
               >
@@ -446,7 +651,7 @@ export default function TeamPage() {
                   {language === "en" ? "FORMER PLAYERS" : "CỰU TUYỂN THỦ"}
                 </h3>
                 <p className="text-gray-400 text-sm mb-4">
-                  {language === "en" 
+                  {language === "en"
                     ? "From Samsung to Gen.G, see all players who wore our colors"
                     : "Từ Samsung đến Gen.G, xem tất cả tuyển thủ đã khoác áo chúng ta"
                   }

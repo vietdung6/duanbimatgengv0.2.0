@@ -1,33 +1,481 @@
-{
-  "summary": {
-    "worldsChampions": 2,
-    "lckChampions": 9,
-    "msiChampions": 2,
-    "internationalTitles": 4,
-    "yearsActive": 12
+[
+  {
+    "year": 2025,
+    "era": "Gen.G",
+    "items": [
+      {
+        "title": "MSI 2025 Champion",
+        "titleVi": "Vô địch MSI 2025",
+        "type": "gold",
+        "icon": "🏆",
+        "major": true,
+        "players": [
+          "Kiin",
+          "Canyon",
+          "Chovy",
+          "Ruler",
+          "Duro"
+        ],
+        "mvp": "Chovy"
+      },
+      {
+        "title": "EWC 2025 Champion",
+        "titleVi": "Vô địch EWC 2025",
+        "type": "gold",
+        "icon": "🏆",
+        "major": true,
+        "players": [
+          "Kiin",
+          "Canyon",
+          "Chovy",
+          "Ruler",
+          "Duro"
+        ],
+        "mvp": "Kiin"
+      },
+      {
+        "title": "LCK Regular Season Champion*",
+        "titleVi": "Vô địch LCK Regular*",
+        "type": "gold",
+        "icon": "🏆",
+        "major": true,
+        "players": [
+          "Kiin",
+          "Canyon",
+          "Chovy",
+          "Ruler",
+          "Duro"
+        ],
+        "mvp": "Chovy"
+      },
+      {
+        "title": "LCK Cup Runner-up",
+        "titleVi": "Á quân LCK Cup",
+        "type": "silver",
+        "icon": "🥈",
+        "players": [
+          "Kiin",
+          "Canyon",
+          "Chovy",
+          "Ruler",
+          "Duro"
+        ]
+      },
+      {
+        "title": "Worlds 2025 Semifinalist",
+        "titleVi": "Bán kết CKTG 2025",
+        "type": "bronze",
+        "icon": "🏅",
+        "major": true,
+        "players": [
+          "Kiin",
+          "Canyon",
+          "Chovy",
+          "Ruler",
+          "Duro"
+        ]
+      }
+    ]
   },
-  
-  "timeline": [
-    {
-      "year": 2025,
-      "era": "Gen.G",
-      "items": [
-        { "title": "MSI 2025 Champion", "titleVi": "Vô địch MSI 2025", "type": "gold", "icon": "🏆", "major": true },
-        { "title": "EWC 2025 Champion", "titleVi": "Vô địch EWC 2025", "type": "gold", "icon": "🏆", "major": true },
-        { "title": "LCK Spring Champion", "titleVi": "Vô địch LCK Mùa Xuân", "type": "gold", "icon": "🏆", "major": true },
-        { "title": "LCK Cup Runner-up", "titleVi": "Á quân LCK Cup", "type": "silver", "icon": "🥈" },
-        { "title": "Worlds 2025 - 4th Place", "titleVi": "CKTG 2025 - Hạng 4", "type": "bronze", "icon": "🏅" }
-      ]
-    },
-    {
-      "year": 2024,
-      "era": "Gen.G",
-      "items": [
-        { "title": "LCK Spring Champion", "titleVi": "Vô địch LCK Mùa Xuân", "type": "gold", "icon": "🏆", "major": true },
-        { "title": "LCK Spring MVP - Chovy", "titleVi": "MVP LCK Mùa Xuân - Chovy", "type": "gold", "icon": "⭐" },
-        { "title": "Worlds 2024 Finalist", "titleVi": "Á quân CKTG 2024", "type": "silver", "icon": "🥈", "major": true }
-      ]
-    }
-  ]
-}
-
+  {
+    "year": 2024,
+    "era": "Gen.G",
+    "items": [
+      {
+        "title": "MSI 2024 Champion",
+        "titleVi": "Vô địch MSI 2024",
+        "type": "gold",
+        "icon": "🏆",
+        "major": true,
+        "players": [
+          "Kiin",
+          "Canyon",
+          "Chovy",
+          "Peyz",
+          "Lehends"
+        ],
+        "mvp": "Lehends"
+      },
+      {
+        "title": "LCK Spring Champion",
+        "titleVi": "Vô địch LCK Mùa Xuân",
+        "type": "gold",
+        "icon": "🏆",
+        "major": true,
+        "players": [
+          "Kiin",
+          "Canyon",
+          "Chovy",
+          "Peyz",
+          "Lehends"
+        ],
+        "mvp": "Chovy"
+      },
+      {
+        "title": "LCK Summer Runner-up",
+        "titleVi": "Á quân LCK Mùa Hè",
+        "type": "silver",
+        "icon": "🥈",
+        "players": [
+          "Kiin",
+          "Canyon",
+          "Chovy",
+          "Peyz",
+          "Lehends"
+        ]
+      },
+      {
+        "title": "Worlds 2024 Semifinalist",
+        "titleVi": "Bán kết CKTG 2024",
+        "type": "bronze",
+        "icon": "🏅",
+        "major": true,
+        "players": [
+          "Kiin",
+          "Canyon",
+          "Chovy",
+          "Peyz",
+          "Lehends"
+        ]
+      }
+    ]
+  },
+  {
+    "year": 2023,
+    "era": "Gen.G",
+    "items": [
+      {
+        "title": "LCK Spring Champion",
+        "titleVi": "Vô địch LCK Mùa Xuân",
+        "type": "gold",
+        "icon": "🏆",
+        "major": true,
+        "players": [
+          "Doran",
+          "Peanut",
+          "Chovy",
+          "Peyz",
+          "Delight"
+        ],
+        "mvp": "Peyz"
+      },
+      {
+        "title": "LCK Summer Champion",
+        "titleVi": "Vô địch LCK Mùa Hè",
+        "type": "gold",
+        "icon": "🏆",
+        "major": true,
+        "players": [
+          "Doran",
+          "Peanut",
+          "Chovy",
+          "Peyz",
+          "Delight"
+        ],
+        "mvp": "Chovy"
+      },
+      {
+        "title": "Worlds 2023 Quarterfinalist",
+        "titleVi": "Tứ kết CKTG 2023",
+        "type": "bronze",
+        "icon": "🏅",
+        "players": [
+          "Doran",
+          "Peanut",
+          "Chovy",
+          "Peyz",
+          "Delight"
+        ]
+      }
+    ]
+  },
+  {
+    "year": 2022,
+    "era": "Gen.G",
+    "items": [
+      {
+        "title": "LCK Spring Runner-up",
+        "titleVi": "Á quân LCK Mùa Xuân",
+        "type": "silver",
+        "icon": "🥈",
+        "players": [
+          "Doran",
+          "Peanut",
+          "Chovy",
+          "Ruler",
+          "Lehends"
+        ]
+      },
+      {
+        "title": "LCK Summer Champion",
+        "titleVi": "Vô địch LCK Mùa Hè",
+        "type": "gold",
+        "icon": "🏆",
+        "major": true,
+        "players": [
+          "Doran",
+          "Peanut",
+          "Chovy",
+          "Ruler",
+          "Lehends"
+        ],
+        "mvp": "Ruler"
+      },
+      {
+        "title": "Worlds 2022 Semifinalist",
+        "titleVi": "Bán kết CKTG 2022",
+        "type": "bronze",
+        "icon": "🏅",
+        "major": true,
+        "players": [
+          "Doran",
+          "Peanut",
+          "Chovy",
+          "Ruler",
+          "Lehends"
+        ]
+      }
+    ]
+  },
+  {
+    "year": 2021,
+    "era": "Gen.G",
+    "items": [
+      {
+        "title": "LCK Spring Runner-up",
+        "titleVi": "Á quân LCK Mùa Xuân",
+        "type": "silver",
+        "icon": "🥈",
+        "players": [
+          "Rascal",
+          "Clid",
+          "Bdd",
+          "Ruler",
+          "Life"
+        ]
+      },
+      {
+        "title": "Worlds 2021 Semifinalist",
+        "titleVi": "Bán kết CKTG 2021",
+        "type": "bronze",
+        "icon": "🏅",
+        "major": true,
+        "players": [
+          "Rascal",
+          "Clid",
+          "Bdd",
+          "Ruler",
+          "Life"
+        ]
+      }
+    ]
+  },
+  {
+    "year": 2020,
+    "era": "Gen.G",
+    "items": [
+      {
+        "title": "LCK Spring Finalist",
+        "titleVi": "Á quân LCK Mùa Xuân",
+        "type": "silver",
+        "icon": "🥈",
+        "players": [
+          "Rascal",
+          "Clid",
+          "Bdd",
+          "Ruler",
+          "Life"
+        ]
+      },
+      {
+        "title": "Worlds 2020 Quarterfinalist",
+        "titleVi": "Tứ kết CKTG 2020",
+        "type": "bronze",
+        "icon": "🏅",
+        "players": [
+          "Rascal",
+          "Clid",
+          "Bdd",
+          "Ruler",
+          "Life"
+        ]
+      }
+    ]
+  },
+  {
+    "year": 2019,
+    "era": "Gen.G",
+    "items": [
+      {
+        "title": "Team Rebuild",
+        "titleVi": "Tái Thiết Đội Hình",
+        "type": "info",
+        "icon": "🔄"
+      }
+    ]
+  },
+  {
+    "year": 2018,
+    "era": "KSV → Gen.G",
+    "items": [
+      {
+        "title": "Worlds 2018 Group Stage",
+        "titleVi": "Vòng Bảng CKTG 2018",
+        "type": "bronze",
+        "icon": "🏅",
+        "players": [
+          "CuVee",
+          "Haru",
+          "Crown",
+          "Ruler",
+          "CoreJJ"
+        ]
+      },
+      {
+        "title": "Rebranded: KSV eSports → Gen.G",
+        "titleVi": "Đổi Tên: KSV eSports → Gen.G",
+        "type": "info",
+        "icon": "logo:geng"
+      },
+      {
+        "title": "KSV eSports Acquired Roster",
+        "titleVi": "KSV eSports Mua Lại Đội Hình",
+        "type": "info",
+        "icon": "logo:ksv"
+      },
+      {
+        "title": "Samsung Ends Esports Sponsorship",
+        "titleVi": "Samsung ngừng tài trợ mảng esport",
+        "type": "info",
+        "icon": "🔚"
+      }
+    ]
+  },
+  {
+    "year": 2017,
+    "era": "Samsung Galaxy",
+    "items": [
+      {
+        "title": "WORLDS CHAMPION 🏆",
+        "titleVi": "VÔ ĐỊCH THẾ GIỚI 🏆",
+        "type": "legendary",
+        "icon": "👑",
+        "major": true,
+        "players": [
+          "CuVee",
+          "Ambition",
+          "Haru",
+          "Crown",
+          "Ruler",
+          "CoreJJ"
+        ],
+        "mvp": "Ruler"
+      }
+    ]
+  },
+  {
+    "year": 2016,
+    "era": "Samsung Galaxy",
+    "items": [
+      {
+        "title": "Worlds 2016 Finalist",
+        "titleVi": "Á quân CKTG 2016",
+        "type": "silver",
+        "icon": "🥈",
+        "major": true,
+        "players": [
+          "CuVee",
+          "Ambition",
+          "Crown",
+          "Ruler",
+          "CoreJJ"
+        ]
+      }
+    ]
+  },
+  {
+    "year": 2015,
+    "era": "Samsung Galaxy",
+    "items": [
+      {
+        "title": "Due to the new policy, Samsung Galaxy was established.",
+        "titleVi": "Do chính sách mới, Samsung Galaxy được thành lập",
+        "type": "info",
+        "icon": "🔄"
+      }
+    ]
+  },
+  {
+    "year": 2014,
+    "era": "Samsung",
+    "items": [
+      {
+        "title": "Samsung Ozone Renamed to Samsung White",
+        "titleVi": "Đổi tên Samsung Ozone thành Samsung White",
+        "type": "info",
+        "icon": "🔄"
+      },
+      {
+        "title": "WORLDS CHAMPION (Samsung White)",
+        "titleVi": "VÔ ĐỊCH THẾ GIỚI (Samsung White)",
+        "type": "legendary",
+        "icon": "👑",
+        "major": true,
+        "players": [
+          "Looper",
+          "DanDy",
+          "PawN",
+          "imp",
+          "Mata"
+        ],
+        "mvp": "Mata"
+      },
+      {
+        "title": "OGN Champions Spring (Samsung Blue)",
+        "titleVi": "OGN Champions Mùa Xuân (Samsung Blue)",
+        "type": "gold",
+        "icon": "🏆",
+        "major": true,
+        "players": [
+          "Acorn",
+          "Spirit",
+          "Dade",
+          "Deft",
+          "Heart"
+        ],
+        "mvp": "Dade"
+      }
+    ]
+  },
+  {
+    "year": 2013,
+    "era": "Samsung",
+    "items": [
+      {
+        "title": "Samsung Blue & Samsung Ozone Established",
+        "titleVi": "Thành lập Samsung Blue & Samsung Ozone",
+        "type": "info",
+        "icon": "logo:samsung"
+      },
+      {
+        "title": "Acquired MVP Ozone & MVP Blue",
+        "titleVi": "Mua lại MVP Ozone & MVP Blue",
+        "type": "info",
+        "icon": "🔄"
+      },
+      {
+        "title": "Worlds 2013 Group Stage",
+        "titleVi": "Vòng Bảng CKTG 2013",
+        "type": "bronze",
+        "icon": "🏅",
+        "players": [
+          "Looper",
+          "DanDy",
+          "Dade",
+          "imp",
+          "Mata"
+        ]
+      }
+    ]
+  }
+]

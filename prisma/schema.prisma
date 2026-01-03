@@ -1,0 +1,499 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model ChatMessage {
+  id             Int              @id @default(autoincrement())
+  session_id     Int
+  user_id        Int?
+  content        String           @db.Text
+  type           ChatMessageType? @default(user)
+  created_at     DateTime?        @default(now()) @db.DateTime(0)
+  viewingSession ViewingSession   @relation(fields: [session_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "chat_messages_ibfk_1")
+  user           User?            @relation(fields: [user_id], references: [id], onUpdate: Restrict, map: "chat_messages_ibfk_2")
+
+  @@index([session_id, created_at], map: "idx_session_created")
+  @@index([user_id], map: "user_id")
+  @@map("chat_messages")
+}
+
+model InviteToken {
+  id                  Int             @id @default(autoincrement())
+  token               String          @unique(map: "token") @db.VarChar(64)
+  created_by_staff_id Int
+  expires_at          DateTime        @db.DateTime(0)
+  used                Boolean         @default(false)
+  used_by_user_id     Int?
+  role                InviteTokenRole @default(fan)
+  created_at          DateTime        @default(now()) @db.DateTime(0)
+
+  @@index([expires_at], map: "idx_expires_at")
+  @@index([token], map: "idx_token")
+  @@index([used], map: "idx_used")
+  @@map("invite_tokens")
+}
+
+model TournamentType {
+  id          Int                  @id @default(autoincrement())
+  name        String               @unique @db.VarChar(100)
+  logo        String?              @db.Text
+  category    TournamentCategory   @default(MAJOR)
+  description String?              @db.VarChar(255)
+  created_at  DateTime             @default(now()) @db.Timestamp(0)
+  updated_at  DateTime             @default(now()) @db.Timestamp(0)
+  tournaments TournamentResource[]
+
+  @@map("tournament_types")
+}
+
+model Match {
+  id             Int          @id @default(autoincrement())
+  home_team_name String?      @default("Gen.G") @db.VarChar(255)
+  home_team_logo String?      @db.VarChar(512)
+  // Opponent - Foreign Key to TeamResource
+  opponent_id         Int?
+  opponent            TeamResource? @relation(fields: [opponent_id], references: [id])
+  
+  // Legacy fields (kept for migration - will be nullable)
+  opponent_name       String?      @db.VarChar(255)
+  opponent_short_name String?      @db.VarChar(20)
+  opponent_logo       String?      @db.VarChar(512)
+  
+  match_date     DateTime     @db.DateTime(0)
+  timezone       String?      @default("KST") @db.VarChar(50)
+  tournament     String       @db.VarChar(255)
+  stage          String?      @db.VarChar(255)
+  round_name     String?      @db.VarChar(255)
+  match_type     String?      @default("BO3") @db.VarChar(50)
+  match_status   MatchStatus  @default(scheduled)
+  score_gen      Int?         @default(0)
+  score_opp      Int?         @default(0)
+  match_result   MatchResult?
+  mvp            String?      @db.VarChar(255)
+  vod_url        String?      @db.VarChar(512)
+  patch          String?      @db.VarChar(20)
+  lineup         String?      @db.LongText
+  is_featured    Boolean      @default(false)
+  slug           String?      @unique @db.VarChar(255)
+  created_at     DateTime     @default(now()) @db.Timestamp(0)
+  updated_at     DateTime     @default(now()) @db.Timestamp(0)
+  games          Game[]
+  
+  // Link to Resource Hub (Optional)
+  tournament_resource_id Int?
+  tournament_resource    TournamentResource? @relation(fields: [tournament_resource_id], references: [id])
+
+  @@index([match_date], map: "idx_matches_date")
+  @@index([match_status], map: "idx_matches_status")
+  @@index([tournament_resource_id], map: "idx_matches_tournament_resource")
+  @@index([opponent_id], map: "idx_matches_opponent")
+  @@index([match_status, match_date], map: "idx_matches_status_date")
+  @@map("matches")
+}
+
+model Game {
+  id          Int     @id @default(autoincrement())
+  match_id    Int
+  game_number Int
+  patch       String? @db.VarChar(20)
+  side        String? @db.VarChar(10)
+  result      String? @db.VarChar(10)
+  gen_bans    String? @db.LongText
+  opp_bans    String? @db.LongText
+  gen_picks   String? @db.LongText
+  opp_picks   String? @db.LongText
+  gen_players String? @db.LongText
+  vod_url     String? @db.VarChar(512)
+  duration    String? @db.VarChar(20)
+  match       Match   @relation(fields: [match_id], references: [id], onDelete: Cascade)
+  
+  // Detailed player stats for this game
+  player_stats GamePlayerStat[]
+
+  @@index([match_id], map: "match_games_match_id_fkey")
+  @@map("match_games")
+}
+
+// Detailed in-game stats for each player in a game
+model GamePlayerStat {
+  id            Int      @id @default(autoincrement())
+  game_id       Int
+  player_name   String?  @db.VarChar(100)    // IGN (optional for opponent)
+  role          String   @db.VarChar(20)     // TOP, JUG, MID, ADC, SUP
+  team          String   @db.VarChar(10)     // "gen" or "opp"
+  champion      String   @db.VarChar(50)     // Champion picked
+  kills         Int      @default(0)
+  deaths        Int      @default(0)
+  assists       Int      @default(0)
+  cs            Int      @default(0)         // Creep Score
+  gold          Int      @default(0)         // Total gold earned
+  summoner1     String?  @db.VarChar(30)     // Flash, Ignite, etc.
+  summoner2     String?  @db.VarChar(30)
+  damage_dealt  Int?     @default(0)         // Total damage dealt to champions
+  damage_taken  Int?     @default(0)         // Total damage taken
+  
+  game          Game     @relation(fields: [game_id], references: [id], onDelete: Cascade)
+  
+  @@index([game_id], map: "game_player_stats_game_id_fkey")
+  @@map("game_player_stats")
+}
+
+model UserHistory {
+  id            Int             @id @default(autoincrement())
+  user_id       Int
+  type          UserHistoryType
+  title         String          @db.VarChar(255)
+  description   String?         @db.Text
+  points_change Int?            @default(0)
+  created_at    DateTime        @default(now()) @db.Timestamp(0)
+  user          User            @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "user_history_ibfk_1")
+
+  @@index([user_id], map: "user_id")
+  @@map("user_history")
+}
+
+model User {
+  id                    Int                    @id @default(autoincrement())
+  email                 String                 @unique(map: "email") @db.VarChar(255)
+  username              String?                @unique(map: "username") @db.VarChar(100)
+  display_name          String?                @db.VarChar(100)
+  proof                 String?                @db.Text
+  points                Int                    @default(0)
+  total_points          Int                    @default(0)
+  password_hash         String                 @db.VarChar(255)
+  role                  UserRole?              @default(fan)
+  created_at            DateTime?              @default(now()) @db.DateTime(0)
+  updated_at            DateTime?              @default(now()) @db.DateTime(0)
+  avatar_url            String?                @db.VarChar(255)
+  last_daily_pray       DateTime?              @db.DateTime(0)
+  daily_streak          Int                    @default(0)
+  last_display_name_change DateTime?           @db.DateTime(0)
+  two_factor_secret     String?                @db.VarChar(255)
+  two_factor_enabled    Boolean                @default(false)
+  chatMessages          ChatMessage[]
+  userHistory           UserHistory[]
+  viewingPartyResponses ViewingPartyResponse[]
+  viewingSessionBans    ViewingSessionBan[]
+  viewingSessions       ViewingSession[]
+  systemLogs            SystemLog[]
+
+  @@map("users")
+}
+
+model ViewingPartyEvent {
+  id                    Int                      @id @default(autoincrement())
+  session_id            Int
+  type                  ViewingPartyEventType
+  title                 String                   @db.VarChar(255)
+  description           String?                  @db.Text
+  options               String?                  @db.LongText
+  correct_option_index  Int?
+  points                Int?                     @default(0)
+  status                ViewingPartyEventStatus? @default(pending)
+  created_at            DateTime                 @default(now()) @db.Timestamp(0)
+  updated_at            DateTime                 @default(now()) @db.Timestamp(0)
+  viewingPartyResponses ViewingPartyResponse[]
+
+  @@index([session_id], map: "idx_session")
+  @@index([status], map: "idx_status")
+  @@map("viewing_party_events")
+}
+
+model ViewingPartyResponse {
+  id                    Int               @id @default(autoincrement())
+  event_id              Int
+  user_id               Int
+  selected_option_index Int?
+  is_correct            Boolean?
+  created_at            DateTime          @default(now()) @db.Timestamp(0)
+  viewingPartyEvent     ViewingPartyEvent @relation(fields: [event_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "viewing_party_responses_ibfk_1")
+  user                  User              @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "viewing_party_responses_ibfk_2")
+
+  @@unique([user_id, event_id], map: "unique_user_event")
+  @@index([event_id], map: "event_id")
+  @@map("viewing_party_responses")
+}
+
+model ViewingSessionBan {
+  session_id     Int
+  user_id        Int
+  banned_by      Int
+  created_at     DateTime       @default(now()) @db.Timestamp(0)
+  viewingSession ViewingSession @relation(fields: [session_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "viewing_session_bans_ibfk_1")
+  user           User           @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "viewing_session_bans_ibfk_2")
+
+  @@id([session_id, user_id])
+  @@index([user_id], map: "user_id")
+  @@map("viewing_session_bans")
+}
+
+model ViewingSession {
+  id                 Int                   @id @default(autoincrement())
+  title              String                @db.VarChar(255)
+  stream_url         String                @db.VarChar(500)
+  type               ViewingSessionType?   @default(online)
+  location           String?               @db.VarChar(255)
+  map_url            String?               @db.VarChar(500)
+  status             ViewingSessionStatus? @default(scheduled)
+  start_time         DateTime              @db.DateTime(0)
+  created_by         Int
+  created_at         DateTime?             @default(now()) @db.DateTime(0)
+  updated_at         DateTime?             @default(now()) @db.DateTime(0)
+  is_chat_enabled    Boolean?              @default(true)
+  slow_mode_duration Int?                  @default(0)
+  chatMessages       ChatMessage[]
+  viewingSessionBans ViewingSessionBan[]
+  user               User                  @relation(fields: [created_by], references: [id], onUpdate: Restrict, map: "viewing_sessions_ibfk_1")
+
+  @@index([created_by], map: "created_by")
+  @@map("viewing_sessions")
+}
+
+model TeamResource {
+  id         Int                   @id @default(autoincrement())
+  name       String                @db.VarChar(255)
+  logo_url   String?               @db.VarChar(512)
+  region     String?               @db.VarChar(50)
+  region_id  Int?
+  regionRef  Region?               @relation(fields: [region_id], references: [id])
+  short_name String?               @db.VarChar(10)
+  created_at DateTime              @default(now()) @db.Timestamp(0)
+  updated_at DateTime              @default(now()) @db.Timestamp(0)
+  groups     OpponentGroupMember[]
+  matches    Match[]               // Reverse relation
+
+  @@map("team_resources")
+}
+
+model Region {
+  id         Int            @id @default(autoincrement())
+  name       String         @unique @db.VarChar(50)
+  created_at DateTime       @default(now()) @db.Timestamp(0)
+  teams      TeamResource[]
+
+  @@map("regions")
+}
+
+model OpponentGroup {
+  id          Int                   @id @default(autoincrement())
+  name        String                @db.VarChar(255)
+  created_at  DateTime              @default(now()) @db.Timestamp(0)
+  updated_at  DateTime              @default(now()) @db.Timestamp(0)
+  members     OpponentGroupMember[]
+  tournaments TournamentResource[]
+
+  @@map("opponent_groups")
+}
+
+model OpponentGroupMember {
+  group_id         Int
+  team_resource_id Int
+  group            OpponentGroup @relation(fields: [group_id], references: [id], onDelete: Cascade)
+  team             TeamResource  @relation(fields: [team_resource_id], references: [id], onDelete: Cascade)
+
+  @@id([group_id, team_resource_id])
+  @@index([team_resource_id], map: "opponent_group_members_team_resource_id_fkey")
+  @@map("opponent_group_members")
+}
+
+model TournamentResource {
+  id                Int             @id @default(autoincrement())
+  name              String          @db.VarChar(255)
+  year              Int             @default(2025)
+  patch             String?         @db.VarChar(20)
+  is_current        Boolean         @default(false)
+  opponent_group_id Int?
+  type_id           Int?
+  is_official       Boolean         @default(true)
+  created_at        DateTime        @default(now()) @db.Timestamp(0)
+  updated_at        DateTime        @default(now()) @db.Timestamp(0)
+  opponent_group    OpponentGroup?  @relation(fields: [opponent_group_id], references: [id])
+  type              TournamentType? @relation(fields: [type_id], references: [id])
+  matches           Match[]
+
+  @@index([opponent_group_id], map: "tournament_resources_opponent_group_id_fkey")
+  @@index([type_id], map: "tournament_resources_type_id_fkey")
+  @@map("tournament_resources")
+}
+
+enum TournamentCategory {
+  MAJOR
+  FRIENDLY
+}
+
+enum UserHistoryType {
+  point
+  admin
+  notification
+
+  @@map("user_history_type")
+}
+
+enum ViewingPartyEventType {
+  quiz
+  prediction
+  check_in
+  poll
+
+  @@map("viewing_party_events_type")
+}
+
+enum ViewingSessionType {
+  online
+  offline
+
+  @@map("viewing_sessions_type")
+}
+
+enum ChatMessageType {
+  user
+  system
+
+  @@map("chat_messages_type")
+}
+
+enum InviteTokenRole {
+  fan
+  staff
+
+  @@map("invite_tokens_role")
+}
+
+enum MatchStatus {
+  scheduled
+  finished
+
+  @@map("matches_match_status")
+}
+
+enum ViewingSessionStatus {
+  scheduled
+  live
+  ended
+
+  @@map("viewing_sessions_status")
+}
+
+enum UserRole {
+  fan
+  staff
+  admin
+
+  @@map("users_role")
+}
+
+enum ViewingPartyEventStatus {
+  pending
+  active
+  ended
+
+  @@map("viewing_party_events_status")
+}
+
+enum MatchResult {
+  win
+  loss
+  draw
+
+  @@map("matches_match_result")
+}
+
+model SquadPreset {
+  id         Int      @id @default(autoincrement())
+  name       String   @db.VarChar(255)
+  top        String?  @db.VarChar(100)
+  jungle     String?  @db.VarChar(100)
+  mid        String?  @db.VarChar(100)
+  ad         String?  @db.VarChar(100)
+  support    String?  @db.VarChar(100)
+  coach      String?  @db.VarChar(100)
+  sub        String?  @db.VarChar(255)
+  is_active  Boolean  @default(true)
+  created_at DateTime @default(now()) @db.Timestamp(0)
+  updated_at DateTime @default(now()) @db.Timestamp(0)
+
+  @@map("squad_presets")
+}
+
+model Player {
+  id          Int        @id @default(autoincrement())
+  ign         String     @db.VarChar(100)
+  real_name   String?    @db.VarChar(255)
+  role        PlayerRole
+  image_url   String?    @db.VarChar(512)
+  nationality String?    @db.VarChar(50)
+  is_active   Boolean    @default(true)
+  join_date   DateTime?  @db.Date
+  created_at  DateTime   @default(now()) @db.Timestamp(0)
+  updated_at  DateTime   @default(now()) @db.Timestamp(0)
+
+  @@map("players")
+}
+
+enum PlayerRole {
+  TOP
+  JUNGLE
+  MID
+  AD
+  SUPPORT
+  COACH
+  SUB
+}
+
+model SystemConfig {
+  key         String   @id @db.VarChar(50)
+  value       String   @db.Text
+  description String?  @db.VarChar(255)
+  updated_at  DateTime @default(now()) @updatedAt
+
+  @@map("system_configs")
+}
+
+model SystemLog {
+  id         Int            @id @default(autoincrement())
+  level      SystemLogLevel
+  type       SystemLogType
+  message    String         @db.Text
+  metadata   Json?
+  user_id    Int?
+  ip_address String?        @db.VarChar(50)
+  path       String?        @db.VarChar(255)
+  created_at DateTime       @default(now()) @db.Timestamp(0)
+  user       User?          @relation(fields: [user_id], references: [id], onDelete: SetNull)
+
+  @@index([level])
+  @@index([type])
+  @@index([created_at])
+  @@map("system_logs")
+}
+
+enum SystemLogLevel {
+  INFO
+  WARN
+  ERROR
+  CRITICAL
+}
+
+enum SystemLogType {
+  SECURITY
+  SYSTEM
+  STAFF_ACTION
+  API_ERROR
+}
+
+model Donation {
+  id          Int      @id @default(autoincrement())
+  date        DateTime @db.Date
+  type        String   @db.VarChar(20) // 'donation' | 'expense'
+  amount      Int
+  description String   @db.VarChar(255)
+  proof       String?  @db.VarChar(512)
+  created_at  DateTime @default(now()) @db.Timestamp(0)
+
+  @@map("donations")
+}

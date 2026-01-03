@@ -52,7 +52,7 @@ const pages = [
   { title: "Schedule", href: "/schedule", icon: "📅" },
   { title: "Gallery", href: "/gallery", icon: "📸" },
   { title: "Fan Zone", href: "/fan-zone", icon: "🎮" },
-  { title: "Chovy Shrine", href: "/fan-zone/shrine", icon: "⛩️" },
+  { title: "Church of Chovy", href: "/fan-zone/church", icon: "⛩️" },
   { title: "Alumni", href: "/team/alumni", icon: "👑" },
 ];
 

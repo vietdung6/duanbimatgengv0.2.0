@@ -1,0 +1,17 @@
+export const matchHistory = {
+  title: "MATCH HISTORY",
+  filter: "Filter",
+  year: "Year",
+  tournament: "Tournament",
+  team: "Team",
+  opponent: "Opponent",
+  player: "Player",
+  result: "Result",
+  all: "All",
+  win: "Win",
+  loss: "Loss",
+  other: "Other",
+  loading: "Loading match data...",
+  loadMore: "Load more {count} matches",
+  noResults: "No matches found matching your filters",
+};

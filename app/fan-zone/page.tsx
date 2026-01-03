@@ -1,12 +1,51 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { Gamepad2, Trophy, Brain, ArrowRight, Star, Flame } from "lucide-react";
+import { Gamepad2, Trophy, ArrowRight, Star, Flame } from "lucide-react";
 import Link from "next/link";
+
 import { useLanguage } from "@/lib/i18n/LanguageContext";
+import type { AuthUser } from "@/lib/auth";
+import { LoginCheck } from "@/components/shared/LoginCheck";
+
+interface LeaderboardResponse {
+  users: Array<Pick<AuthUser, "id" | "displayName" | "username" | "email" | "points">>;
+}
 
 export default function FanZonePage() {
+  return (
+    <LoginCheck>
+      <FanZoneContent />
+    </LoginCheck>
+  );
+}
+
+function FanZoneContent() {
   const { t, language } = useLanguage();
+
+  const [leaderboard, setLeaderboard] = useState<
+    Array<Pick<AuthUser, "id" | "displayName" | "username" | "email" | "points">>
+  >([]);
+  const [loadingLeaderboard, setLoadingLeaderboard] = useState(true);
+
+  useEffect(() => {
+    async function loadLeaderboard() {
+      try {
+        const res = await fetch("/api/fan/leaderboard", { cache: "no-store" });
+        if (!res.ok) {
+          setLoadingLeaderboard(false);
+          return;
+        }
+        const data = (await res.json()) as LeaderboardResponse;
+        setLeaderboard(data.users || []);
+      } finally {
+        setLoadingLeaderboard(false);
+      }
+    }
+
+    void loadLeaderboard();
+  }, []);
 
   const fanZoneItems = [
     {
@@ -15,21 +54,10 @@ export default function FanZonePage() {
         ? "Light candles and receive blessings from the HIGH PRIEST. A fun interactive minigame!"
         : "Thắp nến và nhận lời chúc phúc từ giáo chủ 'Vinh dọn lúa'. Trò chơi tương tác thú vị!",
       icon: "⛩️",
-      href: "/fan-zone/shrine",
+      href: "/fan-zone/church",
       color: "from-gold/30",
       badge: language === "en" ? "POPULAR" : "PHỔ BIẾN",
       badgeColor: "bg-gold text-black",
-    },
-    {
-      title: language === "en" ? "Prediction Game" : "Game Dự Đoán",
-      description: language === "en"
-        ? "Predict scores, MVP, First Blood... Correct predictions earn Gen.G Points!"
-        : "Dự đoán tỉ số, MVP, First Blood... Đúng sẽ nhận điểm Gen.G Points!",
-      icon: "🔮",
-      href: "/fan-zone/predictions",
-      color: "from-purple-500/30",
-      badge: language === "en" ? "COMING SOON" : "SẮP CÓ",
-      badgeColor: "bg-purple-500/20 text-purple-400",
     },
     {
       title: language === "en" ? "Gen.G Quiz" : "Gen.G Quiz",
@@ -41,6 +69,18 @@ export default function FanZonePage() {
       color: "from-blue-500/30",
       badge: language === "en" ? "COMING SOON" : "SẮP CÓ",
       badgeColor: "bg-blue-500/20 text-blue-400",
+    },
+    {
+      title: language === "en" ? "Viewing Party" : "Viewing Party",
+      description:
+        language === "en"
+          ? "Watch Gen.G matches together with other fans (online viewing party)."
+          : "Xem Gen.G thi đấu cùng nhau (online viewing party).",
+      icon: "📺",
+      href: "/fan-zone/viewing-party",
+      color: "from-red-600/30",
+      badge: language === "en" ? "NEW" : "MỚI",
+      badgeColor: "bg-red-600 text-white animate-pulse",
     },
     {
       title: language === "en" ? "Community" : "Cộng Đồng",
@@ -64,13 +104,6 @@ export default function FanZonePage() {
     },
   ];
 
-  const leaderboard = [
-    { rank: 1, name: "ChoviSimp2024", points: 15420, badge: "🥇" },
-    { rank: 2, name: "GenGForever", points: 12850, badge: "🥈" },
-    { rank: 3, name: "LCKFanatic", points: 11200, badge: "🥉" },
-    { rank: 4, name: "MidLaneKing", points: 9800, badge: "" },
-    { rank: 5, name: "GoldenTiger", points: 8650, badge: "" },
-  ];
   return (
     <div className="min-h-screen pt-24 pb-20">
       {/* Hero */}
@@ -196,52 +229,91 @@ export default function FanZonePage() {
             </div>
 
             <div className="card-dark">
-              {leaderboard.map((fan, i) => (
-                <motion.div
-                  key={fan.name}
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.1 }}
-                  className={`flex items-center gap-2 sm:gap-3 md:gap-4 p-3 sm:p-4 ${
-                    i < leaderboard.length - 1 ? 'border-b border-black-charcoal' : ''
-                  } ${i < 3 ? 'bg-gold/5' : ''}`}
-                >
-                  {/* Rank */}
-                  <div className={`w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center font-heading text-base sm:text-lg flex-shrink-0 ${
-                    i === 0 ? 'bg-yellow-500 text-black' :
-                    i === 1 ? 'bg-gray-400 text-black' :
-                    i === 2 ? 'bg-amber-700 text-white' :
-                    'bg-black-charcoal text-gray-400'
-                  }`}>
-                    {fan.badge || fan.rank}
-                  </div>
+              {loadingLeaderboard ? (
+                <div className="py-6 text-center text-gray-400 text-sm">
+                  {language === "en" ? "Loading leaderboard..." : "Đang tải bảng xếp hạng..."}
+                </div>
+              ) : leaderboard.length === 0 ? (
+                <div className="py-6 text-center text-gray-400 text-sm">
+                  {language === "en"
+                    ? "No fans with points yet. Earn points to appear here!"
+                    : "Chưa có fan nào có điểm. Hãy kiếm điểm để xuất hiện tại đây!"}
+                </div>
+              ) : (
+                leaderboard.map((fan, i) => {
+                  const name =
+                    fan.displayName ||
+                    fan.username ||
+                    fan.email.split("@")[0];
 
-                  {/* Name */}
-                  <div className="flex-grow min-w-0">
-                    <p className="font-semibold text-white text-sm sm:text-base truncate">{fan.name}</p>
-                    <div className="flex items-center gap-1.5 sm:gap-2 text-[10px] sm:text-xs text-gray-500">
-                      <Star size={10} className="sm:w-3 sm:h-3 text-gold flex-shrink-0" />
-                      <span className="truncate">{language === "en" ? "Gen.G Superfan" : "Fan Cứng Gen.G"}</span>
-                    </div>
-                  </div>
+                  return (
+                    <motion.div
+                      key={fan.id}
+                      initial={{ opacity: 0, x: -20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: i * 0.1 }}
+                      className={`flex items-center gap-2 sm:gap-3 md:gap-4 p-3 sm:p-4 ${
+                        i < leaderboard.length - 1
+                          ? "border-b border-black-charcoal"
+                          : ""
+                      } ${i < 3 ? "bg-gold/5" : ""}`}
+                    >
+                      {/* Rank */}
+                      <div
+                        className={`w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center font-heading text-base sm:text-lg flex-shrink-0 ${
+                          i === 0
+                            ? "bg-yellow-500 text-black"
+                            : i === 1
+                            ? "bg-gray-400 text-black"
+                            : i === 2
+                            ? "bg-amber-700 text-white"
+                            : "bg-black-charcoal text-gray-400"
+                        }`}
+                      >
+                        {i === 0 ? "🥇" : i === 1 ? "🥈" : i === 2 ? "🥉" : i + 1}
+                      </div>
 
-                  {/* Points */}
-                  <div className="text-right flex-shrink-0">
-                    <p className="font-heading text-xl sm:text-2xl text-gold">{fan.points.toLocaleString()}</p>
-                    <p className="text-[10px] sm:text-xs text-gray-500">
-                      {language === "en" ? "Gen.G Points" : "Điểm Gen.G"}
-                    </p>
-                  </div>
-                </motion.div>
-              ))}
+                      {/* Name */}
+                      <div className="flex-grow min-w-0">
+                        <p className="font-semibold text-white text-sm sm:text-base truncate">
+                          {name}
+                        </p>
+                        <div className="flex items-center gap-1.5 sm:gap-2 text-[10px] sm:text-xs text-gray-500">
+                          <Star
+                            size={10}
+                            className="sm:w-3 sm:h-3 text-gold flex-shrink-0"
+                          />
+                          <span className="truncate">
+                            {language === "en"
+                              ? "Gen.G Superfan"
+                              : "Fan Cứng Gen.G"}
+                          </span>
+                        </div>
+                      </div>
+
+                      {/* Points */}
+                      <div className="text-right flex-shrink-0">
+                        <p className="font-heading text-xl sm:text-2xl text-gold">
+                          {fan.points.toLocaleString()}
+                        </p>
+                        <p className="text-[10px] sm:text-xs text-gray-500">
+                          {language === "en"
+                            ? "Gen.G Points"
+                            : "Điểm Gen.G"}
+                        </p>
+                      </div>
+                    </motion.div>
+                  );
+                })
+              )}
             </div>
 
             <div className="text-center mt-4 sm:mt-6 px-2">
               <p className="text-gray-400 text-xs sm:text-sm mb-3 sm:mb-4">
                 {language === "en"
-                  ? "Earn points by participating in predictions, quizzes, and community activities!"
-                  : "Kiếm điểm bằng cách tham gia dự đoán, quiz và các hoạt động cộng đồng!"}
+                  ? "Earn points by participating in viewing parties, quizzes, and community activities!"
+                  : "Kiếm điểm bằng cách tham gia viewing party, quiz và các hoạt động cộng đồng!"}
               </p>
               <button className="btn-outline-gold flex items-center gap-2 mx-auto text-sm sm:text-base py-2 sm:py-2.5 px-4 sm:px-6">
                 <Flame size={16} className="sm:w-[18px] sm:h-[18px]" />
@@ -252,60 +324,6 @@ export default function FanZonePage() {
         </div>
       </section>
 
-      {/* Daily Challenge */}
-      <section className="py-8 sm:py-12">
-        <div className="container mx-auto px-4 sm:px-6">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            className="bg-black-light border border-gold/30 rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 text-center max-w-2xl mx-auto relative overflow-hidden"
-          >
-            <div className="absolute inset-0 bg-gradient-radial-gold opacity-10" />
-            
-            <div className="relative z-10">
-              <div className="inline-flex items-center gap-1.5 sm:gap-2 bg-gold/20 text-gold 
-                            rounded-full px-3 sm:px-4 py-1.5 sm:py-2 mb-4 sm:mb-6">
-                <Brain className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-                <span className="text-xs sm:text-sm font-medium">
-                  {language === "en" ? "DAILY CHALLENGE" : "THỬ THÁCH HÀNG NGÀY"}
-                </span>
-              </div>
-
-              <h3 className="font-heading text-xl sm:text-2xl text-white mb-3 sm:mb-4 px-2">
-                {language === "en" ? "Today's Quiz" : "Quiz của ngày hôm nay"}
-              </h3>
-              <p className="text-gray-400 mb-4 sm:mb-6 text-sm sm:text-base px-2">
-                {language === "en"
-                  ? "\"How many MVP titles has Chovy won in his LCK career?\""
-                  : "\"Chovy đã có bao nhiêu danh hiệu MVP trong sự nghiệp LCK?\""}
-              </p>
-
-              <div className="grid grid-cols-2 gap-2 sm:gap-3 md:gap-4 max-w-md mx-auto mb-4 sm:mb-6">
-                {(language === "en" 
-                  ? ["2 times", "3 times", "4 times", "5 times"]
-                  : ["2 lần", "3 lần", "4 lần", "5 lần"]
-                ).map((answer, i) => (
-                  <button
-                    key={i}
-                    className="bg-black-charcoal hover:bg-gold/20 hover:border-gold border border-transparent
-                             rounded-lg py-2 sm:py-2.5 md:py-3 px-3 sm:px-4 text-white hover:text-gold 
-                             transition-all text-xs sm:text-sm md:text-base"
-                  >
-                    {answer}
-                  </button>
-                ))}
-              </div>
-
-              <p className="text-gold text-xs sm:text-sm px-2">
-                🎁 {language === "en" 
-                  ? "Answer correctly to earn +100 Gen.G Points!"
-                  : "Trả lời đúng nhận +100 Gen.G Points!"}
-              </p>
-            </div>
-          </motion.div>
-        </div>
-      </section>
     </div>
   );
 }

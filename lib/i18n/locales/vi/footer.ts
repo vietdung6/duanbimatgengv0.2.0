@@ -1,0 +1,16 @@
+export const footer = {
+  description: "Website fan-made không chính thức dành riêng cho đội tuyển Gen.G Esports LMHT. Được xây dựng với 💛 bởi fan, vì fan.",
+  explore: "KHÁM PHÁ",
+  fanZone: "FAN ZONE",
+  predictions: "Dự Đoán",
+  shrine: "Đền Thờ",
+  quiz: "Quiz",
+  community: "Cộng Đồng",
+  officialGenG: "GEN.G CHÍNH THỨC",
+  followText: "Theo dõi Gen.G trên mạng xã hội để cập nhật tin tức chính thức.",
+  copyright: "© 2025 Gen.G Fandom. Đây là website fan-made không chính thức. Chúng tôi không đại diện cho Gen.G Esports, và tất cả các phát ngôn, quan điểm, nội dung trên trang web này đều độc lập và không phản ánh quan điểm hoặc lập trường chính thức của Gen.G Esports hay các bên liên quan.",
+  about: "Giới Thiệu",
+  credits: "Credits",
+  contact: "Liên Hệ",
+  support: "Tiếp Sức",
+};

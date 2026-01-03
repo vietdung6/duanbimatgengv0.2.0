@@ -3,10 +3,23 @@
 import { motion } from "framer-motion";
 import { ArrowLeft, Home } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
 
 export default function NotFound() {
   const { t } = useLanguage();
+  const router = useRouter();
+  const [clickCount, setClickCount] = useState(0);
+
+  const handleMascotClick = () => {
+    const newCount = clickCount + 1;
+    setClickCount(newCount);
+    if (newCount === 3) {
+      router.push("/faker-secret-fanpage");
+    }
+  };
 
   return (
     <div className="min-h-screen pt-24 pb-20 flex items-center justify-center">
@@ -26,17 +39,20 @@ export default function NotFound() {
             repeat: Infinity,
             ease: "easeInOut",
           }}
-          className="mb-8"
+          className="mb-8 cursor-pointer active:scale-95 transition-transform group relative"
+          onClick={handleMascotClick}
         >
-          <img
+          <Image
             src="/images/Genrang.png"
             alt="Genrang Mascot"
+            width={192}
+            height={192}
             className="w-48 h-48 mx-auto object-contain"
-            onError={(e) => {
-              const target = e.target as HTMLImageElement;
-              target.style.display = 'none';
-            }}
+            priority={false}
           />
+          <p className="opacity-0 group-hover:opacity-30 transition-opacity text-[10px] text-gold mt-2 font-mono">
+            (Ấn vào 3 lần để xem điều bất ngờ)
+          </p>
         </motion.div>
 
         {/* Error Message */}
@@ -87,4 +103,3 @@ export default function NotFound() {
     </div>
   );
 }
-

@@ -1,0 +1,16 @@
+export const footer = {
+  description: "An unofficial fan-made website dedicated to Gen.G Esports League of Legends team. Built with 💛 by fans, for fans.",
+  explore: "EXPLORE",
+  fanZone: "FAN ZONE",
+  predictions: "Predictions",
+  shrine: "Shrine",
+  quiz: "Quiz",
+  community: "Community",
+  officialGenG: "OFFICIAL GEN.G",
+  followText: "Follow Gen.G on social media for official updates.",
+  copyright: "© 2025 Gen.G Fandom. This is an unofficial fan-made website. We do not represent Gen.G Esports, and all statements, opinions, and content on this site are independent and do not reflect the official views or positions of Gen.G Esports or its affiliates.",
+  about: "About",
+  credits: "Credits",
+  contact: "Contact",
+  support: "Support",
+};

@@ -7,7 +7,15 @@
     ],
     "allowJs": true,
     "skipLibCheck": true,
-    "strict": true,
+    
+    /* --- BẮT ĐẦU VÙNG KỶ LUẬT THÉP (STRICT ZONE) --- */
+    "strict": true,                     // Kích hoạt tất cả các cờ kiểm tra nghiêm ngặt cơ bản
+    "noImplicitAny": true,              // Cấm AI "quên" khai báo kiểu (biến thành any ngầm định)
+    "noUncheckedIndexedAccess": true,   // QUAN TRỌNG: Ngăn chặn lỗi truy cập mảng không tồn tại (Xem giải thích dưới)
+    "exactOptionalPropertyTypes": true, // Ép kiểu dữ liệu phải chính xác tuyệt đối, không được mập mờ
+    "forceConsistentCasingInFileNames": true, // An toàn khi deploy lên Linux (VPS)
+    /* ----------------------------------------------- */
+
     "noEmit": true,
     "esModuleInterop": true,
     "module": "esnext",
@@ -35,6 +43,7 @@
     ".next/types/**/*.ts"
   ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "scripts"
   ]
 }

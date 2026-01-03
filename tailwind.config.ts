@@ -54,8 +54,12 @@ const config: Config = {
         "pulse-gold": "pulse-gold 2s cubic-bezier(0.4, 0, 0.6, 1) infinite",
         "shimmer": "shimmer 2s linear infinite",
         "float": "float 3s ease-in-out infinite",
+        "spin-reverse": "spin-reverse 1s linear infinite",
       },
       keyframes: {
+        "spin-reverse": {
+          "to": { transform: "rotate(-360deg)" },
+        },
         "pulse-gold": {
           "0%, 100%": { boxShadow: "0 0 20px rgba(212, 175, 55, 0.5)" },
           "50%": { boxShadow: "0 0 40px rgba(212, 175, 55, 0.8)" },

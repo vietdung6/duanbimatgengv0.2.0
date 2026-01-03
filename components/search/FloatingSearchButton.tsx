@@ -1,12 +1,21 @@
 "use client";
 
 import { useState } from "react";
+import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Search } from "lucide-react";
 import SearchModal from "./SearchModal";
 
 export default function FloatingSearchButton() {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const pathname = usePathname();
+
+  // Hide floating button in Viewing Party Room (immersive mode)
+  const isViewingPartyRoom = pathname?.startsWith('/fan-zone/viewing-party/') && pathname !== '/fan-zone/viewing-party';
+  // Also hide on Secret Pages
+  const isSecretPage = pathname?.startsWith('/portal-login') || pathname?.startsWith('/faker-secret-fanpage') || pathname?.startsWith('/chovy-cs-hack');
+
+  if (isViewingPartyRoom || isSecretPage) return null;
 
   return (
     <>

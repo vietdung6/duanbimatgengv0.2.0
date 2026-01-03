@@ -54,7 +54,7 @@ export async function middleware(req: NextRequest) {
     // CSP: Allow scripts from self, unsafe-inline, unsafe-eval (Rick Roll), and blob (Confetti workers)
     response.headers.set(
         'Content-Security-Policy',
-        "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' blob:; worker-src 'self' blob:; style-src 'self' 'unsafe-inline'; img-src 'self' data: https: blob:; connect-src 'self' https:;"
+        "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' blob: https://www.youtube.com https://s.ytimg.com; worker-src 'self' blob:; style-src 'self' 'unsafe-inline'; img-src 'self' data: https: blob:; connect-src 'self' https: wss:; frame-src 'self' https://www.youtube.com https://youtube.com https://www.youtube-nocookie.com;"
     );
     // HSTS: Force HTTPS for 1 year
     response.headers.set(

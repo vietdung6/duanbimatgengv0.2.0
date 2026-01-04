@@ -22,10 +22,6 @@ const baseConfig: NextConfig = {
       allowedOrigins: ["gengfandom.fun", "www.gengfandom.fun"],
     },
   },
-  devIndicators: {
-    buildActivity: false,
-    appIsrStatus: false,
-  },
   images: {
     remotePatterns: [
       {

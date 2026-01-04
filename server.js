@@ -1,4 +1,5 @@
 // server.js - File này dùng cho cPanel Node.js deployment
+process.env.TZ = 'Asia/Ho_Chi_Minh'; // Set timezone to Vietnam
 const { createServer } = require('http');
 const { parse } = require('url');
 const next = require('next');
@@ -65,7 +66,7 @@ app.prepare().then(() => {
     try {
       const sockets = await io.in(room).fetchSockets();
       const uniqueUsers = new Set();
-      
+
       sockets.forEach(s => {
         // Only count sockets that have a valid userId (either user:ID or guest:ID)
         // If userId is missing, it's likely a temporary connection state or bug, 
@@ -74,11 +75,11 @@ app.prepare().then(() => {
           uniqueUsers.add(s.data.userId);
         }
       });
-      
+
       const count = uniqueUsers.size;
       // Debug log to trace view count issues
       console.log(`[ViewCount] Room: ${room}, Sockets: ${sockets.length}, Unique: ${count}, IDs:`, Array.from(uniqueUsers));
-      
+
       return count;
     } catch (error) {
       console.error(`Error counting viewers in room ${room}:`, error);
@@ -100,14 +101,14 @@ app.prepare().then(() => {
       const userId = typeof data === 'object' ? data.userId : null;
 
       await socket.join(room);
-      
+
       // Update userId if provided in payload (redundancy check)
       if (userId) {
-          socket.data.userId = userId;
+        socket.data.userId = userId;
       }
-      
+
       console.log(`Socket ${socket.id} (User: ${socket.data.userId}) joined room ${room}`);
-      
+
       const count = await countViewers(room);
       io.to(room).emit("view_count_update", { count });
     });
@@ -120,7 +121,7 @@ app.prepare().then(() => {
     socket.on("leave_room", async (room) => {
       socket.leave(room);
       console.log(`Socket ${socket.id} left room ${room}`);
-      
+
       const count = await countViewers(room);
       io.to(room).emit("view_count_update", { count });
     });
@@ -128,26 +129,26 @@ app.prepare().then(() => {
     socket.on("disconnecting", async () => {
       // Loop through rooms the socket is in
       for (const room of socket.rooms) {
-         if (room !== socket.id) {
-            // Calculate count after this socket leaves
-            try {
-              const sockets = await io.in(room).fetchSockets();
-              // Filter out the current disconnecting socket
-              const activeSockets = sockets.filter(s => s.id !== socket.id);
-              
-              const uniqueUsers = new Set();
-              activeSockets.forEach(s => {
-                  if (s.data.userId) {
-                      uniqueUsers.add(s.data.userId);
-                  }
-              });
-              const count = uniqueUsers.size;
-              console.log(`[ViewCount] Disconnect from ${room}. Remaining: ${count}`);
-              io.to(room).emit("view_count_update", { count });
-            } catch (error) {
-              console.error("Error counting sockets in disconnecting:", error);
-            }
-         }
+        if (room !== socket.id) {
+          // Calculate count after this socket leaves
+          try {
+            const sockets = await io.in(room).fetchSockets();
+            // Filter out the current disconnecting socket
+            const activeSockets = sockets.filter(s => s.id !== socket.id);
+
+            const uniqueUsers = new Set();
+            activeSockets.forEach(s => {
+              if (s.data.userId) {
+                uniqueUsers.add(s.data.userId);
+              }
+            });
+            const count = uniqueUsers.size;
+            console.log(`[ViewCount] Disconnect from ${room}. Remaining: ${count}`);
+            io.to(room).emit("view_count_update", { count });
+          } catch (error) {
+            console.error("Error counting sockets in disconnecting:", error);
+          }
+        }
       }
     });
 

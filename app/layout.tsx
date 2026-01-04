@@ -72,7 +72,7 @@ export default async function RootLayout({
   // If Maintenance is OFF, hide this page completely (404)
   if (!isMaintenance && pathname.startsWith("/portal-login")) {
     return (
-      <html lang="en" className={`${oswald.variable} ${inter.variable}`} suppressHydrationWarning>
+      <html lang="en" className={`${oswald.variable} ${inter.variable}`} suppressHydrationWarning data-scroll-behavior="smooth">
         <body className="min-h-screen flex flex-col items-center justify-center bg-black" suppressHydrationWarning>
           <Providers>
             <NotFoundPage />
@@ -117,7 +117,7 @@ export default async function RootLayout({
 
   if (isMaintenance && !authorized && isProtectedPath) {
     return (
-      <html lang="en" className={`${oswald.variable} ${inter.variable}`} suppressHydrationWarning>
+      <html lang="en" className={`${oswald.variable} ${inter.variable}`} suppressHydrationWarning data-scroll-behavior="smooth">
         <body className="min-h-screen flex flex-col items-center justify-center bg-black" suppressHydrationWarning>
           <MaintenancePage restrictedAccess={restrictedAccess} />
         </body>
@@ -126,7 +126,7 @@ export default async function RootLayout({
   }
 
   return (
-    <html lang="en" className={`${oswald.variable} ${inter.variable}`} suppressHydrationWarning>
+    <html lang="en" className={`${oswald.variable} ${inter.variable}`} suppressHydrationWarning data-scroll-behavior="smooth">
       <body className="min-h-screen flex flex-col" suppressHydrationWarning>
         <Providers>
           <HoneyPot />

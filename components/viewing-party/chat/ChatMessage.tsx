@@ -35,12 +35,12 @@ export default function ChatMessage({ message: msg, isGrouped, currentUserId, ca
       <div className="flex-shrink-0 w-8 pt-1">
         {!isGrouped && (
           <UserAvatar
-             src={msg.user?.avatar_url || null}
-             alt={msg.user?.username || 'User'}
-             fallback={(msg.user?.display_name || msg.user?.username)?.charAt(0).toUpperCase() || "?"}
-             size={32}
-             className={`rounded-full transition-transform group-hover:scale-105 ${(isStaff || isAdmin) ? 'ring-2 ring-gold/50 shadow-lg shadow-gold/10' : 'ring-1 ring-white/10'}`}
-           />
+            src={msg.user?.avatar_url || null}
+            alt={msg.user?.username || 'User'}
+            fallback={(msg.user?.display_name || msg.user?.username)?.charAt(0).toUpperCase() || "?"}
+            size={32}
+            className={`rounded-full transition-transform group-hover:scale-105 ${(isStaff || isAdmin) ? 'ring-2 ring-gold/50 shadow-lg shadow-gold/10' : 'ring-1 ring-white/10'}`}
+          />
         )}
       </div>
 
@@ -49,15 +49,14 @@ export default function ChatMessage({ message: msg, isGrouped, currentUserId, ca
         {!isGrouped && (
           <div className="flex items-center flex-wrap gap-x-2 mb-0.5">
             <span
-              className={`font-bold text-sm ${
-                (isStaff || isAdmin)
+              className={`font-bold text-sm ${(isStaff || isAdmin)
                   ? "text-gold"
                   : isMe ? "text-white" : "text-gray-300"
-              }`}
+                }`}
             >
               {msg.user?.display_name || msg.user?.username}
             </span>
-            
+
             {/* Role Badge - Only for Staff/Admin */}
             {(isStaff || isAdmin) && (
               <span className="px-1.5 py-[1px] rounded bg-gold text-black text-[10px] font-bold uppercase tracking-wide border border-yellow-600 shadow-[0_0_5px_rgba(170,128,24,0.3)]">
@@ -65,7 +64,7 @@ export default function ChatMessage({ message: msg, isGrouped, currentUserId, ca
               </span>
             )}
 
-            <span className="text-[10px] text-gray-500 group-hover:text-gray-300 ml-auto transition-colors">
+            <span suppressHydrationWarning className="text-[10px] text-gray-500 group-hover:text-gray-300 ml-auto transition-colors">
               {new Date(msg.created_at).toLocaleTimeString(language === 'vi' ? 'vi-VN' : 'en-US', {
                 hour: "2-digit",
                 minute: "2-digit",
@@ -86,7 +85,7 @@ export default function ChatMessage({ message: msg, isGrouped, currentUserId, ca
             )}
           </div>
         )}
-        
+
         <div className={`text-[13px] leading-relaxed break-words ${(isStaff || isAdmin) ? 'text-white' : 'text-gray-300'}`}>
           {msg.content}
         </div>

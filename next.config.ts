@@ -16,6 +16,11 @@ const baseConfig: NextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
+  experimental: {
+    serverActions: {
+      allowedOrigins: ["gengfandom.fun", "www.gengfandom.fun"],
+    },
+  },
   images: {
     remotePatterns: [
       {

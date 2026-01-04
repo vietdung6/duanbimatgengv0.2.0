@@ -6,10 +6,12 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
 import { useAuth } from "@/lib/auth/AuthContext";
 import Loading from "@/components/ui/Loading";
+import { useProgress } from "@bprogress/next";
 import { Turnstile } from "@marsidev/react-turnstile";
 
 function LoginForm() {
   const router = useRouter();
+  const { start, stop } = useProgress();
   const searchParams = useSearchParams();
   let returnUrl = searchParams.get("from") || "/me";
 
@@ -53,6 +55,7 @@ function LoginForm() {
     }
 
     setLoading(true);
+    start(); // Start progress bar
 
     try {
       const res = await fetch("/api/auth/login", {
@@ -67,6 +70,7 @@ function LoginForm() {
 
       if (!res.ok) {
         setError(data.error || auth.errorGeneric);
+        stop(); // Stop if error
         return;
       }
 
@@ -83,6 +87,7 @@ function LoginForm() {
     } catch (err) {
       console.error("Login error", err);
       setError(auth.errorGeneric);
+      stop(); // Stop if error
     } finally {
       setLoading(false);
     }

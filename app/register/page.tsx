@@ -4,10 +4,12 @@ import { useState, useEffect, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
 import Loading from "@/components/ui/Loading";
+import { useProgress } from "@bprogress/next";
 import { Turnstile } from "@marsidev/react-turnstile";
 
 function RegisterContent() {
   const router = useRouter();
+  const { start, stop } = useProgress();
   const searchParams = useSearchParams();
   const { language } = useLanguage();
 
@@ -34,6 +36,7 @@ function RegisterContent() {
   }, [searchParams]);
 
   async function checkToken(t: string) {
+    start();
     try {
       const res = await fetch(`/api/auth/register?check=${t}`);
       if (res.ok) {
@@ -43,6 +46,8 @@ function RegisterContent() {
       }
     } catch {
       setTokenValid(false);
+    } finally {
+      stop();
     }
   }
 
@@ -66,6 +71,7 @@ function RegisterContent() {
     }
 
     setLoading(true);
+    start();
     try {
       const res = await fetch("/api/auth/register", {
         method: "POST",
@@ -89,6 +95,7 @@ function RegisterContent() {
     } catch (err) {
       const msg = err instanceof Error ? err.message : "Có lỗi xảy ra";
       setError(msg);
+      stop();
     } finally {
       setLoading(false);
     }

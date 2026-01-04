@@ -7,6 +7,7 @@ const withPWA = withPWAInit({
   disable: false, // Always enable PWA for now
   workboxOptions: {
     skipWaiting: true,
+    disableDevLogs: true,
   },
 });
 
@@ -20,6 +21,10 @@ const baseConfig: NextConfig = {
     serverActions: {
       allowedOrigins: ["gengfandom.fun", "www.gengfandom.fun"],
     },
+  },
+  devIndicators: {
+    buildActivity: false,
+    appIsrStatus: false,
   },
   images: {
     remotePatterns: [

@@ -4,8 +4,9 @@ export const home = {
   subtitle: "LIÊN MINH HUYỀN THOẠI",
   description: "Điểm đến tối thượng cho fan. Theo dõi tuyển thủ yêu thích, cập nhật mọi trận đấu, và gia nhập cộng đồng Gen.G.",
   meetTeam: "Gặp Đội Tuyển",
+  exploreLegacy: "Khám Phá Di Sản",
   shrine: "Vào Đền Thờ",
-  
+
   // 2025 achievements teaser on home
   achievementsTeaser: {
     title: "THÀNH TÍCH 2025",
@@ -18,7 +19,7 @@ export const home = {
     lckType: "Vô địch",
     cta: "Khám phá thêm",
   },
-  
+
   // Stats
   stats: {
     lckChampions: "Vô địch LCK",
@@ -28,14 +29,14 @@ export const home = {
     noteSamsung: "Tính cả thời kỳ Samsung Galaxy / KSV (2013-2017)",
     noteLckRegular: "LCK Regular 2025 được tính 2 danh hiệu (Xuân + Hè gộp)",
   },
-  
+
   // Roster section
   roster: {
     title: "ĐỘI HÌNH",
     subtitle: "Mùa giải 2025-2026 - Gặp gỡ những nhà vô địch mang vinh quang Gen.G trên Summoner's Rift",
     viewFull: "Xem Đội Hình Đầy Đủ",
   },
-  
+
   // Upcoming match
   match: {
     upcoming: "TRẬN ĐẤU SẮP TỚI",
@@ -45,7 +46,7 @@ export const home = {
     mins: "PHÚT",
     viewSchedule: "Xem Lịch Thi Đấu",
   },
-  
+
   // Features
   features: {
     shrineTitle: "CHURCH OF CHOVY",

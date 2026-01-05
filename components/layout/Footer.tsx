@@ -157,6 +157,9 @@ export default function Footer() {
             <p className="text-gray-500 text-xs mt-4">
               {t.footer.followText}
             </p>
+            <p className="text-gray-500 text-sm">
+              &copy; 2026 Gen.G Fandom. All rights reserved.
+            </p>
           </div>
         </div>
 
@@ -178,6 +181,13 @@ export default function Footer() {
             </Link>
             <Link href="/support" className="hover:text-gold transition-colors">
               {t.footer.support}
+            </Link>
+            <span className="hidden md:inline text-gray-700">|</span>
+            <Link href="/terms" className="hover:text-gold transition-colors">
+              {t.footer.terms}
+            </Link>
+            <Link href="/privacy" className="hover:text-gold transition-colors">
+              {t.footer.privacy}
             </Link>
           </div>
         </div>

@@ -6,17 +6,33 @@ export const achievementsPage = {
   },
   legacy: {
     genGYearsSuffix: "Hiện tại",
+    ksvNote: "Giai đoạn chuyển giao",
     explanation:
-      "* Năm 2017, KSV eSports mua lại toàn bộ đội hình LMHT của Samsung Galaxy (tuyển thủ, ban huấn luyện,kế thừa di sản, và ĐƯỢC RIOT CÔNG NHẬN). KSV sau đó đổi tên thành Gen.G vào năm 2018, tên gọi như hiện tại.",
+      "KSV eSports đã mua lại toàn bộ đội hình và di sản của Samsung Galaxy (được Riot Games công nhận). KSV sau đó đổi tên thành Gen.G vào năm 2018.",
     lckRegularNote:
       "LCK Regular 2025 = Xuân + Hè gộp (tính 2 danh hiệu)",
   },
   worldsChampions: {
     title: "VÔ ĐỊCH THẾ GIỚI",
+    mainTitleLine1: "VÔ ĐỊCH",
+    mainTitleLine2: "THẾ GIỚI",
     samsungWhiteDescription:
       "Hành trình CKTG thống trị nhất lịch sử. Tỉ số 15-1.",
     samsungGalaxyDescription:
       "Trả thù SKT trong trận chung kết. Sự cứu chuộc hoàn hảo.",
+    era2014: "Kỷ nguyên Trắng & Xanh",
+    tag2014: "Thống trị",
+    era2017: "Sự trỗi dậy của Ruler",
+    tag2017: "Triều đại",
+  },
+  msiChampions: {
+    title: "VÔ ĐỊCH MSI",
+    mainTitleLine1: "VÔ ĐỊCH",
+    mainTitleLine2: "MSI",
+    era2024: "Thế hệ Vàng",
+    tag2024: "Đột phá",
+    era2025: "Thống trị Tuyệt đối",
+    tag2025: "Hoàng kim",
   },
   tripleCrown2025: {
     title: "2025 - NĂM BA CÚP",
@@ -31,6 +47,12 @@ export const achievementsPage = {
     lckChampions: "Vô địch LCK",
     internationalTitles: "Danh hiệu Quốc tế",
     yearsOfLegacy: "Năm Lịch sử",
+    worldsLabelShort: "CKTG",
+    msiLabelShort: "MSI",
+    lckLabelShort: "LCK",
+    internationalLabelShort: "QUỐC TẾ",
+    yearsLabelShort: "NĂM",
+    lckTitlesLabel: "NHÌỀU DANH HIỆU THỨ 2",
   },
   timeline: {
     fullTimelineTitle: "LỊCH SỬ ĐẦY ĐỦ",

@@ -13,187 +13,105 @@ export function TripleCrown2025Section({ language }: TripleCrownProps) {
   const t = translations[language].achievementsPage.tripleCrown2025;
 
   return (
-    <section className="py-8 sm:py-10 md:py-12">
-      <div className="container mx-auto px-4 sm:px-6">
+    <section className="py-20 relative bg-black/80">
+      <div className="container mx-auto px-4 relative z-10">
+
+        {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="bg-gradient-to-br from-gold/20 via-black-light to-gold/20 
-                      border border-gold/30 rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 text-center relative overflow-hidden"
+          className="text-center mb-16 relative"
         >
-          {/* Animated background */}
-          <motion.div
-            className="absolute inset-0 bg-gradient-to-r from-gold/0 via-gold/5 to-gold/0"
-            animate={{
-              x: ["-100%", "200%"],
-            }}
-            transition={{
-              duration: 3,
-              repeat: Infinity,
-              ease: "linear",
-            }}
-          />
-
-          {/* Fire emoji animation */}
-          <motion.h2
-            className="font-heading text-xl sm:text-2xl md:text-3xl text-gold mb-3 sm:mb-4 relative z-10 px-2"
-            initial={{ opacity: 0, scale: 0.8 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, type: "spring" }}
-          >
-            <motion.span
-              animate={{ scale: [1, 1.2, 1], rotate: [0, 5, -5, 0] }}
-              transition={{ duration: 1.5, repeat: Infinity }}
-              className="inline-block"
-            >
-              🔥
-            </motion.span>
-            {" "}
-            {t.title}
-            {" "}
-            <motion.span
-              animate={{ scale: [1, 1.2, 1], rotate: [0, -5, 5, 0] }}
-              transition={{ duration: 1.5, repeat: Infinity, delay: 0.3 }}
-              className="inline-block"
-            >
-              🔥
-            </motion.span>
-          </motion.h2>
-          <motion.p
-            className="text-gray-400 mb-6 sm:mb-8 relative z-10 text-sm sm:text-base px-2"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-          >
-            {t.description}
-          </motion.p>
-
-          <div className="grid grid-cols-3 gap-2 sm:gap-3 md:gap-4 max-w-2xl mx-auto mb-6 sm:mb-8 relative z-10 px-2">
-            {/* MSI */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.3, rotateY: -90 }}
-              whileInView={{ opacity: 1, scale: 1, rotateY: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0, duration: 0.8, type: "spring", stiffness: 100 }}
-              whileHover={{ scale: 1.15, y: -10, rotateY: 5 }}
-              className="bg-black/50 rounded-lg sm:rounded-xl p-3 sm:p-4 md:p-6 relative overflow-hidden group/item border border-blue-500/20"
-            >
-              <motion.div
-                className="absolute inset-0 bg-gradient-to-br from-blue-500/0 to-blue-500/0 group-hover/item:from-blue-500/20 group-hover/item:to-transparent rounded-lg sm:rounded-xl"
-                transition={{ duration: 0.3 }}
-              />
-              <div className="relative z-10">
-                <motion.div
-                  className="flex justify-center mb-2 sm:mb-3"
-                  animate={{ rotate: [0, 5, -5, 0] }}
-                  transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                >
-                  <MSILogo className="w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 text-blue-400 drop-shadow-[0_0_10px_rgba(59,130,246,0.5)]" />
-                </motion.div>
-                <div className="text-gold font-heading text-sm sm:text-base md:text-lg">
-                  MSI
-                </div>
-                <div className="text-gold font-heading text-xs sm:text-sm">
-                  2025
-                </div>
-              </div>
-            </motion.div>
-
-            {/* EWC */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.3, rotateY: -90 }}
-              whileInView={{ opacity: 1, scale: 1, rotateY: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2, duration: 0.8, type: "spring", stiffness: 100 }}
-              whileHover={{ scale: 1.15, y: -10, rotateY: 5 }}
-              className="bg-black/50 rounded-lg sm:rounded-xl p-3 sm:p-4 md:p-6 relative overflow-hidden group/item border border-white/20"
-            >
-              <motion.div
-                className="absolute inset-0 bg-gradient-to-br from-white/0 to-white/0 group-hover/item:from-white/20 group-hover/item:to-transparent rounded-lg sm:rounded-xl"
-                transition={{ duration: 0.3 }}
-              />
-              <div className="relative z-10">
-                <motion.div
-                  className="flex justify-center mb-2 sm:mb-3"
-                  animate={{ rotate: [0, -5, 5, 0] }}
-                  transition={{
-                    duration: 3,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                    delay: 0.5,
-                  }}
-                >
-                  <EWCLogo className="w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.3)]" />
-                </motion.div>
-                <div className="text-gold font-heading text-sm sm:text-base md:text-lg">
-                  EWC
-                </div>
-                <div className="text-gold font-heading text-xs sm:text-sm">
-                  2025
-                </div>
-              </div>
-            </motion.div>
-
-            {/* LCK */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.3, rotateY: -90 }}
-              whileInView={{ opacity: 1, scale: 1, rotateY: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.4, duration: 0.8, type: "spring", stiffness: 100 }}
-              whileHover={{ scale: 1.15, y: -10, rotateY: 5 }}
-              className="bg-black/50 rounded-lg sm:rounded-xl p-3 sm:p-4 md:p-6 relative overflow-hidden group/item border border-gold/20"
-            >
-              <motion.div
-                className="absolute inset-0 bg-gradient-to-br from-gold/0 to-gold/0 group-hover/item:from-gold/20 group-hover/item:to-transparent rounded-lg sm:rounded-xl"
-                transition={{ duration: 0.3 }}
-              />
-              <div className="relative z-10">
-                <motion.div
-                  className="flex justify-center mb-2 sm:mb-3"
-                  animate={{ rotate: [0, 5, -5, 0] }}
-                  transition={{
-                    duration: 3,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                    delay: 1,
-                  }}
-                >
-                  <div className="relative w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16">
-                    <Image
-                      src={tournamentLogos.lck}
-                      alt="LCK"
-                      fill
-                      className="object-contain drop-shadow-[0_0_10px_rgba(212,175,55,0.5)]"
-                      sizes="(max-width: 640px) 40px, (max-width: 768px) 48px, 64px"
-                    />
-                  </div>
-                </motion.div>
-                <div className="text-gold font-heading text-sm sm:text-base md:text-lg">
-                  LCK Regular
-                </div>
-                <div className="text-gold font-heading text-xs sm:text-sm">
-                  2025
-                </div>
-              </div>
-            </motion.div>
+          {/* Background Text Effect */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full select-none pointer-events-none opacity-[0.03]">
+            <span className="font-heading text-[60px] md:text-[200px] text-gold tracking-widest whitespace-nowrap">TRIPLE CROWN</span>
           </div>
 
-          <motion.div
-            className="text-gray-400 text-xs sm:text-sm relative z-10 px-2"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.6 }}
-          >
-            {t.summary}
-          </motion.div>
+          <h2 className="font-heading text-5xl md:text-7xl text-uppercase text-white tracking-widest leading-none relative z-10">
+            <span className="text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-500">2025</span>
+            <span className="block text-gold text-2xl md:text-4xl mt-2 tracking-[0.5em] font-light">TRIPLE CROWN</span>
+          </h2>
+          <p className="text-gray-400 mt-6 max-w-2xl mx-auto font-mono text-sm md:text-base px-4">{t.description}</p>
         </motion.div>
+
+        {/* Main Content Grid */}
+        <div className="grid lg:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
+
+          {/* Left: The Team / Trophy Image */}
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
+            className="relative group "
+          >
+            <div className="absolute inset-0 bg-gold/20 blur-[100px] rounded-full opacity-20 group-hover:opacity-40 transition-opacity duration-1000" />
+            <div className="relative rounded-3xl overflow-hidden border border-white/10 hover:border-gold/30 transition-all duration-500 shadow-2xl">
+              <div className="aspect-[4/3] relative">
+                <Image
+                  src="/images/GenG_Cup2025.webp"
+                  alt="Gen.G Triple Crown 2025"
+                  fill
+                  className="object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80" />
+
+                {/* Floating Badge */}
+                <div className="absolute bottom-6 left-6 right-6">
+                  <div className="inline-flex items-center gap-2 px-3 py-1 bg-gold/20 backdrop-blur-md border border-gold/40 rounded-full text-gold text-xs font-bold tracking-widest uppercase mb-2">
+                    🔥 Best Year In History
+                  </div>
+                  <h3 className="text-3xl font-heading text-white leading-none">THE GOLDEN ERA</h3>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Right: The Trophies List */}
+          <div className="space-y-6">
+            {[
+              { label: "MSI CHAMPIONS", sub: "International", icon: MSILogo, color: "text-blue-400", border: "border-blue-500/30", bg: "bg-blue-500/5" },
+              { label: "EWC CHAMPIONS", sub: "Esport World Cup", icon: EWCLogo, color: "text-white", border: "border-white/30", bg: "bg-white/5" },
+              { label: "LCK REGULAR", sub: "Domestic Dominance", icon: null, img: tournamentLogos.lck, color: "text-gold", border: "border-gold/30", bg: "bg-gold/5" }
+            ].map((item, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, x: 50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                whileHover={{ scale: 1.02 }}
+                className={`flex items-center gap-6 p-6 rounded-2xl border ${item.border} ${item.bg} backdrop-blur-sm relative overflow-hidden group`}
+              >
+                {/* Glow Effect */}
+                <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-r from-transparent via-${item.color.replace('text-', '')}/10 to-transparent`} />
+
+                <div className="relative w-16 h-16 flex-shrink-0 flex items-center justify-center">
+                  {item.icon ? (
+                    <item.icon className={`w-12 h-12 ${item.color} drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]`} />
+                  ) : (
+                    <Image src={item.img!} alt={item.label} width={48} height={48} className="object-contain" />
+                  )}
+                </div>
+
+                <div>
+                  <div className={`font-heading text-2xl ${item.color}`}>{item.label}</div>
+                  <div className="text-gray-400 text-sm font-mono tracking-wider uppercase">{item.sub}</div>
+                </div>
+              </motion.div>
+            ))}
+
+            <motion.div
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ delay: 0.5 }}
+              className="pt-4 text-center sm:text-left"
+            >
+              <p className="text-gray-500 text-sm italic">{t.summary}</p>
+            </motion.div>
+          </div>
+        </div>
+
       </div>
     </section>
   );
 }
-

@@ -6,6 +6,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useAuth } from "@/lib/auth/AuthContext";
 import Loading from "@/components/ui/Loading";
 import { Shield, Lock } from "lucide-react";
+import { Turnstile } from "@marsidev/react-turnstile";
 
 function PortalLoginForm() {
     const router = useRouter();
@@ -19,6 +20,7 @@ function PortalLoginForm() {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
     const [showPassword, setShowPassword] = useState(false);
+    const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
 
     useEffect(() => {
         if (!authLoading && user) {
@@ -37,6 +39,12 @@ function PortalLoginForm() {
     async function handleSubmit(e: React.FormEvent) {
         e.preventDefault();
         setError(null);
+
+        if (!turnstileToken) {
+            setError("Vui lòng xác thực bạn không phải là robot");
+            return;
+        }
+
         setLoading(true);
 
         try {
@@ -45,7 +53,7 @@ function PortalLoginForm() {
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify({ emailOrUsername, password }),
+                body: JSON.stringify({ emailOrUsername, password, turnstileToken }),
             });
 
             const data = await res.json();
@@ -141,6 +149,18 @@ function PortalLoginForm() {
                                     {showPassword ? "HIDE" : "SHOW"}
                                 </button>
                             </div>
+                        </div>
+
+                        {/* Turnstile Widget */}
+                        <div className="flex justify-center">
+                            <Turnstile
+                                siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || ""}
+                                onSuccess={setTurnstileToken}
+                                options={{
+                                    theme: "dark",
+                                    size: "normal",
+                                }}
+                            />
                         </div>
 
                         {error && (

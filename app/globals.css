@@ -43,6 +43,26 @@
     @apply bg-gradient-gold bg-clip-text text-transparent;
   }
 
+  /* Neo-Brutalism Design Tokens */
+  .neo-box {
+    @apply border-4 border-black bg-white text-black shadow-[6px_6px_0px_0px_#AA8A00] transition-all hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[8px_8px_0px_0px_#AA8A00];
+  }
+
+  .neo-box-gold {
+    @apply border-4 border-black bg-gold text-black shadow-[6px_6px_0px_0px_#FFFFFF] transition-all hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[8px_8px_0px_0px_#FFFFFF];
+  }
+
+  .neo-button {
+    @apply border-2 border-black bg-gold text-black font-bold uppercase tracking-wider px-6 py-3
+    shadow-[4px_4px_0px_0px_#000000] 
+    active:shadow-none active:translate-x-[4px] active:translate-y-[4px] 
+    hover:bg-white hover:text-black transition-all duration-150;
+  }
+    
+  .neo-badge {
+    @apply border-2 border-black bg-white text-black font-mono text-xs px-2 py-1 shadow-[2px_2px_0px_0px_#000000];
+  }
+
   .gold-underline {
     @apply relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-gold;
   }
@@ -224,3 +244,9 @@ html {
   to { left: 110%; width: 10%; }
 }
 
+
+@layer utilities {
+  .animate-pulse-slow {
+    animation: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+}

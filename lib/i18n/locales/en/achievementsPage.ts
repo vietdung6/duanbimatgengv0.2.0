@@ -6,17 +6,33 @@ export const achievementsPage = {
   },
   legacy: {
     genGYearsSuffix: "Present",
+    ksvNote: "Transition Era",
     explanation:
-      "* In 2017, KSV eSports acquired the entire League of Legends roster of Samsung Galaxy (players, coaching staff, inheriting the legacy, and officially RECOGNIZED BY RIOT GAMES). KSV then rebranded as Gen.G in 2018, which is its current name.",
+      "KSV eSports acquired the complete roster and legacy of Samsung Galaxy (recognized by Riot Games). KSV was subsequently rebranded to Gen.G in 2018.",
     lckRegularNote:
       "LCK Regular 2025 = Spring + Summer combined (counts as 2 titles)",
   },
   worldsChampions: {
     title: "WORLDS CHAMPIONS",
+    mainTitleLine1: "WORLD",
+    mainTitleLine2: "CHAMPIONS",
     samsungWhiteDescription:
       "The most dominant Worlds run in history. 15-1 record.",
     samsungGalaxyDescription:
       "Revenge against SKT in finals. Perfect redemption.",
+    era2014: "White & Blue Era",
+    tag2014: "Dominance",
+    era2017: "Rise of The Rulers",
+    tag2017: "Dynasty",
+  },
+  msiChampions: {
+    title: "MSI CHAMPIONS",
+    mainTitleLine1: "MSI",
+    mainTitleLine2: "CHAMPIONS",
+    era2024: "Golden Generation",
+    tag2024: "Breakthrough",
+    era2025: "Absolute Dominance",
+    tag2025: "Dynasty",
   },
   tripleCrown2025: {
     title: "2025 - TRIPLE CROWN YEAR",
@@ -31,6 +47,12 @@ export const achievementsPage = {
     lckChampions: "LCK Champions",
     internationalTitles: "International Titles",
     yearsOfLegacy: "Years of Legacy",
+    worldsLabelShort: "WORLDS",
+    msiLabelShort: "MSI",
+    lckLabelShort: "LCK",
+    internationalLabelShort: "INTERNATIONAL",
+    yearsLabelShort: "YEARS",
+    lckTitlesLabel: "2ND MOST TITLES",
   },
   timeline: {
     fullTimelineTitle: "FULL TIMELINE",

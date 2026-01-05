@@ -50,18 +50,36 @@ export function HistoryTour({
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.75 }}
       >
-        <button
+        <motion.button
           onClick={tour.startTour}
-          className="btn-gold flex items-center gap-2 text-sm sm:text-base px-4 sm:px-5 py-2 sm:py-3 w-full sm:w-auto justify-center"
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          className="group relative px-6 sm:px-8 py-3 sm:py-4 bg-black/60 backdrop-blur-lg border border-gold/30 rounded-full overflow-hidden shadow-[0_0_20px_rgba(234,179,8,0.15)] hover:shadow-[0_0_30px_rgba(234,179,8,0.3)] transition-all duration-300"
         >
-          <div className="relative w-5 h-5 sm:w-6 sm:h-6">
-            <Image src="/images/genrang_emote.png" alt="Genrang" fill className="object-contain" sizes="24px" />
+          {/* Shimmer Effect */}
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-gold/10 to-transparent -translate-x-[200%] group-hover:translate-x-[200%] transition-transform duration-1000 ease-in-out" />
+
+          <div className="relative flex items-center gap-3 sm:gap-4">
+            <div className="relative w-8 h-8 sm:w-10 sm:h-10 rounded-full border border-gold/30 p-1 bg-black/50 group-hover:border-gold transition-colors">
+              <Image src="/images/genrang_emote.png" alt="Genrang" fill className="object-contain p-1" sizes="40px" />
+            </div>
+
+            <div className="text-left flex flex-col justify-center">
+              <span className="font-heading text-lg sm:text-xl text-white group-hover:text-gold transition-colors leading-none tracking-wide uppercase">
+                {storyT.buttonText}
+              </span>
+              <span className="text-[10px] sm:text-xs text-gray-400 uppercase tracking-[0.2em] group-hover:text-gray-300 transition-colors">
+                Interactive Mode
+              </span>
+            </div>
+
+            <div className="w-5 h-5 sm:w-6 sm:h-6 text-gold/50 group-hover:text-gold transition-colors border-l border-white/10 pl-3 sm:pl-4 ml-1">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-full h-full">
+                <path d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.348a1.125 1.125 0 010 1.971l-11.54 6.347a1.125 1.125 0 01-1.667-.985V5.653z" />
+              </svg>
+            </div>
           </div>
-          {storyT.buttonText}
-        </button>
-        <span className="text-gray-400 text-xs sm:text-sm text-center">
-          {storyT.buttonSubtext}
-        </span>
+        </motion.button>
       </motion.div>
 
       {/* Story Overlay - Rendered via Portal */}

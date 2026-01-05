@@ -3,13 +3,13 @@
 import { Medal, Calendar } from "lucide-react";
 import { useState } from "react";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
-import { AchievementsTimeline } from "@/components/achievements/AchievementsTimeline";
 import { AchievementsHero } from "@/components/achievements/AchievementsHero";
 import {
   CEOQuoteSection,
   LegacyBannerSection,
   LegacyQuoteSection,
   MilestonesSection,
+  MSIChampionsSection,
   TripleCrown2025Section,
   WorldsChampionsSection,
 } from "@/components/achievements/AchievementSections";
@@ -30,11 +30,11 @@ export default function AchievementsPage() {
 
   const milestoneLabels = t.achievementsPage.milestones;
   const milestones = [
-    { value: `${worldsChampions}x`, label: milestoneLabels.worldsChampions, icon: "worlds", color: "text-yellow-400" },
-    { value: `${msiChampions}x`, label: milestoneLabels.msiChampions, icon: "msi", color: "text-blue-400" },
-    { value: `${lckChampions}x`, label: milestoneLabels.lckChampions, icon: "lck", color: "text-gold" },
-    { value: `${internationalTitles}x`, label: milestoneLabels.internationalTitles, icon: Medal, color: "text-purple-400" },
-    { value: `${yearsActive}`, label: milestoneLabels.yearsOfLegacy, icon: Calendar, color: "text-white" },
+    { value: `${worldsChampions}x`, label: milestoneLabels.worldsLabelShort, icon: "worlds", color: "text-yellow-400" },
+    { value: `${msiChampions}x`, label: milestoneLabels.msiLabelShort, icon: "msi", color: "text-blue-400" },
+    { value: `${lckChampions}x`, label: milestoneLabels.lckLabelShort, icon: "lck", color: "text-gold" },
+    { value: `${internationalTitles}x`, label: milestoneLabels.internationalLabelShort, icon: Medal, color: "text-purple-400" },
+    { value: `${yearsActive}`, label: milestoneLabels.yearsLabelShort, icon: Calendar, color: "text-white" },
   ];
 
   return (
@@ -42,7 +42,7 @@ export default function AchievementsPage() {
       {/* Hero */}
       <AchievementsHero
         language={language}
-        setExpandedYear={setExpandedYear}
+        setExpandedYear={() => { }} // No-op as timeline is moved
         isTourMode={isTourMode}
         setIsTourMode={setIsTourMode}
         currentTourYear={currentTourYear}
@@ -53,24 +53,36 @@ export default function AchievementsPage() {
       <div>
         <LegacyBannerSection language={language} />
       </div>
-      
+
       {/* Milestones */}
       <MilestonesSection language={language} milestones={milestones} />
-      
+
       {/* Worlds Champions Highlight */}
       <WorldsChampionsSection language={language} />
 
-      {/* Timeline */}
-      <AchievementsTimeline
-        language={language}
-        expandedYear={expandedYear}
-        setExpandedYear={setExpandedYear}
-        isTourMode={isTourMode}
-        currentTourYear={currentTourYear}
-      />
+      {/* MSI Champions Highlight */}
+      <MSIChampionsSection language={language} />
+
+
 
       {/* 2025 Highlight */}
       <TripleCrown2025Section language={language} />
+
+      {/* View Full History CTA */}
+      <div className="container mx-auto px-4 py-12 flex justify-center">
+        <a
+          href="/history"
+          className="group relative px-8 py-4 bg-black border border-white/20 rounded-full overflow-hidden hover:border-gold/50 transition-all duration-300"
+        >
+          <div className="absolute inset-0 bg-gold/10 -translate-x-[100%] group-hover:translate-x-0 transition-transform duration-500" />
+          <div className="relative flex items-center gap-3">
+            <span className="font-heading text-xl text-white group-hover:text-gold transition-colors">VIEW FULL HISTORY</span>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5 text-gray-400 group-hover:text-gold transition-colors group-hover:translate-x-1">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+            </svg>
+          </div>
+        </a>
+      </div>
 
       {/* CEO Quote */}
       <CEOQuoteSection language={language} />
